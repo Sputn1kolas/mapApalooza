@@ -4,7 +4,7 @@
 
 const express = require("express")
 const cookieSession = require('cookie-session')
-const cookieParser = require('cookie-parser')
+// const cookieParser = require('cookie-parser')
 const bodyParser = require("body-parser")
 const bcrypt = require('bcrypt')
 const port = process.env.PORT || 8080
@@ -13,8 +13,8 @@ const app = express()
 
 
 app.set("view engine", "ejs")
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(cookieParser())
+// app.use(bodyParser.urlencoded({extended: true}))
+// app.use(cookieParser())
 app.use(cookieSession({ secret: 'Banannnas!', cookie: { maxAge: 60 * 60 * 1000 }}))
 app.use(express.static("public")) // this is where files that html references will din .
 
@@ -26,10 +26,17 @@ app.listen(port, function(){
 ///////////////////////////////////// Databases ////////////////////////////////////////////
 
 
+
+///////////////////////////////////// Render ////////////////////////////////////////////
+
 app.get("/", (req, res) => {
-  res.render("main")
+  res.render("main.ejs")
 })
 
-app.get("/obj", (req, res) => {
-  res.render("obj")
+app.get("/search", (req, res) => {
+  res.render("search.ejs")
+})
+
+app.get("/profile", (req, res) => {
+  res.render("profile.ejs")
 })
