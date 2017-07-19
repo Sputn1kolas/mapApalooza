@@ -1,0 +1,11 @@
+// sass input.scss output.css
+// sass --watch app/sass:public/stylesheets
+// OUTPUT FILE NAMED: template.css
+
+@import 'font-awesome.css';
+@import 'main.scss';
+@import 'bootstrap/bootstrap-grid.min.css';
+@import "bootstrap/bootstrap.min.css";
+@import 'bootstrap/bootstrap-reboot.min.css';
+
+
