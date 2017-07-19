@@ -1,0 +1,27 @@
+{
+  "name": "mapapalooza",
+  "version": "0.0.1",
+  "description": "Makes fun, user sharable maps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sputn1kolas/mapApalooza.git"
+  },
+  "keywords": [
+    "map",
+    "palooza",
+    "fun"
+  ],
+  "author": "Nikolas, Sinday, yu chen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sputn1kolas/mapApalooza/issues"
+  },
+  "homepage": "https://github.com/Sputn1kolas/mapApalooza#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
