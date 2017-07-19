@@ -30,13 +30,13 @@ app.listen(port, function(){
 ///////////////////////////////////// Render ////////////////////////////////////////////
 
 app.get("/", (req, res) => {
-  res.render("../views/main")
+  res.render("main.ejs")
 })
 
 app.get("/search", (req, res) => {
-  res.render("../views/search")
+  res.render("search.ejs")
 })
 
 app.get("/profile", (req, res) => {
-  res.render("../views/profile")
+  res.render("profile.ejs")
 })
