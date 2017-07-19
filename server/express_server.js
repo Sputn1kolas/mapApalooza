@@ -4,7 +4,7 @@
 
 const express = require("express")
 const cookieSession = require('cookie-session')
-const cookieParser = require('cookie-parser')
+// const cookieParser = require('cookie-parser')
 const bodyParser = require("body-parser")
 const bcrypt = require('bcrypt')
 const port = process.env.PORT || 8080
@@ -26,10 +26,17 @@ app.listen(port, function(){
 ///////////////////////////////////// Databases ////////////////////////////////////////////
 
 
+
+///////////////////////////////////// Render ////////////////////////////////////////////
+
 app.get("/", (req, res) => {
-  res.render("main")
+  res.render("../views/main")
 })
 
-app.get("/obj", (req, res) => {
-  res.render("obj")
+app.get("/search", (req, res) => {
+  res.render("../views/search")
+})
+
+app.get("/profile", (req, res) => {
+  res.render("../views/profile")
 })
