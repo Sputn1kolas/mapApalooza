@@ -14,18 +14,19 @@ maps {
   title varchar,
   description text,
   img_url  varchar,
-  lat NUMERIC     ,
-  long NUMERIC    ,
+  lat FLOAT(10,6),
+  long FLOAT(10,6) ,
 }
 
 points {
   id interator primary key,
   map_id references map(id),
-  lat NUMERIC
-  long NUMERIC
+  lat FLOAT(10,6)
+  long FLOAT(10,6)
+  address VARCHAR ,
   title varchar,
-  description text
-  img_url:
+  description text,
+  img_url: VARCHAR,
 }
 
 
