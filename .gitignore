@@ -1,2 +1,4 @@
+.DS_Stores
 private.js
 node_module/
+bower_component/
