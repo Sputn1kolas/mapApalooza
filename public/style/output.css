@@ -1,63 +1,16 @@
-@import url(normalize.css);
 @import url(font-awesome.css);
 @import url(bootstrap/bootstrap-grid.min.css);
 @import url(bootstrap/bootstrap.min.css);
 @import url(bootstrap/bootstrap-reboot.min.css);
 .navbar {
   height: 70px;
-  background-color: white;
-  border-bottom: grey;
+  background-color: purple;
   padding: 15px; }
-  .navbar .Brand {
-    height: 35px;
-    margin-left: 15px;
-    width: auto;
-    float: left; }
+  .navbar navbar-brand {
+    font-family: Quicksand, sans-serif; }
+    .navbar navbar-brand a {
+      color: white; }
   .navbar .signIn {
     margin: auto 0px auto auto; }
 
-.main-jumbo {
-  background-color: black; }
-  .main-jumbo .Brand {
-    height: 125px; }
-  .main-jumbo .display {
-    object-fit: cover;
-    width: auto;
-    max-height: 400px;
-    width: 100%;
-    opacity: 0.7; }
-  .main-jumbo h1 {
-    font-family: 'Helvetica', sans-serif;
-    opacity: 0.8;
-    font-size: 400%;
-    z-index: 2;
-    color: white;
-    position: absolute;
-    top: 100px;
-    margin-left: 15px; }
-
-#boxshadow {
-  position: relative;
-  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  background: white; }
-
-.container {
-  padding: 15px;
-  margin: 0px;
-  width: 100%;
-  display: flex;
-  flex-direction: row; }
-
-.mainContent {
-  background-color: #d3d3d3;
-  margin-right: 15px;
-  width: 60%;
-  display: inline; }
-
-.rightContent {
-  background-color: black;
-  width: 40%;
-  display: inline; }
-
-/*# sourceMappingURL=stylesheet.css.map */
+/*# sourceMappingURL=output.css.map */
