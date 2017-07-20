@@ -1,6 +1,24 @@
 div.list_container{
   background: #bed8ff;
   max-width: 23.85%;
+
+  .divider {
+    background: #93b9f2;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    font-family: 'Zilla Slab', serif;
+    color: white;
+  }
+
+  .divider:hover{
+    background: #74a2e8;
+  }
+
+  .divider:active{
+    background: #74a2e8;
+  }
+
   .list_item {
     background:#FFFACD;
     height: 120px;

@@ -20,7 +20,7 @@ app.use(cookieSession({ secret: 'Banannnas!', cookie: { maxAge: 60 * 60 * 1000 }
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
-  debug: true,
+  debug: false,
   outputStyle: 'expanded'
 }));
 app.use(express.static("public")) // this is where files that html references will din .
