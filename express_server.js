@@ -17,6 +17,12 @@ app.set("view engine", "ejs")
 // app.use(bodyParser.urlencoded({extended: true}))
 // app.use(cookieParser())
 app.use(cookieSession({ secret: 'Banannnas!', cookie: { maxAge: 60 * 60 * 1000 }}))
+app.use("/styles", sass({
+  src: __dirname + "/styles",
+  dest: __dirname + "/public/styles",
+  debug: true,
+  outputStyle: 'expanded'
+}));
 app.use(express.static("public")) // this is where files that html references will din .
 app.use(bodyParser.urlencoded({extended:true}))
 
@@ -30,12 +36,7 @@ var db  = require('./db');
 
 
 ///////////////////////////////////// Render ////////////////////////////////////////////
-app.use("/styles", sass({
-  src: __dirname + "/styles",
-  dest: __dirname + "/public/styles",
-  debug: true,
-  outputStyle: 'expanded'
-}));
+
 
 app.get("/", (req, res) => {
    let templateVar = {
