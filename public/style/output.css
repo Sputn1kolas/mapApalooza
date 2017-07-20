@@ -28,4 +28,10 @@
 .pointDescriptions {
   display: none; }
 
+.addPoint {
+  margin: 15px 0px; }
+
+.clicked {
+  border-color: blue; }
+
 /*# sourceMappingURL=output.css.map */

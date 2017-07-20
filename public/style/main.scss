@@ -1,10 +1,10 @@
-$padding: 15px;
+$spacing: 15px;
 
 
 .navbar {
   height: 70px;
   background-color: purple;
-  padding: $padding;
+  padding: $spacing;
 
   .navbar-brand {
     font-family: Quicksand, sans-serif;
@@ -27,10 +27,18 @@ $padding: 15px;
   margin: 0px auto;
   background-color: purple;
   opacity: 0.7;
-  padding: $padding;
+  padding: $spacing;
   color: white;
 }
 
 .pointDescriptions {
   display: none;
+}
+
+.addPoint{
+  margin: $spacing 0px;
+}
+
+.clicked {
+  border-color: blue;
 }
