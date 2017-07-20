@@ -10,6 +10,7 @@ const bcrypt = require('bcrypt')
 const port = process.env.PORT || 8080
 const cookieOptions = ["rocks"]
 const app = express()
+const sass = require("node-sass-middleware");
 
 
 app.set("view engine", "ejs")
@@ -29,6 +30,12 @@ var db  = require('./db');
 
 
 ///////////////////////////////////// Render ////////////////////////////////////////////
+app.use("/styles", sass({
+  src: __dirname + "/styles",
+  dest: __dirname + "/public/styles",
+  debug: true,
+  outputStyle: 'expanded'
+}));
 
 app.get("/", (req, res) => {
    let templateVar = {
