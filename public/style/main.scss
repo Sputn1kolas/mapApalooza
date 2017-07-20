@@ -1,3 +1,17 @@
+$padding: 15px;
+$ease-in : width  0.3s ease-in-out;
+
+.navbar {
+  height: 70px;
+  background-color: #a000a0;
+  padding: $padding;
+
+  .navbar-brand {
+    font-family: Quicksand, sans-serif;
+    text-align: left;
+
+    a {
+      color: white;
 $spacing: 15px;
 
 
@@ -10,6 +24,25 @@ $spacing: 15px;
     font-family: Quicksand, sans-serif;
     color: white;
     }
+  }
+
+  #search_navbar {
+    margin-left: -50px;
+    -webkit-transition: $ease-in;
+    -moz-transition:$ease-in;
+    -o-transition: $ease-in;
+    width:130px;
+    border-radius: 5px;
+  }
+
+  #search_navbar button {
+    background:white;
+  }
+
+
+  #search_navbar:focus {
+    width: 480px;
+  }
 
   .signIn {
     margin: auto 0px auto auto;
@@ -20,6 +53,18 @@ $spacing: 15px;
  #map {
     height: 400px;
     width: 100%;
+  }
+
+  div.col-sm-1{
+    height: 70px;
+    margin-top: -15px;
+    text-align: center;
+    line-height: 57px;
+    color: white;
+  }
+
+  div.col-sm-1:hover{
+    background: #b000b0;
   }
 
 .gmaps {
