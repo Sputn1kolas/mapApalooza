@@ -10,6 +10,7 @@ const bcrypt = require('bcrypt')
 const port = process.env.PORT || 8080
 const cookieOptions = ["rocks"]
 const app = express()
+const sass = require("node-sass-middleware");
 
 let points_db =  {   //delete later
 }
@@ -18,6 +19,12 @@ app.set("view engine", "ejs")
 // app.use(bodyParser.urlencoded({extended: true}))
 // app.use(cookieParser())
 app.use(cookieSession({ secret: 'Banannnas!', cookie: { maxAge: 60 * 60 * 1000 }}))
+app.use("/styles", sass({
+  src: __dirname + "/styles",
+  dest: __dirname + "/public/styles",
+  debug: true,
+  outputStyle: 'expanded'
+}));
 app.use(express.static("public")) // this is where files that html references will din .
 app.use(bodyParser.urlencoded({extended:true}))
 
@@ -27,10 +34,13 @@ app.listen(port, function(){
 })
 
 ///////////////////////////////////// Databases ////////////////////////////////////////////
-var db  = require('./db');
+const config = require("./knexfile");
+const env = 'development';
+const knex = require('knex')(config[env]);
 
 
 ///////////////////////////////////// Render ////////////////////////////////////////////
+
 
 app.get("/", (req, res) => {
    let templateVar = {

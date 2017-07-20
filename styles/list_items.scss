@@ -1,0 +1,33 @@
+div.list_container{
+  background: #bed8ff;
+  max-width: 23.85%;
+  .list_item {
+    background:#FFFACD;
+    height: 120px;
+    border: 1px solid black;
+    width: 100%;
+    margin: 15px;
+    padding: 10px;
+
+    header {
+      border-bottom: 1px solid black;
+    }
+
+    main {
+      padding-top: 2px;
+      font-size: 12px;
+      height: 60%;
+      display: flex;
+
+      img {
+        height: 4em;
+        width: 4em;
+        margin-right: 5px;
+      }
+    }
+
+    footer {
+      text-align: right;
+    }
+  }
+}

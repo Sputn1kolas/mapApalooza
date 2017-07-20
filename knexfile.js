@@ -11,6 +11,13 @@ module.exports = {
       host     : settings.hostname,
       port     : settings.port,
       ssl      : settings.ssl
+    },
+    migrations: {
+      directory: './db/migrations',
+      tableName: 'migrations'
+    },
+    seeds: {
+      directory: './db/seeds'
     }
   },
 

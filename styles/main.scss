@@ -4,6 +4,7 @@ $full_search_width: 480px;
 
 .navbar {
   height: 70px;
+  width: 100%;
   background-color: #a000a0;
   padding: $spacing;
   z-index: 100;
@@ -91,12 +92,12 @@ $full_search_width: 480px;
 .clicked {
   border-color: blue;
 }
+
 div.map_container {
+  height: 100%;
   padding-right: 0;
+  width: 75%;
 }
 
 
-div.list_container {
-  background: #dbd697;
-}
 
