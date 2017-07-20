@@ -116,6 +116,7 @@ $(".pointForm").on('submit', function(event) {
 
 $(".load_map").on('click', function(){
   event.preventDefault();
+  clearMarkers()
   let map =  this.id
   $.ajax({
       url:`/maps/${map}/`,
@@ -142,10 +143,11 @@ function renderPoints(points_db){
   for(point in points_db) {
     let pointObject = points_db[point]
     let latLng = {lat: Number(pointObject.lat), lng: Number(pointObject.long)};
-    let id = new google.maps.Marker({
+    let marker = new google.maps.Marker({   //change this to ID later
        position: latLng,
        map: map
     });
+    markers.push(marker)
   }
 }
 
@@ -158,6 +160,11 @@ function setMapOnAll(map) {
 
 function clearMarkers() {
   setMapOnAll(null);
+}
+
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
 }
 
 // var myMarker = new google.maps.Marker({
