@@ -10,19 +10,9 @@ const bcrypt = require('bcrypt')
 const port = process.env.PORT || 8080
 const cookieOptions = ["rocks"]
 const app = express()
-const Sequelize = require('sequelize');
-// sequelize initialization
-const sequelize = new Sequelize('vagrant', 'development', 'development', {
-  host: 'localhost',
-  dialect: 'postgres',
-  port: '5432',
 
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000
-  }
-});
+
+
 // const sequelize = new Sequelize("postgres://development:development@localhost:5432/vagrant");
 
 
@@ -40,14 +30,7 @@ app.listen(port, function(){
 ///////////////////////////////////// Databases ////////////////////////////////////////////
 
 //Check database connection
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established to the database successfully');
-  })
-  .catch(err => {
-    console.error("Unable to connect to the database", err);
-  });
+
 ///////////////////////////////////// Render ////////////////////////////////////////////
 
 app.get("/", (req, res) => {
