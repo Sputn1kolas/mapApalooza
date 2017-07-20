@@ -11,10 +11,10 @@
 8 verbose lifecycle mapapalooza@0.0.1~start: unsafe-perm in lifecycle true
 9 verbose lifecycle mapapalooza@0.0.1~start: PATH: /home/vagrant/.nvm/versions/node/v6.9.5/lib/node_modules/npm/bin/node-gyp-bin:/vagrant/mapApalooza/node_modules/.bin:/home/vagrant/.nvm/versions/node/v6.9.5/bin:/home/vagrant/.rvm/gems/ruby-2.3.3/bin:/home/vagrant/.rvm/gems/ruby-2.3.3@global/bin:/home/vagrant/.rvm/rubies/ruby-2.3.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/vagrant/.rvm/bin:/home/vagrant/.rvm/bin
 10 verbose lifecycle mapapalooza@0.0.1~start: CWD: /vagrant/mapApalooza
-11 silly lifecycle mapapalooza@0.0.1~start: Args: [ '-c', 'node server/express_server.js' ]
+11 silly lifecycle mapapalooza@0.0.1~start: Args: [ '-c', 'node express_server.js' ]
 12 silly lifecycle mapapalooza@0.0.1~start: Returned: code: 1  signal: null
 13 info lifecycle mapapalooza@0.0.1~start: Failed to exec start script
-14 verbose stack Error: mapapalooza@0.0.1 start: `node server/express_server.js`
+14 verbose stack Error: mapapalooza@0.0.1 start: `node express_server.js`
 14 verbose stack Exit status 1
 14 verbose stack     at EventEmitter.<anonymous> (/home/vagrant/.nvm/versions/node/v6.9.5/lib/node_modules/npm/lib/utils/lifecycle.js:255:16)
 14 verbose stack     at emitTwo (events.js:106:13)
@@ -31,14 +31,14 @@
 19 error node v6.9.5
 20 error npm  v3.10.10
 21 error code ELIFECYCLE
-22 error mapapalooza@0.0.1 start: `node server/express_server.js`
+22 error mapapalooza@0.0.1 start: `node express_server.js`
 22 error Exit status 1
-23 error Failed at the mapapalooza@0.0.1 start script 'node server/express_server.js'.
+23 error Failed at the mapapalooza@0.0.1 start script 'node express_server.js'.
 23 error Make sure you have the latest version of node.js and npm installed.
 23 error If you do, this is most likely a problem with the mapapalooza package,
 23 error not with npm itself.
 23 error Tell the author that this fails on your system:
-23 error     node server/express_server.js
+23 error     node express_server.js
 23 error You can get information on how to open an issue for this project with:
 23 error     npm bugs mapapalooza
 23 error Or if that isn't available, you can get their info via:

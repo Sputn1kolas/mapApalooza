@@ -5,12 +5,14 @@
 .navbar {
   height: 70px;
   background-color: #a000a0;
-  padding: 15px; }
+  padding: 15px;
+  z-index: 100; }
   .navbar .navbar-brand {
     font-family: Quicksand, sans-serif;
     text-align: left; }
     .navbar .navbar-brand a {
-      color: white; }
+      color: white;
+      spacing: 15px; }
   .navbar #search_navbar {
     margin-left: -50px;
     -webkit-transition: width 0.3s ease-in-out;
@@ -20,34 +22,42 @@
     border-radius: 5px; }
   .navbar #search_navbar button {
     background: white; }
+  .navbar #search_results {
+    display: none;
+    width: 480px;
+    height: 150px;
+    background: white;
+    margin-left: -49px;
+    z-index: 10;
+    opacity: 1.0;
+    overflow: scroll; }
   .navbar #search_navbar:focus {
     width: 480px; }
-  .navbar .signIn {
-    margin: auto 0px auto auto; }
-  .navbar div.col-sm-1 {
-    height: 70px;
-    margin-top: -15px;
-    text-align: center;
-    line-height: 57px;
-    color: white; }
-  .navbar div.col-sm-1:hover {
-    background: #b000b0; }
-    color: white; }
   .navbar .signIn {
     margin: auto 0px auto auto;
     background-color: purple; }
 
 #map {
   height: 400px;
-  width: 100%; }
+  width: 100%;
+  z-index: 1; }
+
+div.col-sm-1 {
+  height: 70px;
+  margin-top: -15px;
+  text-align: center;
+  line-height: 57px;
+  color: white; }
+
+div.col-sm-1:hover {
+  background: #b000b0; }
 
 .gmaps {
-  width: 50%;
-  margin: 0px auto;
   background-color: purple;
   opacity: 0.7;
   padding: 15px;
-  color: white; }
+  color: white;
+  z-index: -1; }
 
 .pointDescriptions {
   display: none; }
@@ -57,5 +67,11 @@
 
 .clicked {
   border-color: blue; }
+
+div.map_container {
+  padding-right: 0; }
+
+div.list_container {
+  background: #dbd697; }
 
 /*# sourceMappingURL=output.css.map */

@@ -2,42 +2,42 @@
 <html>
     <head>
          <% include partials/_src %>
-
     </head>
-    <body>
-        <% include partials/_header %>
-     <div>
+  <body>
+  <% include partials/_header %>
+  <div class="body row">
+    <div class="map_container col-9">
+      <% let map_id = "map_1" %>
+      <div class="gmaps">
+        <div id="map" height="460px" width="100%"></div>
+        <button class="addPoint"> Add point </button>
+        <div class="form pointDescriptions">
+          <form action="/<% map_id %> /point" method="POST" class="pointForm">
+          Title of Point
+          <input type="title" name="title">
+          Description
+          <input type="description" name="description">
+          Header Image (url)
+          <input type="img_url" name="img_url">
+          <input type="submit" value="Submit">
+        </form>
+        </div>
+  <!--       <div id="message">Location saved</div>
+  -->   </div>
 
+      <script type="text/javascript" src="/scripts/googlemap.js"></script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=<%= gMapsApi %>&callback=initMap">
+      </script>
 
- <body>
-
-
-    <% let map_id = "map_1" %>
-    <div class="gmaps">
-      <div id="map" height="460px" width="100%"></div>
-      <button class="addPoint"> Add point </button>
-      <div class="form pointDescriptions">
-        <form action="/<% map_id %> /point" method="POST" class="pointForm">
-        Title of Point
-        <input type="title" name="title">
-        Description
-        <input type="description" name="description">
-        Header Image (url)
-        <input type="img_url" name="img_url">
-        <input type="submit" value="Submit">
-      </form>
       </div>
-<!--       <div id="message">Location saved</div>
- -->    </div>
-
-    <script type="text/javascript" src="/scripts/googlemap.js"></script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=<%= gMapsApi %>&callback=initMap">
-    </script>
-
+    <div class="list_container col-3">
+      hello
     </div>
-    <% include partials/_footer %>
-    </body>
+      <% include partials/_footer %>
+    </div>
+  </div>
+  </body>
 
 </html>
 
