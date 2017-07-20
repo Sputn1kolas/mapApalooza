@@ -15,7 +15,7 @@ maps {
   description text,
   img_url  varchar,
   lat FLOAT(10,6),
-  long FLOAT(10,6) ,
+  long FLOAT(10,6)
 }
 
 points {
@@ -23,10 +23,10 @@ points {
   map_id references map(id),
   lat FLOAT(10,6)
   long FLOAT(10,6)
-  address VARCHAR ,
   title varchar,
   description text,
   img_url: VARCHAR,
+  address VARCHAR
 }
 
 

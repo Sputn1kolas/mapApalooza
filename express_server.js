@@ -1,7 +1,7 @@
 // Known bugs:
 
 ///////////////////////////////////// Intiate Settings + Server ////////////////////////////////////////////
-
+const gMapsApi = require("private.js").gMapsApi
 const express = require("express")
 const cookieSession = require('cookie-session')
 // const cookieParser = require('cookie-parser')
@@ -30,7 +30,10 @@ app.listen(port, function(){
 ///////////////////////////////////// Render ////////////////////////////////////////////
 
 app.get("/", (req, res) => {
-  res.render("main.ejs")
+   let templateVar = {
+    gMapsApi: gMapsApi
+  }
+  res.render("main.ejs", templateVar)
 })
 
 app.get("/search", (req, res) => {
@@ -39,4 +42,31 @@ app.get("/search", (req, res) => {
 
 app.get("/profile", (req, res) => {
   res.render("profile.ejs")
+})
+
+
+///////////////////////////////////// POST ////////////////////////////////////////////
+
+//  post for new map
+app.post("/main/:user/", (req, res) => {
+  const user_id = req.params.id
+  const title = req.body["title"]
+  const description = req.body["description"]
+  const img_url = req.body["img_url"]
+
+
+})
+
+//  post for new points
+app.post("/main/:user/:map", (req, res) => {
+  const user_id = req.params.id
+  const map_id = req.params.map
+  const title = req.body["title"]
+  const description = req.body["description"]
+  const img_url = req.body["img_url"]
+  const address = req.body["address"]
+  const lat = req.body["lat"]
+  const long = req.body["long"]
+
+
 })
