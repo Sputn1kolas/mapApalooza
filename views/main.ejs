@@ -35,6 +35,23 @@
       hello
     </div>
       <% include partials/_footer %>
+    <body>
+        <% include partials/_header %>
+     <div>
+
+
+ <body>
+
+    <% let map_id = "map_1" %>
+    <div class="gmaps">
+          <div id="map" height="460px" width="100%"></div>
+    </div>
+
+<script type="text/javascript" src="/scripts/googlemap.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=<%= gMapsApi %>&callback=initMap">
+    </script>
+
     </div>
   </div>
   </body>

@@ -86,18 +86,22 @@ function doNothing () {}
 
 
 // Uses AJAX to add the new point
-$(".pointFormm").ajaxSubmit({url: '/main/:user/:map', type: 'post'})
-
-// .on('submit', function(event) {
-//   event.preventDefault();
-//   let string = $("textarea").serialize()
-//   let stringRaw = $("textarea").val()
-//   $.ajax({
-//       type:'POST',
-//       url:'/main/:user/:map',
-//       data : string,
-//       success: function() {
-//         loadNewTweets()
-//       }
-//     });
-// });
+$(".pointForm").on('submit', function(event) {
+  event.preventDefault();
+  let title = $("input[name='title']").val()
+  let description = $("input[name='description']").val()
+  let img_url = $("input[name='img_url']").val()
+  $.ajax({
+      url:'/maps/map1/point/new',
+      type:'POST',
+      data: {
+        title: title,
+        description: description,
+        img_url: img_url
+      },
+      success: function(res) {
+        console.log("hello") //no server response
+      }
+    });
+  toggleDescriptions();
+});

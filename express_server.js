@@ -17,6 +17,7 @@ app.set("view engine", "ejs")
 // app.use(cookieParser())
 app.use(cookieSession({ secret: 'Banannnas!', cookie: { maxAge: 60 * 60 * 1000 }}))
 app.use(express.static("public")) // this is where files that html references will din .
+app.use(bodyParser.urlencoded({extended:true}))
 
 // Get app to listen on port 8080
 app.listen(port, function(){
@@ -24,7 +25,7 @@ app.listen(port, function(){
 })
 
 ///////////////////////////////////// Databases ////////////////////////////////////////////
-
+var db  = require('./db');
 
 
 ///////////////////////////////////// Render ////////////////////////////////////////////
@@ -37,11 +38,17 @@ app.get("/", (req, res) => {
 })
 
 app.get("/search", (req, res) => {
-  res.render("search.ejs")
+  let templateVar = {
+    gMapsApi: gMapsApi
+  }
+  res.render("search.ejs", templateVar)
 })
 
 app.get("/profile", (req, res) => {
-  res.render("profile.ejs")
+  let templateVar = {
+    gMapsApi: gMapsApi
+  }
+  res.render("profile.ejs", templateVar)
 })
 
 
@@ -53,20 +60,30 @@ app.post("/main/:user/", (req, res) => {
   const title = req.body["title"]
   const description = req.body["description"]
   const img_url = req.body["img_url"]
-
-
 })
 
 //  post for new points
-app.post("/main/:user/:map", (req, res) => {
-  const user_id = req.params.id
+app.post("/maps/:map/point/new", (req, res) => {
+  // const user_id = req.params.id
+  console.log("post recieved!")
   const map_id = req.params.map
   const title = req.body["title"]
   const description = req.body["description"]
   const img_url = req.body["img_url"]
-  const address = req.body["address"]
-  const lat = req.body["lat"]
-  const long = req.body["long"]
-
-
+  // const address = req.body["address"]
+  // const lat = req.body["lat"]
+  // const long = req.body["long"]
+  res.send("I got the message")
 })
+
+
+
+// Logs out user by deleting cookie
+app.post("/logout", (req, res) => {
+  // res.clearCookie('user_id')
+  req.session = null
+  res.redirect("/urls")
+  console.log("logged out!")
+});
+
+
