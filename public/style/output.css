@@ -4,13 +4,33 @@
 @import url(bootstrap/bootstrap-reboot.min.css);
 .navbar {
   height: 70px;
-  background-color: purple;
+  background-color: #a000a0;
   padding: 15px; }
-  .navbar navbar-brand {
-    font-family: Quicksand, sans-serif; }
-    .navbar navbar-brand a {
+  .navbar .navbar-brand {
+    font-family: Quicksand, sans-serif;
+    text-align: left; }
+    .navbar .navbar-brand a {
       color: white; }
+  .navbar #search_navbar {
+    margin-left: -50px;
+    -webkit-transition: width 0.3s ease-in-out;
+    -moz-transition: width 0.3s ease-in-out;
+    -o-transition: width 0.3s ease-in-out;
+    width: 130px;
+    border-radius: 5px; }
+  .navbar #search_navbar button {
+    background: white; }
+  .navbar #search_navbar:focus {
+    width: 480px; }
   .navbar .signIn {
     margin: auto 0px auto auto; }
+  .navbar div.col-sm-1 {
+    height: 70px;
+    margin-top: -15px;
+    text-align: center;
+    line-height: 57px;
+    color: white; }
+  .navbar div.col-sm-1:hover {
+    background: #b000b0; }
 
 /*# sourceMappingURL=output.css.map */
