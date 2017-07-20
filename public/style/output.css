@@ -32,5 +32,30 @@
     color: white; }
   .navbar div.col-sm-1:hover {
     background: #b000b0; }
+    color: white; }
+  .navbar .signIn {
+    margin: auto 0px auto auto;
+    background-color: purple; }
+
+#map {
+  height: 400px;
+  width: 100%; }
+
+.gmaps {
+  width: 50%;
+  margin: 0px auto;
+  background-color: purple;
+  opacity: 0.7;
+  padding: 15px;
+  color: white; }
+
+.pointDescriptions {
+  display: none; }
+
+.addPoint {
+  margin: 15px 0px; }
+
+.clicked {
+  border-color: blue; }
 
 /*# sourceMappingURL=output.css.map */
