@@ -6,18 +6,31 @@ $padding: 15px;
   background-color: purple;
   padding: $padding;
 
-  navbar-brand {
+  .navbar-brand {
     font-family: Quicksand, sans-serif;
-    a {
-      color: white;
+    color: white;
     }
-
-  }
 
   .signIn {
     margin: auto 0px auto auto;
+    background-color: purple;
   }
-
 }
 
+ #map {
+    height: 400px;
+    width: 100%;
+  }
 
+.gmaps {
+  width: 50%;
+  margin: 0px auto;
+  background-color: purple;
+  opacity: 0.7;
+  padding: $padding;
+  color: white;
+}
+
+.pointDescriptions {
+  display: none;
+}

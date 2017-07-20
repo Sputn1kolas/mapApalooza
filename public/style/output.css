@@ -6,11 +6,26 @@
   height: 70px;
   background-color: purple;
   padding: 15px; }
-  .navbar navbar-brand {
-    font-family: Quicksand, sans-serif; }
-    .navbar navbar-brand a {
-      color: white; }
+  .navbar .navbar-brand {
+    font-family: Quicksand, sans-serif;
+    color: white; }
   .navbar .signIn {
-    margin: auto 0px auto auto; }
+    margin: auto 0px auto auto;
+    background-color: purple; }
+
+#map {
+  height: 400px;
+  width: 100%; }
+
+.gmaps {
+  width: 50%;
+  margin: 0px auto;
+  background-color: purple;
+  opacity: 0.7;
+  padding: 15px;
+  color: white; }
+
+.pointDescriptions {
+  display: none; }
 
 /*# sourceMappingURL=output.css.map */
