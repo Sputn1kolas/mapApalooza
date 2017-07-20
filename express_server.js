@@ -70,9 +70,10 @@ app.post("/maps/:map/point/new", (req, res) => {
   const title = req.body["title"]
   const description = req.body["description"]
   const img_url = req.body["img_url"]
-  // const address = req.body["address"]
-  // const lat = req.body["lat"]
-  // const long = req.body["long"]
+  const address = req.body["address"]
+  const lat = req.body["lat"]
+  const long = req.body["long"]
+  console.log(title, description, img_url, lat, long)
   res.send("I got the message")
 })
 
