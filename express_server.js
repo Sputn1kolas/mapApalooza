@@ -11,6 +11,8 @@ const port = process.env.PORT || 8080
 const cookieOptions = ["rocks"]
 const app = express()
 
+let points_db =  {   //delete later
+}
 
 app.set("view engine", "ejs")
 // app.use(bodyParser.urlencoded({extended: true}))
@@ -46,9 +48,23 @@ app.get("/search", (req, res) => {
 
 app.get("/profile", (req, res) => {
   let templateVar = {
-    gMapsApi: gMapsApi
+    gMapsApi: gMapsApi,
+    points_db: points_db //delete later
   }
   res.render("profile.ejs", templateVar)
+})
+
+map_db = {
+}
+
+app.get("/maps/:map", (req, res) => {
+  points_db["nik"].id = 1
+  let map_id = req.params.map
+  let returnObject = {
+    points_db: points_db, //delete later
+    map_db: map_db
+  }
+  res.send(returnObject)
 })
 
 
@@ -62,21 +78,21 @@ app.post("/main/:user/", (req, res) => {
   const img_url = req.body["img_url"]
 })
 
+
+
 //  post for new points
 app.post("/maps/:map/point/new", (req, res) => {
-  // const user_id = req.params.id
-  console.log("post recieved!")
-  const map_id = req.params.map
-  const title = req.body["title"]
-  const description = req.body["description"]
-  const img_url = req.body["img_url"]
-  const address = req.body["address"]
-  const lat = req.body["lat"]
-  const long = req.body["long"]
-  console.log(title, description, img_url, lat, long)
-  res.send("I got the message")
+  const user_id = "nik"
+  points_db[user_id] = {}
+  points_db[user_id].map_id = req.params.map
+  points_db[user_id].title = req.body["title"]
+  points_db[user_id].description = req.body["description"]
+  points_db[user_id].img_url = req.body["img_url"]
+  points_db[user_id].address = req.body["address"]
+  points_db[user_id].lat = req.body["lat"]
+  points_db[user_id].long = req.body["long"]
+  res.send(points_db[user_id])
 })
-
 
 
 // Logs out user by deleting cookie

@@ -2,7 +2,7 @@ var map;
 var marker;
 var infowindow;
 var messagewindow;
-let latLng =
+let markers  = []
 
 function newMarker(event) {
   marker = new google.maps.Marker({
@@ -24,6 +24,7 @@ $('.addPoint').on('click', function() {
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.open(map, marker);
     });
+    markers.push(marker)
     removeMapEvents();
     toggleDescriptions();
   })
@@ -92,8 +93,9 @@ $(".pointForm").on('submit', function(event) {
   let description = $("input[name='description']").val()
   let img_url = $("input[name='img_url']").val()
   let address = $("input[name='address']").val()
-  let lat =  marker.getPosition().lat()
-  let long = marker.getPosition().lng()
+  let lat =  Number(marker.getPosition().lat())
+  let long = Number(marker.getPosition().lng())
+
   $.ajax({
       url:'/maps/map1/point/new',
       type:'POST',
@@ -101,8 +103,8 @@ $(".pointForm").on('submit', function(event) {
         title: title,
         description: description,
         img_url: img_url,
-        lat: lat,
-        long: long,
+        lat: Number(lat),
+        long: Number(long),
         address: address
       },
       success: function(res) {
@@ -112,6 +114,51 @@ $(".pointForm").on('submit', function(event) {
   toggleDescriptions();
 });
 
+$(".load_map").on('click', function(){
+  event.preventDefault();
+  let map =  this.id
+  $.ajax({
+      url:`/maps/${map}/`,
+      type:'GET',
+      success: function(returnObject) {
+        renderPoints(returnObject.points_db)
+        // renderMap(map_db)
+      }
+
+      // data: {
+      //   title: title,
+      //   description: description,
+      //   img_url: img_url,
+      //   lat: lat,
+      //   long: long,
+      //   address: address
+      // }
+  })
+})
+
+function renderPoints(points_db){
+  console.log("rendering...", points_db)
+
+  for(point in points_db) {
+    let pointObject = points_db[point]
+    let latLng = {lat: Number(pointObject.lat), lng: Number(pointObject.long)};
+    let id = new google.maps.Marker({
+       position: latLng,
+       map: map
+    });
+  }
+}
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+function clearMarkers() {
+  setMapOnAll(null);
+}
 
 // var myMarker = new google.maps.Marker({
 //     position: new google.maps.LatLng(47.651968, 9.478485),
