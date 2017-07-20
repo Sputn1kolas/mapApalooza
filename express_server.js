@@ -37,11 +37,17 @@ app.get("/", (req, res) => {
 })
 
 app.get("/search", (req, res) => {
-  res.render("search.ejs")
+  let templateVar = {
+    gMapsApi: gMapsApi
+  }
+  res.render("search.ejs", templateVar)
 })
 
 app.get("/profile", (req, res) => {
-  res.render("profile.ejs")
+  let templateVar = {
+    gMapsApi: gMapsApi
+  }
+  res.render("profile.ejs", templateVar)
 })
 
 
@@ -53,13 +59,11 @@ app.post("/main/:user/", (req, res) => {
   const title = req.body["title"]
   const description = req.body["description"]
   const img_url = req.body["img_url"]
-
-
 })
 
 //  post for new points
-app.post("/main/:user/:map", (req, res) => {
-  const user_id = req.params.id
+app.post("maps/:map/:point/new", (req, res) => {
+  // const user_id = req.params.id
   const map_id = req.params.map
   const title = req.body["title"]
   const description = req.body["description"]

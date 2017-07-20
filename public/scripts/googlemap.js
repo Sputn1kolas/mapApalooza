@@ -86,7 +86,7 @@ function doNothing () {}
 
 
 // Uses AJAX to add the new point
-$(".pointFormm").ajaxSubmit({url: '/main/:user/:map', type: 'post'})
+$(".pointFormm").ajaxSubmit({url: 'maps/map1/point1/new', type: 'post'}) //change map1, point1
 
 // .on('submit', function(event) {
 //   event.preventDefault();
