@@ -4,25 +4,36 @@ var infowindow;
 var messagewindow;
 let editable = false
 
-$('.addPoint').on('click', function() {
-  let editable = true
-  toggleDescriptions();
-    google.maps.event.addListener(map, 'click', function(event) {
-      marker = new google.maps.Marker({
-        position: event.latLng,
-        map: map
-      });
-      let editable = false
-      google.maps.event.addListener(marker, 'click', function() {
-        infowindow.open(map, marker);
-        toggleDescriptions();
-        let editable = false
-      });
-    });
+function newMarker(event) {
+  marker = new google.maps.Marker({
+   position: event.latLng,
+   map: map
   })
+}
+
+function removeMapEvents() {
+  google.maps.event.clearListeners(map);
+}
+
+$('.addPoint').on('click', function() {
+  google.maps.event.addListener(map, 'click', function(event) {
+  marker = new google.maps.Marker({
+   position: event.latLng,
+   map: map
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map, marker);
+    });
+    removeMapEvents();
+    toggleDescriptions();
+  })
+  $('.addPoint').toggleClass("clicked")
+})
 
 function toggleDescriptions() {
   $('.pointDescriptions').slideToggle()
+  $('.addPoint').toggleClass("clicked")
+  // FOCUS ON title
 }
 
 function initMap() {
@@ -72,3 +83,21 @@ function downloadUrl(url, callback) {
 }
 
 function doNothing () {}
+
+
+// Uses AJAX to add the new point
+$(".pointFormm").ajaxSubmit({url: '/main/:user/:map', type: 'post'})
+
+// .on('submit', function(event) {
+//   event.preventDefault();
+//   let string = $("textarea").serialize()
+//   let stringRaw = $("textarea").val()
+//   $.ajax({
+//       type:'POST',
+//       url:'/main/:user/:map',
+//       data : string,
+//       success: function() {
+//         loadNewTweets()
+//       }
+//     });
+// });
