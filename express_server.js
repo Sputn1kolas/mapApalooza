@@ -65,14 +65,39 @@ app.get("/profile", (req, res) => {
   let user_id = 1 //temp as we don't have user id's yet
   let templateVar = {
     gMapsApi: gMapsApi,
-    points_db:
+    points_db: points_db
   }
   res.render("profile.ejs", templateVar)
 })
 
+app.get("/maps", (req, res) => {
+  knex.select('maps.title AS title', 'maps.description AS description', 'maps.img_url AS img_url')
+      .from('maps')
+      .join('users', function (){
+        this.on('users.id','=', 'user_id')
+      }).join('points', function (){
+        this.on('maps.id','=', 'map_id')
+      }).then(function (result){
+        res.send(result);
+      }).catch(function (error){
+        console.error(error)
+      });
+});
+
+app.get("/maps/:map/point", (req, res) => {
+  let map_id = req.params.map
+  knex.select('title', 'description', 'img_url')
+      .from('points')
+      .where('map_id','=', map_id)
+      .then(function (result){
+        res.send(result);
+      }).catch(function (error){
+        console.error(error)
+      });
+});
 
 app.get("/maps/:map", (req, res) => {
-  points_db["nik"].id = 1
+  points_db["nik"].id = 1;
   let map_id = req.params.map
   let returnObject = {
     map_db: map_db,
@@ -96,12 +121,8 @@ app.post("/main/:user/", (req, res) => {
   const img_url = req.body["img_url"]
   const lat = ""
   const long = ""
-<<<<<<< HEAD
-  knex('table').insert({id: id, user_id: user_id, title: title, description: description, lat: lat, long: long})
-=======
   knex('maps').insert({user_id: user_id, title: title, description: description, lat: lat, long: long})
   res.send(knex.column('title', 'description', 'img_url').select().from('map_points'))
->>>>>>> afeb9978814a660d7c3c1f0ddcc62b919a944e96
 })
 
 
@@ -116,11 +137,7 @@ app.post("/maps/:map/point/new", (req, res) => {
   let address = req.body["address"]
   let lat = req.body["lat"]
   let long = req.body["long"]
-<<<<<<< HEAD
-  knex('map_points').insert({id: id, user_map_id: map_id, title: title, description: description, lat: lat, long: long})
-=======
-  knex('points').insert({id: , user_map_id: map_id, title: title, description: description, lat: lat, long: long})
->>>>>>> afeb9978814a660d7c3c1f0ddcc62b919a944e96
+  knex('points').insert({id: id, user_map_id: map_id, title: title, description: description, lat: lat, long: long})
   res.send(knex.column('title', 'description', 'img_url').select().from('map_points'))
 })
 
