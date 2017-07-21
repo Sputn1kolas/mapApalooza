@@ -96,12 +96,8 @@ app.post("/main/:user/", (req, res) => {
   const img_url = req.body["img_url"]
   const lat = ""
   const long = ""
-<<<<<<< HEAD
-  knex('table').insert({id: id, user_id: user_id, title: title, description: description, lat: lat, long: long})
-=======
   knex('maps').insert({user_id: user_id, title: title, description: description, lat: lat, long: long})
   res.send(knex.column('title', 'description', 'img_url').select().from('map_points'))
->>>>>>> afeb9978814a660d7c3c1f0ddcc62b919a944e96
 })
 
 
@@ -116,11 +112,7 @@ app.post("/maps/:map/point/new", (req, res) => {
   let address = req.body["address"]
   let lat = req.body["lat"]
   let long = req.body["long"]
-<<<<<<< HEAD
-  knex('map_points').insert({id: id, user_map_id: map_id, title: title, description: description, lat: lat, long: long})
-=======
   knex('points').insert({id: , user_map_id: map_id, title: title, description: description, lat: lat, long: long})
->>>>>>> afeb9978814a660d7c3c1f0ddcc62b919a944e96
   res.send(knex.column('title', 'description', 'img_url').select().from('map_points'))
 })
 
