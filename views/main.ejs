@@ -22,16 +22,11 @@
           <input type="submit" value="Submit">
         </form>
         </div>
-  <!--       <div id="message">Location saved</div>
-  -->   </div>
-
-
-
+      </div>
       <script type="text/javascript" src="/scripts/googlemap.js"></script>
       <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=<%= gMapsApi %>&callback=initMap">
       </script>
-
       </div>
       <div class="list_container col-3">
       <div class="row">
@@ -49,19 +44,20 @@
             <div class="item_description">description description description description description description description description description </div>
           </main>
           <footer>
+          <div class="numberFavs">
           <i class="fa fa-heart"></i>
           2 fav
+          </div>
+          <div class="numberPoints">10 points</div>
           </footer>
         </article>
       </div>
 
     </div>
-    <div class="gmaps">
-          <div id="map" height="460px" width="100%"></div>
-    </div>
 
     </div>
   </div>
+
   </body>
 
 </html>
