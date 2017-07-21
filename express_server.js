@@ -15,7 +15,6 @@ const morgan = require("morgan");
 
 app.set("view engine", "ejs")
 
-let points_db = {};
 /////////////////////////////////// MiddleWare USE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 app.use(cookieSession({ secret: 'Banannnas!', cookie: { maxAge: 60 * 60 * 1000 }}))
@@ -61,13 +60,37 @@ app.get("/search", (req, res) => {
   res.render("search.ejs", templateVar)
 })
 
+app.get("/:map/points", (req, res) => {
+  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  let map_id = req.params.map
+  knex.select('*').from('points')
+    .where({map_id: map_id})
+    .then(function(result) {
+        let points = result
+        res.json(points)
+        console.log(points)
+      })
+    .catch(function (err) {
+      throw(err)
+    })
+})
+
 app.get("/profile", (req, res) => {
-  let user_id = 1 //temp as we don't have user id's yet
-  let templateVar = {
-    gMapsApi: gMapsApi,
-    points_db: knex('maps').select().where({user_id: user_id})
-  }
-  res.render("profile.ejs", templateVar)
+  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+
+  knex.select('*').from('maps')
+    .where({user_id: user_id})
+    .then(function(result) {
+       let templateVar = {
+          gMapsApi: gMapsApi,
+          map_db: result
+      }
+      console.log(templateVar)
+      res.render("profile.ejs", templateVar)
+      })
+    .catch(function (err) {
+      throw(err)
+    })
 })
 
 
