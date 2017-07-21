@@ -72,6 +72,7 @@ div.col-sm-1:hover {
 }
 
 .gmaps {
+  height: 100%;
   background-color: purple;
   opacity: 0.7;
   padding: 15px;
@@ -162,6 +163,7 @@ div.list_container .divider:active {
 }
 
 div.list_container .list_item {
+  font-family: 'Zilla Slab', serif;
   background: #FFFACD;
   height: 120px;
   border: 1px solid black;
@@ -187,6 +189,7 @@ div.list_container .list_item main img {
   margin-right: 5px;
 }
 
-div.list_container .list_item footer {
+div.list_container .list_item footer .numberPoints {
   text-align: right;
+  margin-top: -23px;
 }

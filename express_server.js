@@ -11,14 +11,15 @@ const port = process.env.PORT || 8080
 const cookieOptions = ["rocks"]
 const app = express()
 const sass = require("node-sass-middleware");
-
-let points_db =  {   //delete later
-}
+const morgan = require("morgan");
 
 app.set("view engine", "ejs")
-// app.use(bodyParser.urlencoded({extended: true}))
-// app.use(cookieParser())
+
+let points_db ={};
+/////////////////////////////////// MiddleWare USE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
 app.use(cookieSession({ secret: 'Banannnas!', cookie: { maxAge: 60 * 60 * 1000 }}))
+
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
@@ -27,7 +28,7 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public")) // this is where files that html references will din .
 app.use(bodyParser.urlencoded({extended:true}))
-
+app.use(morgan('dev'));
 // Get app to listen on port 8080
 app.listen(port, function(){
   console.log(`Mapping away on port: ${port}`)
@@ -36,7 +37,7 @@ app.listen(port, function(){
 ///////////////////////////////////// Databases ////////////////////////////////////////////
 
 const config = require("./knexfile");
-const env = 'development';
+const env = process.env.ENV || 'development';
 const knex = require('knex')(config[env]);
 
 // Temp user

@@ -20,6 +20,7 @@ div.list_container{
   }
 
   .list_item {
+    font-family: 'Zilla Slab', serif;
     background:#FFFACD;
     height: 120px;
     border: 1px solid black;
@@ -45,7 +46,10 @@ div.list_container{
     }
 
     footer {
-      text-align: right;
+      .numberPoints {
+        text-align:right;
+        margin-top: -23px;
+      }
     }
   }
 }
