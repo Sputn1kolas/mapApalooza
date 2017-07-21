@@ -16,7 +16,8 @@ const passport = require('passport');
 
 const morgan = require("morgan");
 
-
+const authRoutes = require('./routes/auth');
+const users = require('./routes/users')
 app.set("view engine", "ejs")
 
 let points_db ={};
@@ -33,6 +34,9 @@ app.use("/styles", sass({
 app.use(express.static("public")) // this is where files that html references will din .
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(morgan('dev'));
+
+app.use('/', routes(knex));
+app.use('/auth', authRoutes(knex));
 // Get app to listen on port 8080
 app.listen(port, function(){
   console.log(`Mapping away on port: ${port}`)
