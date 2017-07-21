@@ -138,7 +138,6 @@ $(".load_map").on('click', function(){
 })
 
 function renderPoints(points_db){
-  console.log("rendering...", points_db)
 
   for(point in points_db) {
     let pointObject = points_db[point]
@@ -148,6 +147,8 @@ function renderPoints(points_db){
        map: map
     });
     markers.push(marker)
+    console.log("rendering...", pointObject)
+    newPointDescription(pointObject.title, pointObject.address, pointObject.description, "point_id", pointObject.img_url)
   }
 }
 
@@ -166,6 +167,20 @@ function deleteMarkers() {
   clearMarkers();
   markers = [];
 }
+
+function newPointDescription(title, address, description, point_id, img_url) {
+  let newPoint =
+  `<div class="row" id="${point_id}">
+      <div class="col-6 offset-1 point_information">
+      <img src="${img_url}">
+      <h1> ${title}   </h1>
+      <h3> ${address} </h3>
+      <p>  ${description}  </p>
+      </div>
+    </div>`
+  $(".map_information_container").prepend(newPoint)
+}
+
 
 // var myMarker = new google.maps.Marker({
 //     position: new google.maps.LatLng(47.651968, 9.478485),

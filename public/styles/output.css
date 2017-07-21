@@ -77,6 +77,12 @@ div.col-sm-1:hover {
   padding: 15px;
   color: white;
   z-index: -1;
+  position: relative;
+}
+
+.gmaps h1 {
+  font-family: Quicksand, sans-serif;
+  font-size: 50px;
 }
 
 .pointDescriptions {
@@ -95,6 +101,36 @@ div.map_container {
   height: 100%;
   padding-right: 0;
   width: 75%;
+}
+
+.point_information {
+  background-color: grey;
+  margin: 15px 0px;
+  padding: 15px;
+}
+
+.point_information img {
+  object-fit: cover;
+  width: auto;
+  max-height: 150px;
+}
+
+.map_information_container {
+  background-color: white;
+}
+
+.controls {
+  position: absolute;
+  bottom: 100px;
+  left: 30px;
+  font-size: 30px;
+  z-index: 200;
+  color: purple;
+  opacity: 0.9;
+}
+
+.addPoint {
+  border-radius: 20%;
 }
 
 div.list_container {
