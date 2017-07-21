@@ -9,8 +9,20 @@
 
 <% let map_id = "map_1" %>
     <div class="gmaps">
-      <div id="map" height="460px" width="100%"></div>
-      <button class="addPoint"> Add point </button>
+        <h1 class "map_title"> Map Title </h1>
+        <div id="map" height="460px" width="100%"></div>
+
+        <div class="controls">
+          <i class="fa fa-heart" aria-hidden="true"></i>
+          <button class="addPoint"> Add point </button>
+        </div>
+
+        <h3 class="map_description"> This map does a bunch of really neat stuff </h3>
+        <h2 class="map_user_name"> Created by Nik! </h2>
+        </div>
+
+
+
       <div class="form pointDescriptions">
         <form action="maps/map1/point/new" method="POST" class="pointForm">
         Title of Point
@@ -25,14 +37,24 @@
       </form>
       </div>
   </div>
+<div class="row" id="${point_id}">
+      <div class="col-6 offset-1 point_information">
+      <button type="button" class="btn btn-primary btn-lg btn-block load_map" id="map1">Load Existing</button>
+      </div>
+  </div>
 
-  <button type="button" class="btn btn-primary btn-lg btn-block load_map" id="map1">Load Existing</button>
+  <div class="row ">
+      <div class="col-7 offset-1 map_information_container">
+      </div>
+  </div>
+
 
 
  <script type="text/javascript" src="/scripts/googlemap.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=<%= gMapsApi %>&callback=initMap">
     </script>
+
 
 
     </div>

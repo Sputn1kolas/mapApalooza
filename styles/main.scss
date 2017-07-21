@@ -12,11 +12,18 @@ $full_search_width: 480px;
   .navbar-brand {
     font-family: Quicksand, sans-serif;
     text-align: left;
+    font-size: 25px;
+    margin-top: -3px;
 
     a {
       color: white;
       spacing: 15px;
     }
+
+    img {
+    margin-top: -10px;
+    }
+
   }
 
   #search_navbar {
@@ -24,7 +31,7 @@ $full_search_width: 480px;
     -webkit-transition: $ease-in;
     -moz-transition:$ease-in;
     -o-transition: $ease-in;
-    width:130px;
+    width: 300px;
     border-radius: 5px;
   }
 
@@ -79,6 +86,15 @@ $full_search_width: 480px;
   opacity: 0.7;
   padding: $spacing;
   color: white;
+  z-index:-1;
+  position: relative;
+
+
+  h1 {
+    font-family: Quicksand, sans-serif;
+    font-size: 50px;
+
+  }
 }
 
 .pointDescriptions {
@@ -100,5 +116,32 @@ div.map_container {
 
 }
 
+.point_information {
+  background-color: grey;
+  margin: $spacing 0px;
+  padding: $spacing;
 
+  img {
+   object-fit: cover;
+    width: auto;
+    max-height: 150px;
+  }
+}
 
+.map_information_container{
+  background-color: white;
+}
+
+.controls {
+  position: absolute;
+  bottom: 100px;
+  left: 30px;
+  font-size: 30px;
+  z-index: 200;
+  color: purple;
+  opacity: 0.9;
+}
+
+.addPoint {
+  border-radius: 20%;
+}
