@@ -13,6 +13,8 @@
 .navbar .navbar-brand {
   font-family: Quicksand, sans-serif;
   text-align: left;
+  font-size: 25px;
+  margin-top: -3px;
 }
 
 .navbar .navbar-brand a {
@@ -20,12 +22,16 @@
   spacing: 15px;
 }
 
+.navbar .navbar-brand img {
+  margin-top: -10px;
+}
+
 .navbar #search_navbar {
   margin-left: -50px;
   -webkit-transition: width 0.3s ease-in-out;
   -moz-transition: width 0.3s ease-in-out;
   -o-transition: width 0.3s ease-in-out;
-  width: 130px;
+  width: 300px;
   border-radius: 5px;
 }
 
