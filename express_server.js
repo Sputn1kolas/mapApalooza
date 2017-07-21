@@ -93,9 +93,34 @@ app.get("/profile", (req, res) => {
     })
 })
 
+app.get("/maps", (req, res) => {
+  knex.select('maps.title AS title', 'maps.description AS description', 'maps.img_url AS img_url')
+      .from('maps')
+      .join('users', function (){
+        this.on('users.id','=', 'user_id')
+      }).join('points', function (){
+        this.on('maps.id','=', 'map_id')
+      }).then(function (result){
+        res.send(result);
+      }).catch(function (error){
+        console.error(error)
+      });
+});
+
+app.get("/maps/:map/point", (req, res) => {
+  let map_id = req.params.map
+  knex.select('title', 'description', 'img_url')
+      .from('points')
+      .where('map_id','=', map_id)
+      .then(function (result){
+        res.send(result);
+      }).catch(function (error){
+        console.error(error)
+      });
+});
 
 app.get("/maps/:map", (req, res) => {
-  points_db["nik"].id = 1
+  points_db["nik"].id = 1;
   let map_id = req.params.map
   let returnObject = {
     map_db: map_db,
