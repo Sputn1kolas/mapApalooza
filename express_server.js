@@ -53,6 +53,7 @@ app.get("/", (req, res) => {
   res.render("main.ejs", templateVar)
 })
 
+
 app.get("/search", (req, res) => {
   let templateVar = {
     gMapsApi: gMapsApi
