@@ -1,11 +1,10 @@
 $(document).ready(function(){
-
-  function createListItem (obj){
+  function createListMap (obj){
     let article = $("<article>").addClass("list_item");
     let header = $("<header>").text(obj.title);
     let main = $("<main>");
     let divImg = $("<div>").addClass("item_img");
-    let itemImg = $("<img>").attr("src", "#");
+    let itemImg = $("<img>").attr("src", obj.img_url);
     let divDesc = $("<div>").addClass("item_description").text(obj.desc);
     let footer = $("<footer>");
     let divFav = $ ("<div>").addClass("numberFavs").text("obj.numberFavs");
@@ -19,16 +18,55 @@ $(document).ready(function(){
     return article;
   };
 
-  function renderListItem (arr) {
+  function renderListMap (arr) {
     for (let i = 0; i < arr.length; i++){
-      let listItem = createListItem(arr[i]);
-      $("#every_item_container").append(listItem);
+      let listMap = createListMap(arr[i]);
+      $("#every_item_container").append(listMap);
     }
   };
 
-  knex.select('title', 'description', 'img_url', 'COUNT (map_points.id) AS points')
-      .from('map')
-      .join('maps', function (){
-        this.on('maps',)
-      })
+  function loadListMaps(){
+    $.ajax({
+      url: "/maps",
+      method: "GET",
+      success: function (result){
+      renderListMap(result);
+      }
+    })
+  };
+
+  loadListMaps();
+
+  function createPoint (obj){
+    let article = $("<article>").addClass("point_item");
+    let header = $("<header>").text(obj.title);
+    let main = $("<main>");
+    let divImg = $("<div>").addClass("point_img");
+    let pointImg = $("<img>").attr("src", obj.img_url);
+    let divDesc = $("<div>").addClass("point_description").text(obj.description);
+    divImg.append(pointImg)
+    main.append(divImg, divDesc);
+    article.append(header, main);
+    return article;
+  };
+
+  function renderListPoint (arr) {
+    for (let i = 0; i < arr.length; i++){
+      let listPoint = createPoint(arr[i]);
+      $("#point_container").append(listPoint);
+    }
+  };
+
+  // function loadListPoints(){
+  //   $.ajax({
+  //     url: "/maps/:map/point",
+  //     method: "GET",
+  //     success: function (result){
+  //     renderListPoint(result);
+  //     }
+  //   })
+  // };
+
+  // loadListPoints();
+
 })

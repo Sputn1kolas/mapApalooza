@@ -73,8 +73,6 @@ div.col-sm-1:hover {
 
 .gmaps {
   height: 100%;
-  background-color: purple;
-  opacity: 0.7;
   padding: 15px;
   color: white;
   z-index: -1;
@@ -98,6 +96,7 @@ div.map_container {
   height: 100%;
   padding-right: 0;
   width: 75%;
+  background: #a64ca6;
 }
 
 .point_information {
@@ -192,4 +191,34 @@ div.list_container .list_item main img {
 div.list_container .list_item footer .numberPoints {
   text-align: right;
   margin-top: -23px;
+}
+
+#point_container .point_item {
+  background: #FFFACD;
+  height: 120px;
+  border: 1px solid black;
+  margin: 20px;
+  padding: 10px;
+  font-family: 'Zilla Slab', serif;
+}
+
+#point_container .point_item header {
+  font-size: 25px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-bottom: 1px solid black;
+}
+
+#point_container .point_item main {
+  display: flex;
+  margin: 5px;
+}
+
+#point_container .point_item main img {
+  height: 50px;
+  width: 75px;
+}
+
+#point_container .point_item main .point_description {
+  margin-left: 10px;
 }
