@@ -15,7 +15,6 @@ const morgan = require("morgan");
 
 app.set("view engine", "ejs")
 
-let points_db ={};
 /////////////////////////////////// MiddleWare USE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 app.use(cookieSession({ secret: 'Banannnas!', cookie: { maxAge: 60 * 60 * 1000 }}))
@@ -61,25 +60,75 @@ app.get("/search", (req, res) => {
   res.render("search.ejs", templateVar)
 })
 
-app.get("/profile", (req, res) => {
-  let templateVar = {
-    gMapsApi: gMapsApi,
-    points_db: points_db //delete later
-  }
-  res.render("profile.ejs", templateVar)
+app.get("/:map/points", (req, res) => {
+  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  let map_id = req.params.map
+  knex.select('*').from('points')
+    .where({map_id: map_id})
+    .then(function(result) {
+        let points = result
+        res.json(points)
+        console.log(points)
+      })
+    .catch(function (err) {
+      throw(err)
+    })
 })
 
-map_db = {
-}
+app.get("/profile", (req, res) => {
+  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+
+  knex.select('*').from('maps')
+    .where({user_id: user_id})
+    .then(function(result) {
+       let templateVar = {
+          gMapsApi: gMapsApi,
+          map_db: result
+      }
+      console.log(templateVar)
+      res.render("profile.ejs", templateVar)
+      })
+    .catch(function (err) {
+      throw(err)
+    })
+})
+
+app.get("/maps", (req, res) => {
+  knex.select('maps.title AS title', 'maps.description AS description', 'maps.img_url AS img_url')
+      .from('maps')
+      .join('users', function (){
+        this.on('users.id','=', 'user_id')
+      }).join('points', function (){
+        this.on('maps.id','=', 'map_id')
+      }).then(function (result){
+        res.send(result);
+      }).catch(function (error){
+        console.error(error)
+      });
+});
+
+app.get("/maps/:map/point", (req, res) => {
+  let map_id = req.params.map
+  knex.select('title', 'description', 'img_url')
+      .from('points')
+      .where('map_id','=', map_id)
+      .then(function (result){
+        res.send(result);
+      }).catch(function (error){
+        console.error(error)
+      });
+});
 
 app.get("/maps/:map", (req, res) => {
-  points_db["nik"].id = 1
+  points_db["nik"].id = 1;
   let map_id = req.params.map
   let returnObject = {
-    map_db: map_db
+    map_db: map_db,
     points_db: knex('map_points').where({
       first_name: 'Test',
       }).select('id')
+    // map_db: knex('maps').where({id: map_id}).select(),
+    // points_db: knex('map_points').where({map_id: map_id}).select()
   }
   res.send(returnObject)
 })
@@ -95,14 +144,14 @@ app.post("/main/:user/", (req, res) => {
   const img_url = req.body["img_url"]
   const lat = ""
   const long = ""
-  knex('table').insert({id: , user_id: user_id, title: title, description: description, lat: lat, long: long})
+  knex('maps').insert({user_id: user_id, title: title, description: description, lat: lat, long: long})
+  res.send(knex.column('title', 'description', 'img_url').select().from('map_points'))
 })
 
 
 
 //  post for new points
 app.post("/maps/:map/point/new", (req, res) => {
-  const user_id = "nik"
   let map_id = req.params.map
   let title = req.body["title"]
   let description = req.body["description"]
@@ -110,8 +159,8 @@ app.post("/maps/:map/point/new", (req, res) => {
   let address = req.body["address"]
   let lat = req.body["lat"]
   let long = req.body["long"]
-  knex('map_points').insert({id: , user_map_id: map_id, title: title, description: description, lat: lat, long: long})
-  res.send(knex.column('title', 'description', 'img_url').select().from('map_points'))
+  knex('points').insert({map_id: map_id, title: title, description: description, lat: lat, long: long})
+  res.send(knex.column.select().from('map_points'))
 })
 
 
