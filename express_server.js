@@ -61,24 +61,21 @@ app.get("/search", (req, res) => {
 })
 
 app.get("/profile", (req, res) => {
+  let user_id = 1 //temp as we don't have user id's yet
   let templateVar = {
     gMapsApi: gMapsApi,
-    points_db: points_db //delete later
+    points_db:
   }
   res.render("profile.ejs", templateVar)
 })
 
-map_db = {
-}
 
 app.get("/maps/:map", (req, res) => {
   points_db["nik"].id = 1
   let map_id = req.params.map
   let returnObject = {
-    map_db: map_db
-    points_db: knex('map_points').where({
-      first_name: 'Test',
-      }).select('id')
+    map_db: knex('maps').where({id: map_id}).select(),
+    points_db: knex('map_points').where({map_id: map_id}).select()
   }
   res.send(returnObject)
 })
@@ -94,7 +91,8 @@ app.post("/main/:user/", (req, res) => {
   const img_url = req.body["img_url"]
   const lat = ""
   const long = ""
-  knex('table').insert({id: , user_id: user_id, title: title, description: description, lat: lat, long: long})
+  knex('maps').insert({user_id: user_id, title: title, description: description, lat: lat, long: long})
+  res.send(knex.column('title', 'description', 'img_url').select().from('map_points'))
 })
 
 
@@ -109,7 +107,7 @@ app.post("/maps/:map/point/new", (req, res) => {
   let address = req.body["address"]
   let lat = req.body["lat"]
   let long = req.body["long"]
-  knex('map_points').insert({id: , user_map_id: map_id, title: title, description: description, lat: lat, long: long})
+  knex('points').insert({id: , user_map_id: map_id, title: title, description: description, lat: lat, long: long})
   res.send(knex.column('title', 'description', 'img_url').select().from('map_points'))
 })
 

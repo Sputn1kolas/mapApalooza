@@ -22,7 +22,7 @@ exports.up = function(knex, Promise) {
       table.increments('id').primary()
       table.integer('map_id')
            .references('id')
-           .inTable('user_maps'),
+           .inTable('maps'),
       table.string('title'),
       table.string('description', 1000),
       table.string('img_url', 1000),
