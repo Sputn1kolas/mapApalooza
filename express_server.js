@@ -35,9 +35,12 @@ app.listen(port, function(){
 })
 
 ///////////////////////////////////// Databases ////////////////////////////////////////////
+
 const config = require("./knexfile");
 const env = process.env.ENV || 'development';
 const knex = require('knex')(config[env]);
+
+// Temp user
 
 
 ///////////////////////////////////// Render ////////////////////////////////////////////
@@ -73,8 +76,10 @@ app.get("/maps/:map", (req, res) => {
   points_db["nik"].id = 1
   let map_id = req.params.map
   let returnObject = {
-    points_db: points_db, //delete later
     map_db: map_db
+    points_db: knex('map_points').where({
+      first_name: 'Test',
+      }).select('id')
   }
   res.send(returnObject)
 })
@@ -88,6 +93,9 @@ app.post("/main/:user/", (req, res) => {
   const title = req.body["title"]
   const description = req.body["description"]
   const img_url = req.body["img_url"]
+  const lat = ""
+  const long = ""
+  knex('table').insert({id: , user_id: user_id, title: title, description: description, lat: lat, long: long})
 })
 
 
@@ -95,15 +103,15 @@ app.post("/main/:user/", (req, res) => {
 //  post for new points
 app.post("/maps/:map/point/new", (req, res) => {
   const user_id = "nik"
-  points_db[user_id] = {}
-  points_db[user_id].map_id = req.params.map
-  points_db[user_id].title = req.body["title"]
-  points_db[user_id].description = req.body["description"]
-  points_db[user_id].img_url = req.body["img_url"]
-  points_db[user_id].address = req.body["address"]
-  points_db[user_id].lat = req.body["lat"]
-  points_db[user_id].long = req.body["long"]
-  res.send(points_db[user_id])
+  let map_id = req.params.map
+  let title = req.body["title"]
+  let description = req.body["description"]
+  let img_url = req.body["img_url"]
+  let address = req.body["address"]
+  let lat = req.body["lat"]
+  let long = req.body["long"]
+  knex('map_points').insert({id: , user_map_id: map_id, title: title, description: description, lat: lat, long: long})
+  res.send(knex.column('title', 'description', 'img_url').select().from('map_points'))
 })
 
 

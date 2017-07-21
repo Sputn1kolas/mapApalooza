@@ -3,6 +3,8 @@ var marker;
 var infowindow;
 var messagewindow;
 let markers  = []
+var image = '/img/lighthouse.svg';
+
 
 function newMarker(event) {
   marker = new google.maps.Marker({
@@ -19,7 +21,8 @@ $('.addPoint').on('click', function() {
   google.maps.event.addListener(map, 'click', function(event) {
   marker = new google.maps.Marker({
    position: event.latLng,
-   map: map
+   map: map,
+   icon: image
     });
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.open(map, marker);
@@ -144,7 +147,8 @@ function renderPoints(points_db){
     let latLng = {lat: Number(pointObject.lat), lng: Number(pointObject.long)};
     let marker = new google.maps.Marker({   //change this to ID later
        position: latLng,
-       map: map
+       map: map,
+       icon: image
     });
     markers.push(marker)
     console.log("rendering...", pointObject)
