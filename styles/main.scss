@@ -62,11 +62,7 @@ $full_search_width: 480px;
   }
 }
 
- #map {
-    height: 400px;
-    width: 100%;
-    z-index: 1;
-  }
+
 
   div.col-sm-1{
     height: 70px;
@@ -76,7 +72,7 @@ $full_search_width: 480px;
     color: white;
   }
 
-  div.col-sm-1:hover{
+  div.col-sm-1:hover {
     background: #b000b0;
   }
 
@@ -86,26 +82,20 @@ $full_search_width: 480px;
   padding: $spacing;
   color: white;
   z-index:-1;
-  position: relative;
 
+  #map {
+    height: 400px;
+    width: 100%;
+  }
 
   h1 {
     font-family: Quicksand, sans-serif;
     font-size: 50px;
-
   }
 }
 
 .pointDescriptions {
   display: none;
-}
-
-.addPoint{
-  margin: $spacing 0px;
-}
-
-.clicked {
-  border-color: blue;
 }
 
 div.map_container {
@@ -127,20 +117,33 @@ div.map_container {
   }
 }
 
-.map_information_container{
+.map_information_container {
   background-color: white;
 }
 
 .controls {
-  position: absolute;
+ /* position: absolute;
   bottom: 100px;
-  left: 30px;
+  left: 30px;*/
   font-size: 30px;
-  z-index: 200;
-  color: purple;
+  z-index: 100;
+  color: white;
   opacity: 0.9;
 }
 
+
 .addPoint {
   border-radius: 20%;
-}
+  z-index: 1000;
+  margin: $spacing 0px;
+  }
+  .addPoint:hover {
+  opacity: 0.8;
+  }
+
+.clicked {
+    border-color: blue;
+  }
+
+
+

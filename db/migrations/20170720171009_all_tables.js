@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
       table.string('password'),
       table.string('email')
     }),
-    knex.schema.createTable('user_maps', function(table){
+    knex.schema.createTable('maps', function(table){
       table.increments('id').primary(),
       table.integer('user_id')
            .references('id')
@@ -18,9 +18,9 @@ exports.up = function(knex, Promise) {
       table.float('lat', 10, 6),
       table.float('long', 10, 6)
     }),
-    knex.schema.createTable('map_points', function(table){
+    knex.schema.createTable('points', function(table){
       table.increments('id').primary()
-      table.integer('user_map_id')
+      table.integer('map_id')
            .references('id')
            .inTable('user_maps'),
       table.string('title'),
@@ -35,9 +35,8 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return Promise.all([
-    knex.schema.dropTable('map_points'),
-    knex.schema.dropTable('user_maps'),
+    knex.schema.dropTable('points'),
+    knex.schema.dropTable('maps'),
     knex.schema.dropTable('users')
   ])
-
 };
