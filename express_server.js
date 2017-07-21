@@ -65,7 +65,7 @@ app.get("/profile", (req, res) => {
   let user_id = 1 //temp as we don't have user id's yet
   let templateVar = {
     gMapsApi: gMapsApi,
-    points_db:
+    points_db: knex('maps').select().where({user_id: user_id})
   }
   res.render("profile.ejs", templateVar)
 })
@@ -104,7 +104,6 @@ app.post("/main/:user/", (req, res) => {
 
 //  post for new points
 app.post("/maps/:map/point/new", (req, res) => {
-  const user_id = "nik"
   let map_id = req.params.map
   let title = req.body["title"]
   let description = req.body["description"]
@@ -112,8 +111,8 @@ app.post("/maps/:map/point/new", (req, res) => {
   let address = req.body["address"]
   let lat = req.body["lat"]
   let long = req.body["long"]
-  knex('points').insert({id: , user_map_id: map_id, title: title, description: description, lat: lat, long: long})
-  res.send(knex.column('title', 'description', 'img_url').select().from('map_points'))
+  knex('points').insert({map_id: map_id, title: title, description: description, lat: lat, long: long})
+  res.send(knex.column.select().from('map_points'))
 })
 
 
