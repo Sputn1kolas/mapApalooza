@@ -12,11 +12,18 @@ $full_search_width: 480px;
   .navbar-brand {
     font-family: Quicksand, sans-serif;
     text-align: left;
+    font-size: 25px;
+    margin-top: -3px;
 
     a {
       color: white;
       spacing: 15px;
     }
+
+    img {
+    margin-top: -10px;
+    }
+
   }
 
   #search_navbar {
@@ -24,7 +31,7 @@ $full_search_width: 480px;
     -webkit-transition: $ease-in;
     -moz-transition:$ease-in;
     -o-transition: $ease-in;
-    width:130px;
+    width: 300px;
     border-radius: 5px;
   }
 
