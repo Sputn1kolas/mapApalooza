@@ -1,4 +1,20 @@
 $(document).ready(function(){
+  const pg = require("pg");
+  const knex = require('knex')({
+    client: 'postgresql',
+    connection: {
+      user     : settings.user,
+      password : settings.password,
+      database : settings.database,
+      host     : settings.hostname,
+      port     : settings.port,
+      ssl      : settings.ssl
+    },
+    migration : {
+      tableName: "all_tables"
+    }
+  });
+
 
   function createListItem (obj){
     let article = $("<article>").addClass("list_item");
@@ -26,9 +42,20 @@ $(document).ready(function(){
     }
   };
 
-  knex.select('title', 'description', 'img_url', 'COUNT (map_points.id) AS points')
-      .from('map')
-      .join('maps', function (){
-        this.on('maps',)
-      })
+  function loadListItems(){
+    knex.select('title', 'description', 'img_url', 'COUNT (map_points.id) AS points')
+        .from('maps')
+        .join('users', function (){
+          this.on('users.id','=', 'user_id')
+        }).join('points', function (){
+          this.on('maps.id','=', 'map_id')
+        }).then(function (result){
+          console.log(result);
+          return renderListItem(result);
+        }).catch(function (error){
+          console.error(error)
+        });
+  };
+
+  loadListItems();
 })
