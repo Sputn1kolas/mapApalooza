@@ -63,7 +63,6 @@ app.get("/maps/all", (req, res) => {
   knex.select('*').from('maps')
     .then(function(result) {
       res.json(result)
-      console.log("db get..", result)
       })
     .catch(function (err) {
       throw(err)

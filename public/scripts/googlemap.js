@@ -130,7 +130,7 @@ $(".point_item").on('click', function(){
       }
   })
   $.ajax({
-      url:`/${map_id}/points`,
+      url:`/${map_id}/point`,
       type:'GET',
       success: function(returnObject) {
         console.log(returnObject)
@@ -205,8 +205,7 @@ function changeMap(title, description, map_id) {
   console.log("tryign to change data")
 }
 
-//////////////////////// Pulling all the maps on sidebar ///////////////////
-
+///////////////////////// On load AJAX CALLS ////////////////////////
 $.ajax({
       url:`/maps/all`,
       type:'GET',
@@ -215,8 +214,19 @@ $.ajax({
       }
   })
 
+let map_id = $('#map').data('map_id')
+$.ajax({
+  url:`/${map_id}/points`,
+  type:'GET',
+  success: function(returnObject) {
+    console.log(returnObject)
+    newPointDescription(returnObject)
+  }
+})
+
+//////////////////////// Pulling all the maps on sidebar ///////////////////
+
 function newMapDescription(title, description, map_id, img_url) {
-  console.log("calling new map description", title, description, map_id, img_url )
   let newMap =
    `<article class="list_item data-map_id="${map_id}">
             <header>
@@ -238,7 +248,6 @@ function newMapDescription(title, description, map_id, img_url) {
  }
 
 function generateDescriptions(map_db){
-console.log("calling generateDescriptions", map_db)
  for(var i = 0; i < map_db.length; i++) {
    newMapDescription(map_db[i].title,
      map_db[i].description,
