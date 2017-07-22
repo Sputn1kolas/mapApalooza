@@ -29,7 +29,7 @@ app.use(express.static("public")) // this is where files that html references wi
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(morgan('dev'));
 // Get app to listen on port 8080
-app.listen(port, function(){
+app.listen(port, function() {
   console.log(`Mapping away on port: ${port}`)
 })
 
@@ -44,14 +44,44 @@ const knex = require('knex')(config[env]);
 
 ///////////////////////////////////// Render ////////////////////////////////////////////
 
-
 app.get("/", (req, res) => {
-   let templateVar = {
-    gMapsApi: gMapsApi
-  }
-  res.render("main.ejs", templateVar)
+  knex.select('*').from('maps')
+    .then(function(result) {
+      let templateVar = {
+          gMapsApi: gMapsApi,
+          map_db: result,
+          page: "main",
+      }
+      res.render("main.ejs", templateVar)
+      })
+    .catch(function (err) {
+      throw(err)
+    })
 })
 
+app.get("/maps/all", (req, res) => {
+  knex.select('*').from('maps')
+    .then(function(result) {
+      res.json(result)
+      })
+    .catch(function (err) {
+      throw(err)
+    })
+})
+
+app.get("/maps/:map_id", (req, res) => {
+  let map_id = req.params.map_id
+  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  knex.select('*').from('maps')
+    .where({id: map_id})
+    .then(function(result){
+        console.log(result)
+        res.json(result)
+      })
+    .catch(function (err) {
+      throw(err)
+    })
+})
 
 app.get("/search", (req, res) => {
   let templateVar = {
@@ -60,15 +90,15 @@ app.get("/search", (req, res) => {
   res.render("search.ejs", templateVar)
 })
 
-app.get("/:map/points", (req, res) => {
+app.get("/:map_id/points", (req, res) => {
+  console.log(req.body)
   let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
-  let map_id = req.params.map
+  let map_id = req.params.map_id
   knex.select('*').from('points')
     .where({map_id: map_id})
     .then(function(result) {
         let points = result
         res.json(points)
-        console.log(points)
       })
     .catch(function (err) {
       throw(err)
@@ -83,29 +113,30 @@ app.get("/profile", (req, res) => {
     .then(function(result) {
        let templateVar = {
           gMapsApi: gMapsApi,
-          map_db: result
+          map_db: result,
+          page: "profile"
       }
       console.log(templateVar)
-      res.render("profile.ejs", templateVar)
+      res.render("main.ejs", templateVar)
       })
     .catch(function (err) {
       throw(err)
     })
 })
 
-app.get("/maps", (req, res) => {
-  knex.select('maps.title AS title', 'maps.description AS description', 'maps.img_url AS img_url')
-      .from('maps')
-      .join('users', function (){
-        this.on('users.id','=', 'user_id')
-      }).join('points', function (){
-        this.on('maps.id','=', 'map_id')
-      }).then(function (result){
-        res.send(result);
-      }).catch(function (error){
-        console.error(error)
-      });
-});
+// app.get("/maps", (req, res) => {
+//   knex.select('maps.title AS title', 'maps.description AS description', 'maps.img_url AS img_url')
+//       .from('maps')
+//       .join('users', function (){
+//         this.on('users.id','=', 'user_id')
+//       }).join('points', function (){
+//         this.on('maps.id','=', 'map_id')
+//       }).then(function (result){
+//         res.send(result);
+//       }).catch(function (error){
+//         console.error(error)
+//       });
+// });
 
 app.get("/maps/:map/point", (req, res) => {
   let map_id = req.params.map
@@ -119,19 +150,6 @@ app.get("/maps/:map/point", (req, res) => {
       });
 });
 
-app.get("/maps/:map", (req, res) => {
-  points_db["nik"].id = 1;
-  let map_id = req.params.map
-  let returnObject = {
-    map_db: map_db,
-    points_db: knex('map_points').where({
-      first_name: 'Test',
-      }).select('id')
-    // map_db: knex('maps').where({id: map_id}).select(),
-    // points_db: knex('map_points').where({map_id: map_id}).select()
-  }
-  res.send(returnObject)
-})
 
 
 ///////////////////////////////////// POST ////////////////////////////////////////////

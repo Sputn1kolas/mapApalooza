@@ -2,6 +2,8 @@ div.list_container{
   background: #bed8ff;
   max-width: 23.85%;
 
+
+
   .divider {
     background: #93b9f2;
     text-align: center;
@@ -52,4 +54,8 @@ div.list_container{
       }
     }
   }
+}
+
+.list_item:hover {
+  opacity: 0.8;
 }
