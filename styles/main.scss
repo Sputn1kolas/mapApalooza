@@ -50,8 +50,6 @@ $full_search_width: 480px;
     overflow: scroll;
   }
 
-
-
   #search_navbar:focus {
     width: $full_search_width;
   }
@@ -62,14 +60,34 @@ $full_search_width: 480px;
   }
 }
 
-
-
   div.col-sm-1{
     height: 70px;
     margin-top: -15px;
     text-align: center;
     line-height: 57px;
     color: white;
+  }
+
+  div #login_form{
+    line-height: 20px;
+    display: none;
+    background: lightblue;
+    width: 230px;
+    height: 250px;
+    margin-left: -40px;
+
+    h3 {
+      line-height: 60px;
+    }
+
+    .password {
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+    }
+
   }
 
   div.col-sm-1:hover {

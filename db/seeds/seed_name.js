@@ -8,8 +8,7 @@ exports.seed = function(knex, Promise) {
 
   return Promise.all([
 
-  knex('points').del()
-  .then(() => {return knex('maps').del()})
+  knex('points').del()  .then(() => {return knex('maps').del()})
   .then(() => { return knex('users').del()})
   .then(function () {
     // Inserts seed entries
