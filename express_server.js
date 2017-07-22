@@ -65,11 +65,7 @@ app.get("/profile", (req, res) => {
   let user_id = 1 //temp as we don't have user id's yet
   let templateVar = {
     gMapsApi: gMapsApi,
-<<<<<<< HEAD
-    points_db: points_db
-=======
     points_db: knex('maps').select().where({user_id: user_id})
->>>>>>> 2e606db71fde5e7b821de3f9a2d2a4f5e265e607
   }
   res.render("profile.ejs", templateVar)
 })
