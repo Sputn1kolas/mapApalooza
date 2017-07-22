@@ -83,20 +83,14 @@ app.get("/maps/:map_id", (req, res) => {
     })
 })
 
-app.get("/search", (req, res) => {
-  let templateVar = {
-    gMapsApi: gMapsApi
-  }
-  res.render("search.ejs", templateVar)
-})
 
 app.get("/:map_id/points", (req, res) => {
   let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
   let map_id = req.params.map_id
   knex.select('*').from('points')
     .where({map_id: map_id})
-    .then(function(result) {
-        console.log("GET map/points is returning..", result)
+    .then(function(result){
+        console.log("sending... ", result)
         res.json(result)
       })
     .catch(function (err) {
@@ -104,6 +98,13 @@ app.get("/:map_id/points", (req, res) => {
     })
 })
 
+
+app.get("/search", (req, res) => {
+  let templateVar = {
+    gMapsApi: gMapsApi
+  }
+  res.render("search.ejs", templateVar)
+})
 // // returns all of the points for a specific mind
 // app.get("/maps/:map/point", (req, res) => {
 //   let map_id = req.params.map
@@ -158,7 +159,7 @@ app.get("/profile", (req, res) => {
 ///////////////////////////////////// POST ////////////////////////////////////////////
 
 //  post for new map
-app.post("/main/:user/", (req, res) => {
+app.post("/maps/new", (req, res) => {
   const user_id = req.params.id
   const title = req.body["title"]
   const description = req.body["description"]

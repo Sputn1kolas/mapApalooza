@@ -93,7 +93,7 @@ $(".pointForm").on('submit', function(event) {
   event.preventDefault();
   let map_id = $('#map').data('map_id')
   let title = $("input[name='title']").val()
-  let description = $("input[name='description']").val()
+  let description = $("textarea[name='description']").val()
   let img_url = $("input[name='img_url']").val()
   let address = $("input[name='address']").val()
   let lat =  Number(marker.getPosition().lat())
@@ -120,12 +120,41 @@ $(".pointForm").on('submit', function(event) {
 });
 
 
+// creates a new map
+$(".map_description").on('submit', function(event) {
+  event.preventDefault();
+  let title = $("input[name='map_title']").val()
+  let description = $("textarea[name='map_description']").val()
+  if(marker){
+    let lat =  Number(marker.getPosition().lat())
+    let long = Number(marker.getPosition().lng())
+  }
+  let data = {
+    title: title,
+    description: description,
+    img_url: img_url,
+    lat: Number(lat),
+    long: Number(long),
+    address: address
+  }
+  $.ajax({
+    url:`/maps/new`,
+    type:'POST',
+    data: data,
+    success: function(res) {
+      console.log(res)
+    }
+  });
+  toggleDescriptions();
+  renderPoints({data})
+});
+
+
 
 // for all points passed to it shows them on screen and generates a box below
 function renderPoints(points_array){
   for(var i = 0; i < points_array.length; i++) {
-    let pointObject = points_db[i]
-    console.log("renderPoints", pointObject)
+    let pointObject = points_array[i]
     let latLng = {lat: Number(pointObject.lat), lng: Number(pointObject.long)};
     let marker = new google.maps.Marker({   //change this to ID later
      position: latLng,
@@ -168,7 +197,6 @@ function newPointDescription(title, address, description, point_id, img_url) {
   </main>
   </article>
   </div>`
-  console.log("the new point is", newPoint)
   $("#point_container").prepend(newPoint)
 }
 
@@ -187,8 +215,11 @@ function newMapDescription(title, address, description, map_id, img_url) {
 
 
 function changeMap(title, description, map_id) {
-  $('.gmaps').find('.map_title').text(title)
-  $('.map_description').text(description)
+  $('.controls').find('.map_title').replaceWith(
+    `<h1 class="map_title" >${title}</h1>`
+    )
+  $('.gmaps').find('.map_description').replaceWith(
+    `<h3 class="map_description"> ${description} </h3>`)
   $('#map').data('map_id', map_id)
 }
 
@@ -203,15 +234,16 @@ $.ajax({
 
 // should load the map points on load
 // let map_id = $('#map').data('map_id')
-// $.ajax({
-//   url:`/${map_id}/points`,
-//   type:'GET',
-//   success: function(returnObject) {
-//     console.log("the get for map points returns...", returnObject)
-//     newPointDescription(returnObject)
-//   }
-// })
-
+// if(map_id){
+//   $.ajax({
+//     url:`/${map_id}/points`,
+//     type:'GET',
+//     success: function(returnObject) {
+//       console.log("the get for map points returns...", returnObject)
+//       newPointDescription(returnObject)
+//     }
+//   })
+// }
 //////////////////////// Pulling all the maps on sidebar ///////////////////
 
 function newMapDescription(title, description, map_id, img_url) {
@@ -245,31 +277,55 @@ function generateDescriptions(map_db){
  }
 }
 
+function removePointDescriptions(){
+  $('.point_item').remove()
+}
+
 // get the information on the clicked item, and loads it to the main screen
 $(".list_container").on('click', '.list_item', function() {
   event.preventDefault();
   clearMarkers()
   let map_id= this.dataset.map_id
+  if(!map_id) {
+    return
+  }
   $.ajax({
     url:`/maps/${map_id}`,
     type:'GET',
     success: function(mapObject) {
-      // $('.point_item').remove()
+      removePointDescriptions()
       let title = mapObject[0].title
       let description = mapObject[0].description
       let map_id = mapObject[0].id
       changeMap(title, description, map_id)
     }
   })
+
   $.ajax({
     url:`/${map_id}/points`,
     type:'GET',
     success: function(returnObject) {
-      console.log("r map click return points..", returnObject)
-      renderPoints(returnObject.points_db)
+      renderPoints(returnObject)
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+     alert("some error", errorThrown);
     }
+
   })
 })
 
+$(".new_map").on('click', function(event) {
+  removePointDescriptions()
+  $('.controls').find('.map_title').replaceWith(
+    `<input type="map_title" name="map_title" class=".form-control map_title" placeholder='Title: My Sunbathing Spots'>`
+    )
+  $('.gmaps').find('.map_description').replaceWith(
+    `<div class=map_description">
+    <textarea class="form-control" type="map_description" name="map_description" rows="2" placeholder='Description: My map is a all of my favourite sunbathing spots in Montreal...'></textarea>
+     <button type="submit"class="btn btn-info btn-block">SUBMIT</button>
+    </div>
+       `)
+  $('#map').data('map_id', "new")
+})
 
 

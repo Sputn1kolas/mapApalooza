@@ -5,20 +5,21 @@ div.list_container{
 
 
   .divider {
-    background: #93b9f2;
+    background: black;
     text-align: center;
     height: 40px;
     line-height: 40px;
     font-family: 'Zilla Slab', serif;
     color: white;
+    border-left: white solid 1px;
   }
 
   .divider:hover{
-    background: #74a2e8;
+    background: #darkgrey;
   }
 
   .divider:active{
-    background: #74a2e8;
+    background: #black;
   }
 
   .list_item {
