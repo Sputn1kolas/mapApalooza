@@ -117,27 +117,7 @@ $(".pointForm").on('submit', function(event) {
   toggleDescriptions();
 });
 
-$(".point_item").on('click', function(){
-  event.preventDefault();
-  clearMarkers()
-  let map_id = $(this).data('map_id')
-  $.ajax({
-      url:`/maps/${map_id}/`,
-      type:'GET',
-      success: function(mapObject) {
-        console.log(mapObject)
-        changeMap(title, description, map_id)
-      }
-  })
-  $.ajax({
-      url:`/${map_id}/point`,
-      type:'GET',
-      success: function(returnObject) {
-        console.log(returnObject)
-        //renderPoints(returnObject.points_db)
-      }
-  })
-})
+
 
 // for all points passed to it shows them on screen and generates a box below
 function renderPoints(points_db){
@@ -173,14 +153,18 @@ function deleteMarkers() {
 // make a point description box down below the map
 function newPointDescription(title, address, description, point_id, img_url) {
   let newPoint =
-  `<div class="row" data-point_id="${point_id}">
-      <div class="col-6 offset-1 point_information">
-      <img src="${img_url}">
-      <h1> ${title}   </h1>
-      <h3> ${address} </h3>
-      <p>  ${description}  </p>
-      </div>
-    </div>`
+  ` <article class="point_item" data-point_id="${point_id}">
+            <header>
+              <h1> ${title}   </h1>
+            </header>
+            <main>
+              <div class="point_img"><img src="${img_url}"></div>
+              <div class="point_description">
+                ${description}
+              </div>
+            </main>
+          </article>
+        </div>`
   $(".map_information_container").prepend(newPoint)
 }
 
@@ -228,7 +212,7 @@ $.ajax({
 
 function newMapDescription(title, description, map_id, img_url) {
   let newMap =
-   `<article class="list_item data-map_id="${map_id}">
+   `<article class="list_item" data-map_id="${map_id}">
             <header>
               ${title}
             </header>
@@ -257,6 +241,32 @@ function generateDescriptions(map_db){
  }
 }
 
+
+
+  $(".list_container").on('click', '.list_item', function() {
+    event.preventDefault();
+    clearMarkers()
+    let map_id = this.dataset.map_id
+    console.log(map_id)
+    $.ajax({
+        url:`/maps/${map_id}`,
+        type:'GET',
+        success: function(mapObject) {
+          let title = mapObject.title
+          let description = mapObject.description
+          let map_id = mapObject.id
+          changeMap(title, description, map_id)
+        }
+    })
+    $.ajax({
+        url:`/${map_id}/points`,
+        type:'GET',
+        success: function(returnObject) {
+          console.log("got points..", returnObject)
+          renderPoints(returnObject.points_db)
+        }
+    })
+  })
 
 
 

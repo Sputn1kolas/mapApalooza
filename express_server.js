@@ -69,6 +69,20 @@ app.get("/maps/all", (req, res) => {
     })
 })
 
+app.get("/maps/:map_id", (req, res) => {
+  let map_id = req.params.map_id
+  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  knex.select('*').from('maps')
+    .where({id: map_id})
+    .then(function(result){
+        console.log(result)
+        res.json(result)
+      })
+    .catch(function (err) {
+      throw(err)
+    })
+})
+
 app.get("/search", (req, res) => {
   let templateVar = {
     gMapsApi: gMapsApi
@@ -77,6 +91,7 @@ app.get("/search", (req, res) => {
 })
 
 app.get("/:map_id/points", (req, res) => {
+  console.log(req.body)
   let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
   let map_id = req.params.map_id
   knex.select('*').from('points')
@@ -84,7 +99,6 @@ app.get("/:map_id/points", (req, res) => {
     .then(function(result) {
         let points = result
         res.json(points)
-        console.log(points)
       })
     .catch(function (err) {
       throw(err)
@@ -136,18 +150,6 @@ app.get("/maps/:map/point", (req, res) => {
       });
 });
 
-app.get("/maps/:map_id", (req, res) => {
-  let map_id = req.params.map_id
-  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
-  knex.select('*').from('maps')
-    .where({map_id: map_id})
-    .then(function(result) {
-        res.json(result)
-      })
-    .catch(function (err) {
-      throw(err)
-    })
-})
 
 
 ///////////////////////////////////// POST ////////////////////////////////////////////

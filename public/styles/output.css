@@ -214,6 +214,10 @@ div.list_container .list_item footer .numberPoints {
   margin-top: -23px;
 }
 
+.list_item:hover {
+  opacity: 0.8;
+}
+
 #point_container .point_item {
   background: #FFFACD;
   height: 120px;
