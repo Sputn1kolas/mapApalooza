@@ -91,19 +91,32 @@ app.get("/search", (req, res) => {
 })
 
 app.get("/:map_id/points", (req, res) => {
-  console.log(req.body)
   let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
   let map_id = req.params.map_id
   knex.select('*').from('points')
     .where({map_id: map_id})
     .then(function(result) {
-        let points = result
-        res.json(points)
+        console.log("GET map/points is returning..", result)
+        res.json(result)
       })
     .catch(function (err) {
       throw(err)
     })
 })
+
+// // returns all of the points for a specific mind
+// app.get("/maps/:map/point", (req, res) => {
+//   let map_id = req.params.map
+//   knex.select('title', 'description', 'img_url')
+//       .from('points')
+//       .where('map_id','=', map_id)
+//       .then(function (result){
+//         res.send(result);
+//       }).catch(function (error){
+//         console.error(error)
+//       });
+// });
+
 
 app.get("/profile", (req, res) => {
   let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
@@ -139,18 +152,6 @@ app.get("/profile", (req, res) => {
 // });
 
 
-// returns all of the points for a specific mind
-app.get("/maps/:map/point", (req, res) => {
-  let map_id = req.params.map
-  knex.select('title', 'description', 'img_url')
-      .from('points')
-      .where('map_id','=', map_id)
-      .then(function (result){
-        res.send(result);
-      }).catch(function (error){
-        console.error(error)
-      });
-});
 
 
 
@@ -180,8 +181,11 @@ app.post("/maps/:map/point/new", (req, res) => {
   let lat = req.body["lat"]
   let long = req.body["long"]
   console.log("posting got called", map_id, title, description, address, lat, long)
-  knex('points').insert({map_id: map_id, title: title, description: description, lat: lat, long: long})
-  res.send(map_id, title, description, img_url, address, lat, long)
+  knex('points').insert({map_id: map_id, title: title, description: description, lat: lat, long: long}).then(function (result){
+        res.send(201)
+      }).catch(function (error){
+        console.error(error)
+      });
 })
 
 
