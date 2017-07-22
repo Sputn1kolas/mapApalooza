@@ -138,6 +138,8 @@ app.get("/profile", (req, res) => {
 //       });
 // });
 
+
+// returns all of the points for a specific mind
 app.get("/maps/:map/point", (req, res) => {
   let map_id = req.params.map
   knex.select('title', 'description', 'img_url')
@@ -177,8 +179,9 @@ app.post("/maps/:map/point/new", (req, res) => {
   let address = req.body["address"]
   let lat = req.body["lat"]
   let long = req.body["long"]
+  console.log("posting got called", map_id, title, description, address, lat, long)
   knex('points').insert({map_id: map_id, title: title, description: description, lat: lat, long: long})
-  res.send(knex.column.select().from('map_points'))
+  res.send(map_id, title, description, img_url, address, lat, long)
 })
 
 

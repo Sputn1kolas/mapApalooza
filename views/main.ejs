@@ -13,7 +13,6 @@
         return Math.floor(Math.random() * (max - min) + min);
       }
       let randMap = getRandomArbitrary(0, map_db.length)
-      console.log("randmap is ", randMap)
       %>
       <h1 class "map_title" > <%= map_db[randMap].title   %> </h1>
       <div id="map" data-map_id="<%= map_db[randMap].id  %>" height="460px" width="100%"></div>

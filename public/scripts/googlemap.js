@@ -98,23 +98,25 @@ $(".pointForm").on('submit', function(event) {
   let address = $("input[name='address']").val()
   let lat =  Number(marker.getPosition().lat())
   let long = Number(marker.getPosition().lng())
-
-  $.ajax({
-      url:'/maps/${map_id}/point/new',
-      type:'POST',
-      data: {
+  let data = {
         title: title,
         description: description,
         img_url: img_url,
         lat: Number(lat),
         long: Number(long),
         address: address
-      },
+      }
+
+  $.ajax({
+      url:`/maps/${map_id}/point/new`,
+      type:'POST',
+      data: data,
       success: function(res) {
         console.log(res)
       }
     });
   toggleDescriptions();
+  renderPoints({data})
 });
 
 
@@ -124,6 +126,7 @@ function renderPoints(points_db){
   for(point in points_db) {
     let pointObject = points_db[point]
     let latLng = {lat: Number(pointObject.lat), lng: Number(pointObject.long)};
+    console.log(pointObject, latLng)
     let marker = new google.maps.Marker({   //change this to ID later
        position: latLng,
        map: map,
@@ -165,7 +168,8 @@ function newPointDescription(title, address, description, point_id, img_url) {
             </main>
           </article>
         </div>`
-  $(".map_information_container").prepend(newPoint)
+  console.log(newPoint)
+  $("#point_container").prepend(newPoint)
 }
 
 // generates a map description box on the right hand, when passed info
@@ -240,7 +244,6 @@ function generateDescriptions(map_db){
    )
  }
 }
-
 
 
   $(".list_container").on('click', '.list_item', function() {
