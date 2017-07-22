@@ -40,10 +40,9 @@ function toggleDescriptions() {
   // FOCUS ON title
 }
 
-function initMap() {
-  var crew = {lat: 45.5023, lng: -73.5592};
+function initMap(center) {
   map = new google.maps.Map(document.getElementById('map'), {
-    center: crew,
+    center: {lat: 45.5023, lng: -73.5592},
     zoom: 15
   });
 
@@ -92,6 +91,7 @@ function doNothing () {}
 // Uses AJAX to add the new point
 $(".pointForm").on('submit', function(event) {
   event.preventDefault();
+  let map_id = $('#map').data('map_id')
   let title = $("input[name='title']").val()
   let description = $("input[name='description']").val()
   let img_url = $("input[name='img_url']").val()
@@ -100,7 +100,7 @@ $(".pointForm").on('submit', function(event) {
   let long = Number(marker.getPosition().lng())
 
   $.ajax({
-      url:'/maps/map1/point/new',
+      url:'/maps/${map_id}/point/new',
       type:'POST',
       data: {
         title: title,
@@ -117,16 +117,16 @@ $(".pointForm").on('submit', function(event) {
   toggleDescriptions();
 });
 
-$(".load_map").on('click', function(){
+$(".point_item").on('click', function(){
   event.preventDefault();
   clearMarkers()
-  let map =  this.id
+  let map_id = $(this).data('map_id')
   $.ajax({
-      url:`/maps/${map}/`,
+      url:`/maps/${map_id}/`,
       type:'GET',
-      success: function(returnObject) {
-        renderPoints(returnObject.points_db)
-        // renderMap(map_db)
+      success: function(mapObject) {
+        console.log(mapObject)
+        changeMap(title, description, map_id)
       }
 
       // data: {
@@ -138,10 +138,18 @@ $(".load_map").on('click', function(){
       //   address: address
       // }
   })
+  $.ajax({
+      url:`/${map_id}/points`,
+      type:'GET',
+      success: function(returnObject) {
+        console.log(returnObject)
+        //renderPoints(returnObject.points_db)
+      }
+  })
 })
 
+// for all points passed to it shows them on screen and generates a box below
 function renderPoints(points_db){
-
   for(point in points_db) {
     let pointObject = points_db[point]
     let latLng = {lat: Number(pointObject.lat), lng: Number(pointObject.long)};
@@ -151,7 +159,6 @@ function renderPoints(points_db){
        icon: image
     });
     markers.push(marker)
-    console.log("rendering...", pointObject)
     newPointDescription(pointObject.title, pointObject.address, pointObject.description, "point_id", pointObject.img_url)
   }
 }
@@ -172,9 +179,10 @@ function deleteMarkers() {
   markers = [];
 }
 
+// make a point description box down below the map
 function newPointDescription(title, address, description, point_id, img_url) {
   let newPoint =
-  `<div class="row" id="${point_id}">
+  `<div class="row" data-point_id="${point_id}">
       <div class="col-6 offset-1 point_information">
       <img src="${img_url}">
       <h1> ${title}   </h1>
@@ -185,6 +193,27 @@ function newPointDescription(title, address, description, point_id, img_url) {
   $(".map_information_container").prepend(newPoint)
 }
 
+// generates a map description box on the right hand, when passed info
+function newMapDescription(title, address, description, map_id, img_url) {
+ let newMap =
+  `<article class="point_item" data-map_id="${map_id}">
+      <header> ${title} </header>
+      <main>
+        <div class="point_img"><img src="${img_url}"></div>
+        <div class="point_description">${description}</div>
+      </main>
+  </article>`
+  $('#point_container').prepend(newMap)
+}
+
+
+function changeMap(title, description, map_id) {
+  $('.map_title').text(title)
+  $('.map_description').text(description)
+  $('#map').data('map_id', map_id)
+}
+
+// $('row').data('point_id', "new point id")
 
 // var myMarker = new google.maps.Marker({
 //     position: new google.maps.LatLng(47.651968, 9.478485),

@@ -5,83 +5,81 @@
     </head>
   <body>
   <% include partials/_header %>
-  <div class="body row">
-    <div class="map_container col-9">
-      <% let map_id = "map_1" %>
-      <div class="gmaps">
-        <h1 class "map_title"> Map Title </h1> //gets replaced with edit form
-        <div id="map" height="460px" width="100%"></div>
+  <div class=“body row”>
+    <div class=“map_container col-9">
+      <% let map_id = “map_1” %>
+      <div class=“gmaps”>
+        <h1 class “map_title”>  <%= map_db[0].title   %> </h1> //gets replaced with edit form
+        <div id=“map” height=“460px” width=“100%“></div>
 
-        <div class="controls">
-          <i class="fa fa-heart" aria-hidden="true"></i>
-          <button class="addPoint"> Add point </button>
+       <div class=“controls”>
+          <i class=“fa fa-heart” aria-hidden=“true”></i>
+          <button class=“addPoint”> Add point </button>
         </div>
 
-        <h3 class="map_description"> This map does a bunch of really neat stuff </h3>
-        <h2 class="map_user_name"> Created by Nik! </h2>
+       <h3 class=“map_description”> <%= map_db[0].description %> </h3>
+        <h2 class=“map_user_name”> Created by Nik! </h2>
         </div>
 
 
-        <div class="form pointDescriptions">
-          <form action="/<% map_id %> /point" method="POST" class="pointForm">
+       <div class=“form pointDescriptions”>
+          <form action=“/<% map_id %> /point” method=“POST” class=“pointForm”>
           Title of Point
-          <input type="title" name="title">
+          <input type=“title” name=“title”>
           Description
-          <input type="description" name="description">
+          <input type=“description” name=“description”>
           Header Image (url)
-          <input type="img_url" name="img_url">
-          <input type="submit" value="Submit">
+          <input type=“img_url” name=“img_url”>
+          <input type=“submit” value=“Submit”>
         </form>
         </div>
-        <div id="point_container">
-          <article class="point_item">
+        <div id=“point_container”>
+          <article class=“point_item”>
             <header>
               title
             </header>
             <main>
-              <div class="point_img"><img src="#"></div>
-              <div class="point_description"></div>
+              <div class=“point_img”><img src=“#”></div>
+              <div class=“point_description”></div>
               description description description description description description description description description description
             </main>
           </article>
         </div>
       </div>
-      <script type="text/javascript" src="/scripts/googlemap.js"></script>
+      <script type=“text/javascript” src=“/scripts/googlemap.js”></script>
       <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=<%= gMapsApi %>&callback=initMap">
+      src=“https://maps.googleapis.com/maps/api/js?key=<%= gMapsApi %>&callback=initMap”>
       </script>
-      <div class="list_container col-3">
-        <div class="row">
-          <div class="col divider">Search</div>
-          <div class="col divider">Fav</div>
+      <div class=“list_container col-3”>
+        <div class=“row”>
+          <div class=“col divider”>Search</div>
+          <div class=“col divider”>Fav</div>
         </div>
 
-        <div class="row" id="every_item_container">
-          <article class="list_item">
+       <div class=“row” id=“every_item_container”>
+          <article class=“list_item”>
             <header>
               title
             </header>
             <main>
-              <div class="item_img"><img src="#"></div>
-              <div class="item_description">description description description description description description description description description </div>
+              <div class=“item_img”><img src=“#”></div>
+              <div class=“item_description”>description description description description description description description description description </div>
             </main>
             <footer>
-            <div class="numberFavs">
-            <i class="fa fa-heart"></i>
+            <div class=“numberFavs”>
+            <i class=“fa fa-heart”></i>
             2 fav
             </div>
-            <div class="numberPoints">10 points</div>
+            <div class=“numberPoints”>10 points</div>
             </footer>
           </article>
         </div>
 
-      </div>
+     </div>
 
-    </div>
+   </div>
   </div>
 
-  </body>
+ </body>
 
 </html>
-
-
