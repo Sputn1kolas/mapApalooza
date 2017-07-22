@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const init = require('./passport');
 
-const config = require("./knexfile");
+const config = require("../knexfile");
 const env = process.env.ENV || 'development';
 const knex = require('knex')(config[env]);
 
@@ -28,4 +28,4 @@ passport.use(new LocalStrategy(options, (username, password, done) => {
   .catch((err) => { return done(err); });
 }));
 
-modue.exports = passport;
+module.exports = passport;

@@ -17,8 +17,12 @@ const passport = require('passport');
 const morgan = require("morgan");
 
 const authRoutes = require('./routes/auth');
-const users = require('./routes/users')
+// const usersRoutes = require('./routes/users');
 app.set("view engine", "ejs")
+
+const config = require("./knexfile");
+const env = process.env.ENV || 'development';
+const knex = require('knex')(config[env]);
 
 /////////////////////////////////// MiddleWare USE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -34,7 +38,7 @@ app.use(express.static("public")) // this is where files that html references wi
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(morgan('dev'));
 
-app.use('/', routes(knex));
+// app.use('/', users(knex));
 app.use('/auth', authRoutes(knex));
 // Get app to listen on port 8080
 app.listen(port, function(){
@@ -43,9 +47,7 @@ app.listen(port, function(){
 
 ///////////////////////////////////// Databases ////////////////////////////////////////////
 
-const config = require("./knexfile");
-const env = process.env.ENV || 'development';
-const knex = require('knex')(config[env]);
+
 
 // Temp user
 
