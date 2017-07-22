@@ -128,15 +128,6 @@ $(".point_item").on('click', function(){
         console.log(mapObject)
         changeMap(title, description, map_id)
       }
-
-      // data: {
-      //   title: title,
-      //   description: description,
-      //   img_url: img_url,
-      //   lat: lat,
-      //   long: long,
-      //   address: address
-      // }
   })
   $.ajax({
       url:`/${map_id}/points`,
@@ -213,14 +204,5 @@ function changeMap(title, description, map_id) {
   $('#map').data('map_id', map_id)
 }
 
-// $('row').data('point_id', "new point id")
 
-// var myMarker = new google.maps.Marker({
-//     position: new google.maps.LatLng(47.651968, 9.478485),
-//     draggable: true
-// });
-
-// google.maps.event.addListener(myMarker, 'dragend', function (evt) {
-//     document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
-// });
 

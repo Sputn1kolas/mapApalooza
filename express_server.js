@@ -29,7 +29,7 @@ app.use(express.static("public")) // this is where files that html references wi
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(morgan('dev'));
 // Get app to listen on port 8080
-app.listen(port, function(){
+app.listen(port, function() {
   console.log(`Mapping away on port: ${port}`)
 })
 
@@ -44,16 +44,22 @@ const knex = require('knex')(config[env]);
 
 ///////////////////////////////////// Render ////////////////////////////////////////////
 
+// app.get("/", (req, res) => {
+//       let templateVar = {
+//           gMapsApi: gMapsApi,
+//           map_db: {}
+//         }
+//   res.render("main.ejs", templateVar)
+// })
+
 
 app.get("/", (req, res) => {
-   knex.select('*').from('maps')
-      .then(function(result) {
-       let templateVar = {
+  knex.select('*').from('maps')
+    .then(function(result) {
+      let templateVar = {
           gMapsApi: gMapsApi,
-          map_db: result,
-          view: "profile"
+          map_db: result
       }
-      console.log(templateVar)
       res.render("main.ejs", templateVar)
       })
     .catch(function (err) {
@@ -92,8 +98,7 @@ app.get("/profile", (req, res) => {
     .then(function(result) {
        let templateVar = {
           gMapsApi: gMapsApi,
-          map_db: result,
-          view: "profile"
+          map_db: result
       }
       console.log(templateVar)
       res.render("main.ejs", templateVar)
