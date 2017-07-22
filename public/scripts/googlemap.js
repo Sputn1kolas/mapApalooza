@@ -218,14 +218,23 @@ $.ajax({
 function newMapDescription(title, description, map_id, img_url) {
   console.log("calling new map description", title, description, map_id, img_url )
   let newMap =
-   `<article class="point_item" data-map_id="${map_id}"">
-   <header> ${title} </header>
-   <main>
-   <div class="point_img"><img src="${img_url}"></div>
-   <div class="point_description">${description}</div>
-   </main>
-   </article>`
-   $('#point_container').prepend(newMap)
+   `<article class="list_item data-map_id="${map_id}">
+            <header>
+              ${title}
+            </header>
+            <main>
+              <div class="item_img"><img src="${img_url}"></div>
+              <div class="item_description">${description} </div>
+            </main>
+            <footer>
+            <div class="numberFavs">
+            <i class="fa fa-heart"></i>
+            2 fav
+            </div>
+            <div class="numberPoints">10 points</div>
+            </footer>
+          </article>`
+   $('.list_container').append(newMap)
  }
 
 function generateDescriptions(map_db){
