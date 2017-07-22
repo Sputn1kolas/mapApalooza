@@ -8,7 +8,7 @@
 
 <% let map_id = "map_1" %>
     <div class="gmaps">
-        <h1 class "map_title"> Map Title </h1>
+        <h1 class "map_title"> <%= map_db[0].title   %> </h1>
         <div id="map" height="460px" width="100%"></div>
 
         <div class="controls">
@@ -16,8 +16,7 @@
           <button class="addPoint"> Add point </button>
         </div>
 
-        <h3 class="map_description"> This map does a bunch of really neat stuff </h3>
-        <h2 class="map_user_name"> Created by Nik! </h2>
+        <h3 class="map_description"><%= map_db[0].description %></h3>
    </div>
 
       <div class="form pointDescriptions">
