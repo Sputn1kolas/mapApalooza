@@ -67,6 +67,27 @@ div.col-sm-1 {
   color: white;
 }
 
+div #login_form {
+  line-height: 20px;
+  display: none;
+  background: lightblue;
+  width: 230px;
+  height: 250px;
+  margin-left: -40px;
+}
+
+div #login_form h3 {
+  line-height: 60px;
+}
+
+div #login_form .password {
+  margin-top: 10px;
+}
+
+div #login_form button {
+  margin-top: 10px;
+}
+
 div.col-sm-1:hover {
   background: #b000b0;
 }
