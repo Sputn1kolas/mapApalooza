@@ -186,7 +186,7 @@ function changeMap(title, description, map_id) {
   $('h1').text(title)
   $('.map_description').text(description)
   $('#map').data('map_id', map_id)
-  console.log("tryign to change data")
+  console.log("trying to change data")
 }
 
 ///////////////////////// On load AJAX CALLS ////////////////////////
@@ -252,9 +252,9 @@ function generateDescriptions(map_db){
         url:`/maps/${map_id}`,
         type:'GET',
         success: function(mapObject) {
-          let title = mapObject.title
-          let description = mapObject.description
-          let map_id = mapObject.id
+          let title = mapObject[0].title
+          let description = mapObject[0].description
+          let map_id = mapObject[0].id
           changeMap(title, description, map_id)
         }
     })
@@ -262,7 +262,6 @@ function generateDescriptions(map_db){
         url:`/${map_id}/points`,
         type:'GET',
         success: function(returnObject) {
-          console.log("got points..", returnObject)
           renderPoints(returnObject.points_db)
         }
     })
