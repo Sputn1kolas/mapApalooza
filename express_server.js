@@ -44,21 +44,13 @@ const knex = require('knex')(config[env]);
 
 ///////////////////////////////////// Render ////////////////////////////////////////////
 
-// app.get("/", (req, res) => {
-//       let templateVar = {
-//           gMapsApi: gMapsApi,
-//           map_db: {}
-//         }
-//   res.render("main.ejs", templateVar)
-// })
-
-
 app.get("/", (req, res) => {
   knex.select('*').from('maps')
     .then(function(result) {
       let templateVar = {
           gMapsApi: gMapsApi,
-          map_db: result
+          map_db: result,
+          page: "main",
       }
       res.render("main.ejs", templateVar)
       })
@@ -67,6 +59,16 @@ app.get("/", (req, res) => {
     })
 })
 
+app.get("/maps/all", (req, res) => {
+  knex.select('*').from('maps')
+    .then(function(result) {
+      res.json(result)
+      console.log("db get..", result)
+      })
+    .catch(function (err) {
+      throw(err)
+    })
+})
 
 app.get("/search", (req, res) => {
   let templateVar = {
@@ -98,7 +100,8 @@ app.get("/profile", (req, res) => {
     .then(function(result) {
        let templateVar = {
           gMapsApi: gMapsApi,
-          map_db: result
+          map_db: result,
+          page: "profile"
       }
       console.log(templateVar)
       res.render("main.ejs", templateVar)
@@ -108,19 +111,19 @@ app.get("/profile", (req, res) => {
     })
 })
 
-app.get("/maps", (req, res) => {
-  knex.select('maps.title AS title', 'maps.description AS description', 'maps.img_url AS img_url')
-      .from('maps')
-      .join('users', function (){
-        this.on('users.id','=', 'user_id')
-      }).join('points', function (){
-        this.on('maps.id','=', 'map_id')
-      }).then(function (result){
-        res.send(result);
-      }).catch(function (error){
-        console.error(error)
-      });
-});
+// app.get("/maps", (req, res) => {
+//   knex.select('maps.title AS title', 'maps.description AS description', 'maps.img_url AS img_url')
+//       .from('maps')
+//       .join('users', function (){
+//         this.on('users.id','=', 'user_id')
+//       }).join('points', function (){
+//         this.on('maps.id','=', 'map_id')
+//       }).then(function (result){
+//         res.send(result);
+//       }).catch(function (error){
+//         console.error(error)
+//       });
+// });
 
 app.get("/maps/:map/point", (req, res) => {
   let map_id = req.params.map
@@ -136,15 +139,15 @@ app.get("/maps/:map/point", (req, res) => {
 
 app.get("/maps/:map_id", (req, res) => {
   let map_id = req.params.map_id
-  let returnObject = {
-    map_db: map_db,
-    points_db: knex('map_points').where({
-      first_name: 'Test',
-      }).select('id')
-    // map_db: knex('maps').where({id: map_id}).select(),
-    // points_db: knex('map_points').where({map_id: map_id}).select()
-  }
-  res.send(returnObject)
+  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  knex.select('*').from('maps')
+    .where({map_id: map_id})
+    .then(function(result) {
+        res.json(result)
+      })
+    .catch(function (err) {
+      throw(err)
+    })
 })
 
 

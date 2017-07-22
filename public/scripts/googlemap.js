@@ -199,10 +199,46 @@ function newMapDescription(title, address, description, map_id, img_url) {
 
 
 function changeMap(title, description, map_id) {
-  $('.map_title').text(title)
+  $('h1').text(title)
   $('.map_description').text(description)
   $('#map').data('map_id', map_id)
+  console.log("tryign to change data")
 }
+
+//////////////////////// Pulling all the maps on sidebar ///////////////////
+
+$.ajax({
+      url:`/maps/all`,
+      type:'GET',
+      success: function(result) {
+        generateDescriptions(result)
+      }
+  })
+
+function newMapDescription(title, description, map_id, img_url) {
+  console.log("calling new map description", title, description, map_id, img_url )
+  let newMap =
+   `<article class="point_item" data-map_id="${map_id}"">
+   <header> ${title} </header>
+   <main>
+   <div class="point_img"><img src="${img_url}"></div>
+   <div class="point_description">${description}</div>
+   </main>
+   </article>`
+   $('#point_container').prepend(newMap)
+ }
+
+function generateDescriptions(map_db){
+console.log("calling generateDescriptions", map_db)
+ for(var i = 0; i < map_db.length; i++) {
+   newMapDescription(map_db[i].title,
+     map_db[i].description,
+     map_db[i].id,
+     map_db[i].img_url
+   )
+ }
+}
+
 
 
 
