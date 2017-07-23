@@ -12,11 +12,9 @@
         <input placeholder="Search ..." id="search_navbar" />
         <div id="search_results">
           <ul class="dropdown">
-            <li>hello</li>
-            <li>wow</li>
-            <li>Stuff</li>
-            <li>Other stuff</li>
-            <li>Other weird stuff</li>
+          <% for (var i = 0; i < map_db.length; i++){ %>
+          <li><%= map_db[i].title%></li>
+          <% } %>
           </ul>
         </div>
         <!-- <button type="submit" class="btn"><i class="fa fa-search"></i></button> -->
@@ -49,38 +47,28 @@
         </div>
       </div>
     </div>
-    <div class="register">
-    <p>register</p>
-    <div id="register_form">
-       <div id="register">
+    <div class="col-1 register_form_button">
+      <p>register</p>
+      <div id="register_form">
+        <div id="register">
           <h3>register</h3>
           <form action="/" method="post">
-          <div class="field-wrap">
-            <label>
-              Username<span class="req">*</span>
-            </label>
-            <input required autocomplete="off"/>
-          </div>
-
-          <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email"required autocomplete="off"/>
-          </div>
-
-          <div class="field-wrap password">
-            <label>
-              Password<span class="req">*</span>
-            </label>
-            <input type="password"required autocomplete="off"/>
-          </div>
-          <button class="button button-block"/>Log In</button>
+            <div class="field-wrap">
+              <label>
+                Email Address<span class="req">*</span>
+              </label>
+              <input type="email"required autocomplete="off"/>
+            </div>
+            <div class="field-wrap password">
+              <label>
+                Password<span class="req">*</span>
+              </label>
+              <input type="password"required autocomplete="off"/>
+            </div>
+            <button class="button button-block"/>Log In</button>
           </form>
         </div>
       </div>
-    </div>
-
     </div>
   </div>
 </nav>
