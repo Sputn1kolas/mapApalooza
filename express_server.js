@@ -8,7 +8,7 @@ const cookieSession = require('cookie-session')
 const bodyParser = require("body-parser")
 const bcrypt = require('bcrypt')
 const port = process.env.PORT || 8080
-const cookieOptions = ["rocks"]
+
 const app = express()
 const sass = require("node-sass-middleware");
 const morgan = require("morgan");
@@ -17,7 +17,14 @@ app.set("view engine", "ejs")
 
 /////////////////////////////////// MiddleWare USE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-app.use(cookieSession({ secret: 'Banannnas!', cookie: { maxAge: 60 * 60 * 1000 }}))
+
+app.use(cookieSession({
+  name: 'session',
+  keys: [process.env.SECRET_KEY]
+
+  // Cookie Options
+  // maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 
 app.use("/styles", sass({
   src: __dirname + "/styles",
@@ -285,8 +292,81 @@ app.post("/fav", (req, res) => {
 app.post("/logout", (req, res) => {
   // res.clearCookie('user_id')
   req.session = null
-  res.redirect("/urls")
+  res.redirect("/")
   console.log("logged out!")
 });
 
+app.post("/register", (req, res) => {
+  let email = req.body.email;
+  let password = req.body.password;
+  if(email == "" || password == ""){
+    res.status(400).send("Password or email cannot be empty");
+  }else if(emailExistsInDB(email)){
+    res.status(400).send("Email already exist in database");
+  }else{
 
+    password = bcrypt.hashSync(password, 10);
+    users[userID] = {
+      "id" : userID,
+      "email" : email,
+      "password": password
+    }
+    req.session.user_id = userID;
+    res.redirect('/urls');
+  }
+ });
+
+app.post("/login", (req, res) => {
+
+  let password = req.body.password;
+  let passwordInDatabase = userForAnExistingEmail(req.body.email)["password"];
+  let passwordMatch = bcrypt.compareSync(password, passwordInDatabase);
+
+  if(!emailExistsInDB(req.body.email)){
+    let templateVars = { shortURL: req.params.id,
+  urls: urlsForUser(req.session.user_id),
+  user: users[req.session.user_id]};
+  res.render("urls_show", templateVars);
+    res.status(403).send("Email not in database");
+  }else if(!passwordMatch){
+    res.status(403).send("Password incorrect");
+  } else {
+    req.session.user_id = userForAnExistingEmail(req.body.email).id;
+    res.redirect("/urls");
+  }
+})
+
+
+// ##################################  HELPER-FUNCTION DECLARATIONS    ##############################
+// ##########################################################################################
+
+
+function generateRandomString(numberOfCharacters){
+  const alphaNumeric = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+  let randomString = "";
+  let i = 0;
+  while(i<numberOfCharacters){
+    randomString += alphaNumeric[Math.floor(Math.random() * 63)];
+    i++;
+  }
+
+  return randomString;
+}
+
+function emailExistsInDB(email){
+  for(let user in users){
+    if(users[user].email == email) return true;
+  }
+  return false;
+}
+
+function userForAnExistingEmail(email){
+  for(let user in users){
+    if(users[user].email == email) return users[user];
+  }
+  return false;
+}
+
+function urlsForUser(id){
+  return urlDatabase[id];
+}
