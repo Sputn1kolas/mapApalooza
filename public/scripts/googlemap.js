@@ -43,7 +43,8 @@ function toggleDescriptions() {
 function initMap(center) {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 45.5023, lng: -73.5592},
-    zoom: 15
+    zoom: 15,
+    styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#fcfcfc"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#fcfcfc"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#dddddd"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#dddddd"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#eeeeee"}]},{"featureType":"water","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#dddddd"}]}]
   });
 
   infowindow = new google.maps.InfoWindow({
@@ -141,7 +142,6 @@ $(".gmaps").on('click', ".submit_new_map", function(event) {
     type:'POST',
     data: data,
     success: function(mapObject) {
-      console.log(mapObject)
       loadMap(mapObject)
       // changemap(title, description,)
     }
@@ -219,19 +219,70 @@ function changeMap(title, description, map_id) {
   $('.controls').find('.map_title').replaceWith(
     `<h1 class="map_title" >${title}</h1>`
     )
-  $('.gmaps').find('.map_description').replaceWith(
-    `<h3 class="map_description"> ${description} </h3>`)
+ $('.gmaps').find('#map_description').replaceWith(
+    `<h3 class="map_description" id="map_description"> ${description} </h3>`
+  )
   $('#map').data('map_id', map_id)
+  ifFavourited(map_id, highlight)
 }
 
+
+
+
+
+function allArray(array, callback) {
+  for(var i = 0; i < 0; i++ ) {
+    callback(array[i])
+  }
+}
+
+
+function highlight(mapObject){
+  console.log(mapObject)
+ if(mapObject === []){
+    $('.fav').removeClass("favourited")
+   } else {
+    $('.fav').addClass("favourited")
+  }
+}
+
+function ifFavourited(map_id, callback){
+   $.ajax({
+    url:`/favourites/${map_id}`,
+    type:'GET',
+    success: function(mapObject) {
+      callback(mapObject)
+    }
+  })
+}
+
+
 ///////////////////////// On load AJAX CALLS ////////////////////////
-$.ajax({
-  url:`/maps/all`,
+
+console.log("page is reading..", $('.page').data('page'))
+switch($('.page').data('page')) {
+case 'main':
+  generateDescriptionsByRoute("/maps/all")
+  break;
+case 'favourites':
+  generateDescriptionsByRoute("/user/favourites")
+  break;
+case 'profile':
+  generateDescriptionsByRoute("/user/maps")
+  break;
+}
+
+function generateDescriptionsByRoute(route) {
+  $.ajax({
+  url: route,
   type:'GET',
   success: function(result) {
+    console.log(result)
     generateDescriptions(result)
-  }
-})
+    }
+  })
+}
+
 
 // should load the map points on load
 // let map_id = $('#map').data('map_id')
@@ -258,7 +309,7 @@ function newMapDescription(title, description, map_id, img_url) {
   <div class="item_description">${description} </div>
   </main>
   <footer>
-  <div class="numberFavs">
+  <div class="numberFavs data-map_id="${map_id}">
   <i class="fa fa-heart"></i>
   2 fav
   </div>
@@ -325,12 +376,56 @@ $(".new_map").on('click', function(event) {
     `<input type="map_title" name="map_title" class=".form-control map_title" placeholder='Title: My Sunbathing Spots'>`
     )
   $('.gmaps').find('.map_description').replaceWith(
-    `<div class=map_description">
+    `<div class="map_description" id="map_description">
     <textarea class="form-control" type="map_description" name="map_description" rows="2" placeholder='Description: My map is a all of my favourite sunbathing spots in Montreal...'></textarea>
      <button class="btn btn-info btn-block submit_new_map">SUBMIT</button>
     </div>
        `)
   $('#map').data('map_id', "new")
 })
+
+$(".list_container").on('click', '.my_maps', function(event) {
+  $('.list_container').find('.my_maps').replaceWith(
+    `<div class="col divider my_maps"><a href="/">All Maps</a></div>`)
+})
+
+$(".list_container").on('click', '.all_maps', function(event) {
+  $('.list_container').find('.all_maps').replaceWith(
+    `<div class="col divider my_maps"><a href="/profile">My Maps</a></div>`)
+})
+
+$(".controls").on('click', '.fav', function() {
+  event.preventDefault();
+  if($('.fav').hasClass('favourited')){
+    let favourited = "Yes"
+  }
+  let favourited = "No"
+  let map_id = $('#map').data('map_id')
+  if(!map_id) {
+    console.log("Error, No map id!")
+    return
+  }
+  $.ajax({
+    url:`/fav`,
+    type:'POST',
+    data: {
+      favourited: favourited,
+      map_id: map_id
+    },
+    success: function(mapObject) {
+       $('.fav').toggleClass('favourited')
+    }
+  })
+})
+
+// needs to match the map ID on the fav..
+// $.ajax({
+//   url: `/user/favourites`,
+//   type:'GET',
+//   success: function(result) {
+//     allArray(result, highlight)
+//   }
+// })
+
 
 

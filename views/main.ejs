@@ -14,10 +14,12 @@
   <div class="body row">
     <div class="map_container col-9">
       <% let map_id = "map_1" %>
-
+      <h3 class="page" data-page="<%= page %>"> <%= page %> </h3>
        <div class="controls">
-        <i class="fa fa-heart fav" aria-hidden="true"></i>
-        <p>FAVE</p>
+        <div class="fav">
+          <i class="fa fa-heart" aria-hidden="true"></i>
+          <p>FAVE</p>
+        </div>
         <h1 class="map_title" > <%= map_db[randMap].title   %> </h1>
         <div class="addPoint">
           <i class="fa fa-plus" aria-hidden="true"></i>
@@ -30,9 +32,9 @@
       <div id="map" data-map_id="<%= map_db[randMap].id  %>" height="350px" width="100%"></div>
 
       <h3 class="map_description"> <%= map_db[randMap].description %> </h3>
-    </div>
 
-    <div class="form pointDescriptions col-7 offset-2">
+
+    <div class="form pointDescriptions col-7 offset-1">
       <form action="/<% map_id %> /point" method="POST" class="pointForm">
         <h1> New Point </h1>
         Title
@@ -47,7 +49,7 @@
         <button type="submit"class="btn btn-info btn-block">SUBMIT</button>
       </form>
     </div>
-
+  </div>
     <div id="point_container">
     </div>
 
@@ -55,8 +57,8 @@
 
   <div class="list_container col-3">
     <div class="row">
-      <div class="col divider">Search</div>
-      <div class="col divider">Fav</div>
+      <div class="col divider my_maps"><a href="/profile">My Maps</a></div>
+      <div class="col divider"><a href="/favourites">My Faves</a></div>
       <article class="list_item new_map" id="new_map">
         NEW  <br> MAP
         <i class="fa fa-map-o fa-5x" aria-hidden="true"></i>

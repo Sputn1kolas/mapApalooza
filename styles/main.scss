@@ -2,16 +2,26 @@ $spacing: 15px;
 $ease-in : width  0.3s ease-in-out;
 $full_search_width: 480px;
 
+a {
+ color: white;
+}
+
+a:hover{
+  color: white;
+  text-decoration: none;
+}
+
 .navbar {
   height: 70px;
   width: 100%;
-  background-color: #a000a0;
+  background-color: black;
   padding: $spacing;
   z-index: 100;
   position: relative;
 
   .navbar-brand {
     font-family: Quicksand, sans-serif;
+    color: white;
     text-align: left;
     font-size: 25px;
     margin-top: -3px;
@@ -98,13 +108,14 @@ $full_search_width: 480px;
 .gmaps {
   background-color: white;
   height:100%;
-  padding: $spacing;
+  padding: 0px 15px 15px 15px;
   color: black;
   z-index:-1;
 
   #map {
     height: 400px;
-    width: 100%;
+    width: 95%;
+    margin: 15px 20px;
   }
 
   h1 {
@@ -128,21 +139,18 @@ div.map_container {
 }
 
 .controls {
-  height: 40px;
   font-size: 15px;
-  color: white;
+  font-style: Quicksand, sans-serif;
   width: 100%;
-  background-color: black;
-  opacity: 0.9;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: $spacing;
 
   h1 {
-    font-size: 30px;
+    font-size: 40px;
     margin: 0px;
-    color: purple;
+    color: black;
   }
   p {
     margin: 0px $spacing 0px 3px;
@@ -153,16 +161,22 @@ div.map_container {
 .addPoint {
   z-index: 1000;
   margin: 0px $spacing;
-  color: white;
+  color: black;
   }
   .addPoint{
     margin: 0px $spacing;
   }
   .addPoint:hover {
-    color: lightgrey;
+    color: purple;
+  }
+  .fav {
+    color:black;
+    display: flex;
+    align-items: center;
+    justify-content: left;
   }
   .fav:hover {
-    color: lightgrey;
+    color: purple;
   }
 
 
@@ -206,6 +220,8 @@ div.map_container {
 
   .map_description {
     margin: $spacing;
+    font-family: Quicksand, sans-serif;
+    font-style: italic;
 
   }
 
@@ -218,9 +234,22 @@ div.map_container {
       margin: 0px $spacing;
     }
 
+.submit_new_map {
+  background-color: black;
+  border-color: white;
+}
+
+.submit_new_map:hover{
+  background-color: purple;
+}
+
 .pointDescriptions{
 color: black;
 font-family: Quicksand, sans-serif;
+}
+
+.favourited {
+  color: purple;
 }
 
 /*::-webkit-input-placeholder { color: #f0eeee; }

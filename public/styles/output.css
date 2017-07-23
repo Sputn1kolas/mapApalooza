@@ -2,10 +2,19 @@
 @import url(bootstrap/bootstrap-grid.min.css);
 @import url(bootstrap/bootstrap.min.css);
 @import url(bootstrap/bootstrap-reboot.min.css);
+a {
+  color: white;
+}
+
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
 .navbar {
   height: 70px;
   width: 100%;
-  background-color: #a000a0;
+  background-color: black;
   padding: 15px;
   z-index: 100;
   position: relative;
@@ -13,6 +22,7 @@
 
 .navbar .navbar-brand {
   font-family: Quicksand, sans-serif;
+  color: white;
   text-align: left;
   font-size: 25px;
   margin-top: -3px;
@@ -96,14 +106,15 @@ div.col-sm-1:hover {
 .gmaps {
   background-color: white;
   height: 100%;
-  padding: 15px;
+  padding: 0px 15px 15px 15px;
   color: black;
   z-index: -1;
 }
 
 .gmaps #map {
   height: 400px;
-  width: 100%;
+  width: 95%;
+  margin: 15px 20px;
 }
 
 .gmaps h1 {
@@ -123,12 +134,9 @@ div.map_container {
 }
 
 .controls {
-  height: 40px;
   font-size: 15px;
-  color: white;
+  font-style: Quicksand, sans-serif;
   width: 100%;
-  background-color: black;
-  opacity: 0.9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,9 +144,9 @@ div.map_container {
 }
 
 .controls h1 {
-  font-size: 30px;
+  font-size: 40px;
   margin: 0px;
-  color: purple;
+  color: black;
 }
 
 .controls p {
@@ -148,7 +156,7 @@ div.map_container {
 .addPoint {
   z-index: 1000;
   margin: 0px 15px;
-  color: white;
+  color: black;
 }
 
 .addPoint {
@@ -156,11 +164,18 @@ div.map_container {
 }
 
 .addPoint:hover {
-  color: lightgrey;
+  color: purple;
+}
+
+.fav {
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: left;
 }
 
 .fav:hover {
-  color: lightgrey;
+  color: purple;
 }
 
 .clicked {
@@ -202,6 +217,8 @@ div #login_form button {
 
 .map_description {
   margin: 15px;
+  font-family: Quicksand, sans-serif;
+  font-style: italic;
 }
 
 #new_map {
@@ -213,9 +230,22 @@ div #login_form button {
   margin: 0px 15px;
 }
 
+.submit_new_map {
+  background-color: black;
+  border-color: white;
+}
+
+.submit_new_map:hover {
+  background-color: purple;
+}
+
 .pointDescriptions {
   color: black;
   font-family: Quicksand, sans-serif;
+}
+
+.favourited {
+  color: purple;
 }
 
 /*::-webkit-input-placeholder { color: #f0eeee; }
@@ -239,17 +269,17 @@ div.list_container {
   text-align: center;
   height: 40px;
   line-height: 40px;
-  font-family: 'Zilla Slab', serif;
+  font-family: 'Quicksand', sans-serif;
   color: white;
   border-left: black solid 1px;
 }
 
 .divider:hover {
-  background: #purple;
+  background: purple;
 }
 
 .divider:active {
-  background: #black;
+  background: black;
 }
 
 .list_item {
@@ -293,16 +323,20 @@ div.list_container {
 #point_container .point_item {
   background: white;
   height: 120px;
-  margin: 20px;
-  padding: 10px;
+  padding: 15px;
+  margin: 0px 20px;
   font-family: Quicksand, sans-serif;
 }
 
 #point_container .point_item header {
   font-size: 25px;
-  margin-left: 20px;
+  margin-left: 0px;
   margin-right: 20px;
   border-bottom: 1px solid black;
+}
+
+#point_container .point_item header h1 {
+  font-size: 30px;
 }
 
 #point_container .point_item main {
