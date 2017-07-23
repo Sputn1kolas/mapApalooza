@@ -334,4 +334,17 @@ $(".new_map").on('click', function(event) {
   $('#map').data('map_id', "new")
 })
 
+$(".list_container").on('click', '.my_maps', function(event) {
+  $('.list_container').find('.my_maps').replaceWith(
+    `<div class="col divider my_maps"><a href="/">All Maps</a></div>`)
+})
+
+$(".list_container").on('click', '.all_maps', function(event) {
+  $('.list_container').find('.all_maps').replaceWith(
+    `<div class="col divider my_maps"><a href="/profile">My Maps</a></div>`)
+})
+
+
+
+
 

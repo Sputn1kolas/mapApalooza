@@ -2,6 +2,15 @@ $spacing: 15px;
 $ease-in : width  0.3s ease-in-out;
 $full_search_width: 480px;
 
+a {
+ color: white;
+}
+
+a:hover{
+  color: white;
+  text-decoration: none;
+}
+
 .navbar {
   height: 70px;
   width: 100%;
@@ -218,6 +227,15 @@ div.map_container {
       padding-bottom:  0px;
       margin: 0px $spacing;
     }
+
+.submit_new_map {
+  background-color: black;
+  border-color: white;
+}
+
+.submit_new_map:hover{
+  background-color: purple;
+}
 
 .pointDescriptions{
 color: black;

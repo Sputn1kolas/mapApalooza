@@ -2,6 +2,15 @@
 @import url(bootstrap/bootstrap-grid.min.css);
 @import url(bootstrap/bootstrap.min.css);
 @import url(bootstrap/bootstrap-reboot.min.css);
+a {
+  color: white;
+}
+
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
 .navbar {
   height: 70px;
   width: 100%;
@@ -212,6 +221,15 @@ div #login_form button {
   padding: 15px;
   padding-bottom: 0px;
   margin: 0px 15px;
+}
+
+.submit_new_map {
+  background-color: black;
+  border-color: white;
+}
+
+.submit_new_map:hover {
+  background-color: purple;
 }
 
 .pointDescriptions {
