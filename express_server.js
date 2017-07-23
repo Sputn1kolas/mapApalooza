@@ -160,14 +160,19 @@ app.get("/profile", (req, res) => {
 
 //  post for new map
 app.post("/maps/new", (req, res) => {
-  const user_id = req.params.id
+  console.log("posting map route works...")
+  const user_id = 1
   const title = req.body["title"]
   const description = req.body["description"]
-  const img_url = req.body["img_url"]
-  const lat = ""
-  const long = ""
-  knex('maps').insert({user_id: user_id, title: title, description: description, lat: lat, long: long})
-  res.send(knex.column('title', 'description', 'img_url').select().from('map_points'))
+  // const img_url = req.body["img_url"]
+  // const lat = ""
+  // const long = ""
+  console.log("posting new map..", user_id, title, description)
+  knex('maps').insert({user_id: user_id, title: title, description: description}).then(function (result){
+        res.send(201, result)
+      }).catch(function (error){
+        console.error(error)
+      });
 })
 
 
@@ -181,7 +186,7 @@ app.post("/maps/:map/point/new", (req, res) => {
   let address = req.body["address"]
   let lat = req.body["lat"]
   let long = req.body["long"]
-  console.log("posting got called", map_id, title, description, address, lat, long)
+  console.log("posting new point...", map_id, title, description, address, lat, long)
   knex('points').insert({map_id: map_id, title: title, description: description, lat: lat, long: long}).then(function (result){
         res.send(201)
       }).catch(function (error){

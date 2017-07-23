@@ -121,7 +121,7 @@ $(".pointForm").on('submit', function(event) {
 
 
 // creates a new map
-$(".map_description").on('submit', function(event) {
+$(".gmaps").on('click', ".submit_new_map", function(event) {
   event.preventDefault();
   let title = $("input[name='map_title']").val()
   let description = $("textarea[name='map_description']").val()
@@ -131,18 +131,19 @@ $(".map_description").on('submit', function(event) {
   }
   let data = {
     title: title,
-    description: description,
-    img_url: img_url,
-    lat: Number(lat),
-    long: Number(long),
-    address: address
+    description: description
+    // img_url: img_url,
+    // lat: Number(lat),
+    // long: Number(long),
   }
+  console.log(data)
   $.ajax({
     url:`/maps/new`,
     type:'POST',
     data: data,
     success: function(res) {
       console.log(res)
+      // changemap(title, description,)
     }
   });
   toggleDescriptions();
@@ -322,7 +323,7 @@ $(".new_map").on('click', function(event) {
   $('.gmaps').find('.map_description').replaceWith(
     `<div class=map_description">
     <textarea class="form-control" type="map_description" name="map_description" rows="2" placeholder='Description: My map is a all of my favourite sunbathing spots in Montreal...'></textarea>
-     <button type="submit"class="btn btn-info btn-block">SUBMIT</button>
+     <button class="btn btn-info btn-block submit_new_map">SUBMIT</button>
     </div>
        `)
   $('#map').data('map_id', "new")
