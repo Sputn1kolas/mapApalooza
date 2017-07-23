@@ -2,15 +2,26 @@ $spacing: 15px;
 $ease-in : width  0.3s ease-in-out;
 $full_search_width: 480px;
 
+a {
+ color: white;
+}
+
+a:hover{
+  color: white;
+  text-decoration: none;
+}
+
 .navbar {
   height: 70px;
   width: 100%;
-  background-color: #a000a0;
+  background-color: black;
   padding: $spacing;
   z-index: 100;
+  position: relative;
 
   .navbar-brand {
     font-family: Quicksand, sans-serif;
+    color: white;
     text-align: left;
     font-size: 25px;
     margin-top: -3px;
@@ -63,7 +74,7 @@ $full_search_width: 480px;
   div.col-1{
     height: 70px;
     margin-top: -15px;
-    text-align: center;
+    text-align: enter;
     line-height: 57px;
     color: white;
   }
@@ -76,7 +87,7 @@ $full_search_width: 480px;
   div #login_form{
     line-height: 20px;
     display: none;
-    background: lightblue;
+    background: white;
     width: 230px;
     height: 250px;
     margin-left: -40px;
@@ -104,14 +115,16 @@ $full_search_width: 480px;
   }
 
 .gmaps {
+  background-color: white;
   height:100%;
-  padding: $spacing;
-  color: white;
+  padding: 0px 15px 15px 15px;
+  color: black;
   z-index:-1;
 
   #map {
     height: 400px;
-    width: 100%;
+    width: 95%;
+    margin: 15px 20px;
   }
 
   h1 {
@@ -120,55 +133,140 @@ $full_search_width: 480px;
   }
 }
 
-.pointDescriptions {
-  display: none;
-}
 
 div.map_container {
   height: 100%;
   padding-right: 0;
   width: 75%;
-  background: #a64ca6;
+  background: white
 
 }
 
-.point_information {
-  background-color: grey;
-  margin: $spacing 0px;
-  padding: $spacing;
-
-  img {
-   object-fit: cover;
-    width: auto;
-    max-height: 150px;
-  }
-}
 
 .map_information_container {
   background-color: white;
 }
 
 .controls {
- /* position: absolute;
-  bottom: 100px;
-  left: 30px;*/
-  font-size: 30px;
-  z-index: 100;
-  color: white;
-  opacity: 0.9;
+  font-size: 15px;
+  font-style: Quicksand, sans-serif;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing;
+
+  h1 {
+    font-size: 40px;
+    margin: 0px;
+    color: black;
+  }
+  p {
+    margin: 0px $spacing 0px 3px;
+  }
 }
 
 
 .addPoint {
-  border-radius: 20%;
   z-index: 1000;
-  margin: $spacing 0px;
+  margin: 0px $spacing;
+  color: black;
+  }
+  .addPoint{
+    margin: 0px $spacing;
   }
   .addPoint:hover {
-  opacity: 0.8;
+    color: purple;
+  }
+  .fav {
+    color:black;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+  .fav:hover {
+    color: purple;
   }
 
+
+
 .clicked {
-    border-color: blue;
+    color: purple;
   }
+
+
+.pointDescriptions {
+  display: none;
+  background-color: white;
+  padding: $spacing;
+  color: white;
+  font-family: sans-serif;
+  .btn {
+    margin-top: $spacing;
+  }
+}
+
+ div #login_form{
+   line-height: 20px;
+    display: none;
+    background: lightblue;
+    width: 230px;
+    height: 250px;
+    margin-left: -40px;
+
+    h3 {
+      line-height: 60px;
+    }
+
+    .password {
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+    }
+  }
+
+  .map_description {
+    margin: $spacing;
+    font-family: Quicksand, sans-serif;
+    font-style: italic;
+
+  }
+
+ #new_map{
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      padding: 15px;
+      padding-bottom:  0px;
+      margin: 0px $spacing;
+    }
+
+.submit_new_map {
+  background-color: black;
+  border-color: white;
+}
+
+.submit_new_map:hover{
+  background-color: purple;
+}
+
+.pointDescriptions{
+color: black;
+font-family: Quicksand, sans-serif;
+}
+
+.favourited {
+  color: purple;
+}
+
+/*::-webkit-input-placeholder { color: #f0eeee; }
+::-moz-placeholder {color: #f0eeee; }
+:-ms-input-placeholder { color: #f0eeee; }
+:-o-input-placeholder { color: #f0eeee; }
+::-webkit-textarea-placeholder { color: #f0eeee; }
+::-moz-placeholder {color: #f0eeee; }
+:-ms-textarea-placeholder { color: #f0eeee; }
+:-o-textarea-placeholder { color: #f0eeee; }*/
 

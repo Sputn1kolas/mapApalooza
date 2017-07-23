@@ -6,10 +6,12 @@
     <body>
     <% include partials/_header %>
 
-    <% let map_id = "map_1" %>
+<div class="body row">
+  <div class="map_container col-9">
+<% let map_id = "map_1" %>
     <div class="gmaps">
         <h1 class "map_title"> <%= map_db[0].title   %> </h1>
-        <div id="map" height="460px" width="100%"></div>
+        <div id="map" height="460px" width="100%" data-map_id="17"></div>
 
         <div class="controls">
           <i class="fa fa-heart" aria-hidden="true"></i>
@@ -18,9 +20,8 @@
 
         <h3 class="map_description"><%= map_db[0].description %></h3>
    </div>
-
       <div class="form pointDescriptions">
-          <form action="maps/map1/point/new" method="POST" class="pointForm">
+          <form class="pointForm">
             Title of Point
             <input type="title" name="title">
             Description
@@ -34,16 +35,42 @@
       </div>
   </div>
 <div class="row" id="${point_id}">
-      <div class="col-6 offset-1 point_information">
-        <button type="button" class="btn btn-primary btn-lg btn-block load_map" id="map1">Load Existing</button>
-      </div>
-  </div>
+
+
 
   <div class="row">
       <div class="col-7 offset-1 map_information_container">
       </div>
   </div>
+<div class="list_container col-3">
+        <div class="row">
+          <div class="col divider">Search</div>
+          <div class="col divider">Fav</div>
+        </div>
 
+        <div class="row" id="every_item_container">
+          <article class="list_item">
+            <header>
+              title
+            </header>
+            <main>
+              <div class="item_img"><img src="#"></div>
+              <div class="item_description">description description description description description description description description description </div>
+            </main>
+            <footer>
+            <div class="numberFavs">
+            <i class="fa fa-heart"></i>
+            2 fav
+            </div>
+            <div class="numberPoints">10 points</div>
+            </footer>
+          </article>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 
 
  <script type="text/javascript" src="/scripts/googlemap.js"></script>
