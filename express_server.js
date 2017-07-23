@@ -299,18 +299,17 @@ app.post("/logout", (req, res) => {
 app.post("/register", (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
+  let username = req.body.username;
   if(email == "" || password == ""){
     res.status(400).send("Password or email cannot be empty");
-  }else if(emailExistsInDB(email)){
-    res.status(400).send("Email already exist in database");
+  // }else if(emailExistsInDB(email)){
+  //   res.status(400).send("Email already exist in database");
+  // }
   }else{
 
     password = bcrypt.hashSync(password, 10);
-    users[userID] = {
-      "id" : userID,
-      "email" : email,
-      "password": password
-    }
+
+    knex('users').insert({username: username, })
     req.session.user_id = userID;
     res.redirect('/urls');
   }
@@ -341,32 +340,22 @@ app.post("/login", (req, res) => {
 // ##########################################################################################
 
 
-function generateRandomString(numberOfCharacters){
-  const alphaNumeric = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
-  let randomString = "";
-  let i = 0;
-  while(i<numberOfCharacters){
-    randomString += alphaNumeric[Math.floor(Math.random() * 63)];
-    i++;
-  }
 
-  return randomString;
-}
 
-function emailExistsInDB(email){
-  for(let user in users){
-    if(users[user].email == email) return true;
-  }
-  return false;
-}
+// function emailExistsInDB(email){
+//   for(let user in users){
+//     if(users[user].email == email) return true;
+//   }
+//   return false;
+// }
 
-function userForAnExistingEmail(email){
-  for(let user in users){
-    if(users[user].email == email) return users[user];
-  }
-  return false;
-}
+// function userForAnExistingEmail(email){
+//   for(let user in users){
+//     if(users[user].email == email) return users[user];
+//   }
+//   return false;
+// }
 
-function urlsForUser(id){
-  return urlDatabase[id];
-}
+// function urlsForUser(id){
+//   return urlDatabase[id];
+// }
