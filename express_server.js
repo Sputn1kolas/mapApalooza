@@ -201,7 +201,7 @@ app.post("/maps/:map/point/new", (req, res) => {
         console.error(error)
       });
 })
-
+ /////////////////////////// USER Authentication //////////////////////////
 
 // Logs out user by deleting cookie
 app.post("/logout", (req, res) => {
