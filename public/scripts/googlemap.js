@@ -223,32 +223,23 @@ function changeMap(title, description, map_id) {
     `<h3 class="map_description" id="map_description"> ${description} </h3>`
   )
   $('#map').data('map_id', map_id)
-  ifFavourited(map_id, highlight)
+  ifFavourited(map_id)
 }
 
 
-function allArray(array, callback) {
-  for(var i = 0; i < 0; i++ ) {
-    callback(array[i])
-  }
-}
-
-
-function highlight(mapObject){
-  console.log(mapObject)
- if(mapObject === []){
-    $('.fav').removeClass("favourited")
-   } else {
-    $('.fav').addClass("favourited")
-  }
-}
-
-function ifFavourited(map_id, callback){
+function ifFavourited(map_id) {
    $.ajax({
     url:`/favourites/${map_id}`,
     type:'GET',
     success: function(mapObject) {
-      callback(mapObject)
+        console.log("the favourited result is..", mapObject)
+        if(mapObject === []) {
+          console.log("removing class favourited")
+           $('.fav').removeClass("favourited")
+        } else {
+          console.log("adding class favourited")
+          $('.fav').addClass("favourited")
+         }
     }
   })
 }
