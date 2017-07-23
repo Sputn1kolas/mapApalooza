@@ -168,8 +168,15 @@ app.post("/maps/new", (req, res) => {
   // const lat = ""
   // const long = ""
   console.log("posting new map..", user_id, title, description)
-  knex('maps').insert({user_id: user_id, title: title, description: description}).then(function (result){
-        res.send(201, result)
+  knex('maps').insert({user_id: user_id, title: title, description: description}).then(function(){
+        knex.select('*').from('maps')
+        .where({title: title})
+        .then(function(result){
+          res.json(result)
+         })
+        .catch(function (err) {
+           throw(err)
+        })
       }).catch(function (error){
         console.error(error)
       });
@@ -187,8 +194,9 @@ app.post("/maps/:map/point/new", (req, res) => {
   let lat = req.body["lat"]
   let long = req.body["long"]
   console.log("posting new point...", map_id, title, description, address, lat, long)
-  knex('points').insert({map_id: map_id, title: title, description: description, lat: lat, long: long}).then(function (result){
-        res.send(201)
+  knex('points').insert({map_id: map_id, title: title, description: description, lat: lat, long: long}).returning('id').then(function (result){
+        console.log(result)
+        res.send(result)
       }).catch(function (error){
         console.error(error)
       });

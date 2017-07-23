@@ -63,7 +63,7 @@
 div.col-sm-1 {
   height: 70px;
   margin-top: -15px;
-  text-align: center;
+  text-align: enter;
   line-height: 57px;
   color: white;
 }
@@ -71,7 +71,7 @@ div.col-sm-1 {
 div #login_form {
   line-height: 20px;
   display: none;
-  background: lightblue;
+  background: white;
   width: 230px;
   height: 250px;
   margin-left: -40px;
@@ -94,9 +94,10 @@ div.col-sm-1:hover {
 }
 
 .gmaps {
+  background-color: white;
   height: 100%;
   padding: 15px;
-  color: white;
+  color: black;
   z-index: -1;
 }
 
@@ -114,7 +115,7 @@ div.map_container {
   height: 100%;
   padding-right: 0;
   width: 75%;
-  background: #a64ca6;
+  background: white;
 }
 
 .map_information_container {
@@ -168,7 +169,7 @@ div.map_container {
 
 .pointDescriptions {
   display: none;
-  background-color: lightblue;
+  background-color: white;
   padding: 15px;
   color: white;
   font-family: sans-serif;
@@ -203,6 +204,20 @@ div #login_form button {
   margin: 15px;
 }
 
+#new_map {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 15px;
+  padding-bottom: 0px;
+  margin: 0px 15px;
+}
+
+.pointDescriptions {
+  color: black;
+  font-family: Quicksand, sans-serif;
+}
+
 /*::-webkit-input-placeholder { color: #f0eeee; }
 ::-moz-placeholder {color: #f0eeee; }
 :-ms-input-placeholder { color: #f0eeee; }
@@ -212,71 +227,75 @@ div #login_form button {
 :-ms-textarea-placeholder { color: #f0eeee; }
 :-o-textarea-placeholder { color: #f0eeee; }*/
 div.list_container {
-  background: #bed8ff;
+  background: white;
   max-width: 23.85%;
+  max-height: 600px;
+  overflow: auto;
+  border-left: solid 5px lightgrey;
 }
 
-div.list_container .divider {
+.divider {
   background: black;
   text-align: center;
   height: 40px;
   line-height: 40px;
   font-family: 'Zilla Slab', serif;
   color: white;
-  border-left: white solid 1px;
+  border-left: black solid 1px;
 }
 
-div.list_container .divider:hover {
-  background: #darkgrey;
+.divider:hover {
+  background: #purple;
 }
 
-div.list_container .divider:active {
+.divider:active {
   background: #black;
 }
 
-div.list_container .list_item {
-  font-family: 'Zilla Slab', serif;
-  background: #FFFACD;
+.list_item {
+  font-family: Quicksand, sans-serif;
   height: 120px;
-  border: 1px solid black;
   width: 100%;
-  margin: 15px;
+  margin: 15px 0px;
   padding: 10px;
 }
 
-div.list_container .list_item header {
+.list_item header {
   border-bottom: 1px solid black;
 }
 
-div.list_container .list_item main {
+.list_item main {
   padding-top: 2px;
   font-size: 12px;
   height: 60%;
   display: flex;
 }
 
-div.list_container .list_item main img {
+.list_item main img {
   height: 4em;
   width: 4em;
   margin-right: 5px;
 }
 
-div.list_container .list_item footer .numberPoints {
+.list_item footer .numberPoints {
   text-align: right;
   margin-top: -23px;
 }
 
 .list_item:hover {
-  opacity: 0.8;
+  color: purple;
+}
+
+#point_container {
+  background-color: white;
 }
 
 #point_container .point_item {
-  background: #FFFACD;
+  background: white;
   height: 120px;
-  border: 1px solid black;
   margin: 20px;
   padding: 10px;
-  font-family: 'Zilla Slab', serif;
+  font-family: Quicksand, sans-serif;
 }
 
 #point_container .point_item header {

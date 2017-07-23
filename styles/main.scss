@@ -64,7 +64,7 @@ $full_search_width: 480px;
   div.col-sm-1{
     height: 70px;
     margin-top: -15px;
-    text-align: center;
+    text-align: enter;
     line-height: 57px;
     color: white;
   }
@@ -72,7 +72,7 @@ $full_search_width: 480px;
   div #login_form{
     line-height: 20px;
     display: none;
-    background: lightblue;
+    background: white;
     width: 230px;
     height: 250px;
     margin-left: -40px;
@@ -96,9 +96,10 @@ $full_search_width: 480px;
   }
 
 .gmaps {
+  background-color: white;
   height:100%;
   padding: $spacing;
-  color: white;
+  color: black;
   z-index:-1;
 
   #map {
@@ -117,7 +118,7 @@ div.map_container {
   height: 100%;
   padding-right: 0;
   width: 75%;
-  background: #a64ca6;
+  background: white
 
 }
 
@@ -170,9 +171,10 @@ div.map_container {
     color: purple;
   }
 
+
 .pointDescriptions {
   display: none;
-  background-color: lightblue;
+  background-color: white;
   padding: $spacing;
   color: white;
   font-family: sans-serif;
@@ -206,6 +208,20 @@ div.map_container {
     margin: $spacing;
 
   }
+
+ #new_map{
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      padding: 15px;
+      padding-bottom:  0px;
+      margin: 0px $spacing;
+    }
+
+.pointDescriptions{
+color: black;
+font-family: Quicksand, sans-serif;
+}
 
 /*::-webkit-input-placeholder { color: #f0eeee; }
 ::-moz-placeholder {color: #f0eeee; }

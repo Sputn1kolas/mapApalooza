@@ -1,8 +1,11 @@
 div.list_container{
-  background: #bed8ff;
+  background: white;
   max-width: 23.85%;
+  max-height: 600px;
+  overflow: auto;
+  border-left: solid 5px lightgrey;
 
-
+}
 
   .divider {
     background: black;
@@ -11,11 +14,11 @@ div.list_container{
     line-height: 40px;
     font-family: 'Zilla Slab', serif;
     color: white;
-    border-left: white solid 1px;
+    border-left: black solid 1px;
   }
 
   .divider:hover{
-    background: #darkgrey;
+    background: #purple;
   }
 
   .divider:active{
@@ -23,12 +26,10 @@ div.list_container{
   }
 
   .list_item {
-    font-family: 'Zilla Slab', serif;
-    background:#FFFACD;
+    font-family: Quicksand, sans-serif;
     height: 120px;
-    border: 1px solid black;
     width: 100%;
-    margin: 15px;
+    margin: 15px 0px ;
     padding: 10px;
 
     header {
@@ -53,10 +54,10 @@ div.list_container{
         text-align:right;
         margin-top: -23px;
       }
-    }
+
   }
 }
 
 .list_item:hover {
-  opacity: 0.8;
+  color: purple;
 }

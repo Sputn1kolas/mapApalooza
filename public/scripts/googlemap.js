@@ -136,13 +136,13 @@ $(".gmaps").on('click', ".submit_new_map", function(event) {
     // lat: Number(lat),
     // long: Number(long),
   }
-  console.log(data)
   $.ajax({
     url:`/maps/new`,
     type:'POST',
     data: data,
-    success: function(res) {
-      console.log(res)
+    success: function(mapObject) {
+      console.log(mapObject)
+      loadMap(mapObject)
       // changemap(title, description,)
     }
   });
@@ -282,6 +282,14 @@ function removePointDescriptions(){
   $('.point_item').remove()
 }
 
+function loadMap(mapObject){
+  removePointDescriptions()
+  let title = mapObject[0].title
+  let description = mapObject[0].description
+  let map_id = mapObject[0].id
+  changeMap(title, description, map_id)
+}
+
 // get the information on the clicked item, and loads it to the main screen
 $(".list_container").on('click', '.list_item', function() {
   event.preventDefault();
@@ -294,11 +302,7 @@ $(".list_container").on('click', '.list_item', function() {
     url:`/maps/${map_id}`,
     type:'GET',
     success: function(mapObject) {
-      removePointDescriptions()
-      let title = mapObject[0].title
-      let description = mapObject[0].description
-      let map_id = mapObject[0].id
-      changeMap(title, description, map_id)
+      loadMap(mapObject)
     }
   })
 
