@@ -309,7 +309,7 @@ app.post("/register", (req, res) => {
 
     password = bcrypt.hashSync(password, 10);
 
-    knex('users').insert({username: username, })
+    knex('users').insert({username: username, password: password, email: email})
     req.session.user_id = userID;
     res.redirect('/urls');
   }
