@@ -8,6 +8,7 @@
   background-color: #a000a0;
   padding: 15px;
   z-index: 100;
+  position: relative;
 }
 
 .navbar .navbar-brand {
@@ -62,9 +63,120 @@
 div.col-sm-1 {
   height: 70px;
   margin-top: -15px;
-  text-align: center;
+  text-align: enter;
   line-height: 57px;
   color: white;
+}
+
+div #login_form {
+  line-height: 20px;
+  display: none;
+  background: white;
+  width: 230px;
+  height: 250px;
+  margin-left: -40px;
+}
+
+div #login_form h3 {
+  line-height: 60px;
+}
+
+div #login_form .password {
+  margin-top: 10px;
+}
+
+div #login_form button {
+  margin-top: 10px;
+}
+
+div.col-sm-1:hover {
+  background: #b000b0;
+}
+
+.gmaps {
+  background-color: white;
+  height: 100%;
+  padding: 15px;
+  color: black;
+  z-index: -1;
+}
+
+.gmaps #map {
+  height: 400px;
+  width: 100%;
+}
+
+.gmaps h1 {
+  font-family: Quicksand, sans-serif;
+  font-size: 50px;
+}
+
+div.map_container {
+  height: 100%;
+  padding-right: 0;
+  width: 75%;
+  background: white;
+}
+
+.map_information_container {
+  background-color: white;
+}
+
+.controls {
+  height: 40px;
+  font-size: 15px;
+  color: white;
+  width: 100%;
+  background-color: black;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.controls h1 {
+  font-size: 30px;
+  margin: 0px;
+  color: purple;
+}
+
+.controls p {
+  margin: 0px 15px 0px 3px;
+}
+
+.addPoint {
+  z-index: 1000;
+  margin: 0px 15px;
+  color: white;
+}
+
+.addPoint {
+  margin: 0px 15px;
+}
+
+.addPoint:hover {
+  color: lightgrey;
+}
+
+.fav:hover {
+  color: lightgrey;
+}
+
+.clicked {
+  color: purple;
+}
+
+.pointDescriptions {
+  display: none;
+  background-color: white;
+  padding: 15px;
+  color: white;
+  font-family: sans-serif;
+}
+
+.pointDescriptions .btn {
+  margin-top: 15px;
 }
 
 div #login_form {
@@ -88,143 +200,102 @@ div #login_form button {
   margin-top: 10px;
 }
 
-div.col-sm-1:hover {
-  background: #b000b0;
+.map_description {
+  margin: 15px;
 }
 
-.gmaps {
-  height: 100%;
+#new_map {
+  display: flex;
+  align-items: center;
+  justify-content: left;
   padding: 15px;
-  color: white;
-  z-index: -1;
-}
-
-.gmaps #map {
-  height: 400px;
-  width: 100%;
-}
-
-.gmaps h1 {
-  font-family: Quicksand, sans-serif;
-  font-size: 50px;
+  padding-bottom: 0px;
+  margin: 0px 15px;
 }
 
 .pointDescriptions {
-  display: none;
+  color: black;
+  font-family: Quicksand, sans-serif;
 }
 
-div.map_container {
-  height: 100%;
-  padding-right: 0;
-  width: 75%;
-  background: #a64ca6;
-}
-
-.point_information {
-  background-color: grey;
-  margin: 15px 0px;
-  padding: 15px;
-}
-
-.point_information img {
-  object-fit: cover;
-  width: auto;
-  max-height: 150px;
-}
-
-.map_information_container {
-  background-color: white;
-}
-
-.controls {
-  /* position: absolute;
-  bottom: 100px;
-  left: 30px;*/
-  font-size: 30px;
-  z-index: 100;
-  color: white;
-  opacity: 0.9;
-}
-
-.addPoint {
-  border-radius: 20%;
-  z-index: 1000;
-  margin: 15px 0px;
-}
-
-.addPoint:hover {
-  opacity: 0.8;
-}
-
-.clicked {
-  border-color: blue;
-}
-
+/*::-webkit-input-placeholder { color: #f0eeee; }
+::-moz-placeholder {color: #f0eeee; }
+:-ms-input-placeholder { color: #f0eeee; }
+:-o-input-placeholder { color: #f0eeee; }
+::-webkit-textarea-placeholder { color: #f0eeee; }
+::-moz-placeholder {color: #f0eeee; }
+:-ms-textarea-placeholder { color: #f0eeee; }
+:-o-textarea-placeholder { color: #f0eeee; }*/
 div.list_container {
-  background: #bed8ff;
+  background: white;
   max-width: 23.85%;
+  max-height: 600px;
+  overflow: auto;
+  border-left: solid 5px lightgrey;
 }
 
-div.list_container .divider {
-  background: #93b9f2;
+.divider {
+  background: black;
   text-align: center;
   height: 40px;
   line-height: 40px;
   font-family: 'Zilla Slab', serif;
   color: white;
+  border-left: black solid 1px;
 }
 
-div.list_container .divider:hover {
-  background: #74a2e8;
+.divider:hover {
+  background: #purple;
 }
 
-div.list_container .divider:active {
-  background: #74a2e8;
+.divider:active {
+  background: #black;
 }
 
-div.list_container .list_item {
-  font-family: 'Zilla Slab', serif;
-  background: #FFFACD;
+.list_item {
+  font-family: Quicksand, sans-serif;
   height: 120px;
-  border: 1px solid black;
   width: 100%;
-  margin: 15px;
+  margin: 15px 0px;
   padding: 10px;
 }
 
-div.list_container .list_item header {
+.list_item header {
   border-bottom: 1px solid black;
 }
 
-div.list_container .list_item main {
+.list_item main {
   padding-top: 2px;
   font-size: 12px;
   height: 60%;
   display: flex;
 }
 
-div.list_container .list_item main img {
+.list_item main img {
   height: 4em;
   width: 4em;
   margin-right: 5px;
 }
 
-div.list_container .list_item footer .numberPoints {
+.list_item footer .numberPoints {
   text-align: right;
   margin-top: -23px;
 }
 
 .list_item:hover {
-  opacity: 0.8;
+  color: purple;
+}
+
+#point_container {
+  background-color: white;
 }
 
 #point_container .point_item {
-  background: #FFFACD;
+  background: white;
   height: 120px;
-  border: 1px solid black;
   margin: 20px;
   padding: 10px;
-  font-family: 'Zilla Slab', serif;
+  font-family: Quicksand, sans-serif;
 }
 
 #point_container .point_item header {

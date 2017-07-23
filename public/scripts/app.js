@@ -25,17 +25,18 @@ $(document).ready(function(){
     }
   };
 
-  function loadListMaps(){
-    $.ajax({
-      url: "/maps",
-      method: "GET",
-      success: function (result){
-      renderListMap(result);
-      }
-    })
-  };
+// Repeated a similar function in "googlemaps.js"
+  // function loadListMaps(){
+  //   $.ajax({
+  //     url: "/maps",
+  //     method: "GET",
+  //     success: function (result){
+  //     renderListMap(result);
+  //     }
+  //   })
+  // };
 
-  loadListMaps();
+  // loadListMaps();
 
   function createPoint (obj){
     let article = $("<article>").addClass("point_item");
