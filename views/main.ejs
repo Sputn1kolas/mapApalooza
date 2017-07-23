@@ -14,7 +14,7 @@
   <div class="body row">
     <div class="map_container col-9">
       <% let map_id = "map_1" %>
-
+      <h3 class="page" data-page="<%= page %>"> <%= page %> </h3>
        <div class="controls">
         <div class="fav">
           <i class="fa fa-heart" aria-hidden="true"></i>
@@ -58,7 +58,7 @@
   <div class="list_container col-3">
     <div class="row">
       <div class="col divider my_maps"><a href="/profile">My Maps</a></div>
-      <div class="col divider"><a href="/user/favourites">Faves</a></div>
+      <div class="col divider"><a href="/favourites">My Faves</a></div>
       <article class="list_item new_map" id="new_map">
         NEW  <br> MAP
         <i class="fa fa-map-o fa-5x" aria-hidden="true"></i>

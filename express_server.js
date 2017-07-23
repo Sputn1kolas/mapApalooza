@@ -59,6 +59,66 @@ app.get("/", (req, res) => {
     })
 })
 
+app.get("/profile", (req, res) => {
+  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  knex.select('*').from('maps')
+    .where({user_id: user_id})
+    .then(function(result) {
+       let templateVar = {
+          gMapsApi: gMapsApi,
+          map_db: result,
+          page: "profile"
+      }
+      res.render("main.ejs", templateVar)
+      })
+    .catch(function (err) {
+      throw(err)
+    })
+})
+
+app.get("/favourites", (req, res) => {
+  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+
+  knex.select('*').from('maps')
+      .rightJoin('user_fav', 'maps.id', 'user_fav.map_id')
+      .where({'user_fav.user_id': user_id})
+      .then(function(result) {
+        console.log(result)
+       let templateVar = {
+          gMapsApi: gMapsApi,
+          map_db: result,
+          page: "favourites"
+      }
+      res.render("main.ejs", templateVar)
+      })
+    .catch(function (err) {
+      throw(err)
+    })
+})
+
+
+app.get("/search", (req, res) => {
+  let templateVar = {
+    gMapsApi: gMapsApi
+  }
+  res.render("search.ejs", templateVar)
+})
+// // returns all of the points for a specific mind
+// app.get("/maps/:map/point", (req, res) => {
+//   let map_id = req.params.map
+//   knex.select('title', 'description', 'img_url')
+//       .from('points')
+//       .where('map_id','=', map_id)
+//       .then(function (result){
+//         res.send(result);
+//       }).catch(function (error){
+//         console.error(error)
+//       });
+// });
+
+
+
+
 app.get("/maps/all", (req, res) => {
   knex.select('*').from('maps')
     .then(function(result) {
@@ -67,6 +127,31 @@ app.get("/maps/all", (req, res) => {
     .catch(function (err) {
       throw(err)
     })
+})
+
+app.get("/user/maps", (req, res) => {
+  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  knex.select('*').from('maps')
+  .where({user_id: user_id})
+  .then(function(result) {
+    res.json(result)
+    })
+  .catch(function (err) {
+    throw(err)
+  })
+})
+
+app.get("/user/favourites", (req, res) => {
+  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  knex.select('*').from('maps')
+  .rightJoin('user_fav', 'maps.id', 'user_fav.map_id')
+  .where({'user_fav.user_id': user_id})
+  .then(function(result) {
+    res.json(result)
+  })
+  .catch(function (err) {
+    throw(err)
+  })
 })
 
 app.get("/maps/:map_id", (req, res) => {
@@ -97,65 +182,6 @@ app.get("/:map_id/points", (req, res) => {
 })
 
 
-app.get("/search", (req, res) => {
-  let templateVar = {
-    gMapsApi: gMapsApi
-  }
-  res.render("search.ejs", templateVar)
-})
-// // returns all of the points for a specific mind
-// app.get("/maps/:map/point", (req, res) => {
-//   let map_id = req.params.map
-//   knex.select('title', 'description', 'img_url')
-//       .from('points')
-//       .where('map_id','=', map_id)
-//       .then(function (result){
-//         res.send(result);
-//       }).catch(function (error){
-//         console.error(error)
-//       });
-// });
-
-
-app.get("/profile", (req, res) => {
-  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
-
-  knex.select('*').from('maps')
-    .where({user_id: user_id})
-    .then(function(result) {
-       let templateVar = {
-          gMapsApi: gMapsApi,
-          map_db: result,
-          page: "profile"
-      }
-      res.render("main.ejs", templateVar)
-      })
-    .catch(function (err) {
-      throw(err)
-    })
-})
-
-
-
-app.get("/user/favourites", (req, res) => {
-  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
-
-  knex.select('*').from('maps')
-      .rightJoin('user_fav', 'maps.id', 'user_fav.map_id')
-      .where({'user_fav.user_id': user_id})
-      .then(function(result) {
-        console.log(result)
-       let templateVar = {
-          gMapsApi: gMapsApi,
-          map_db: result,
-          page: "favourites"
-      }
-      res.render("main.ejs", templateVar)
-      })
-    .catch(function (err) {
-      throw(err)
-    })
-})
 
 // app.get("/maps", (req, res) => {
 //   knex.select('maps.title AS title', 'maps.description AS description', 'maps.img_url AS img_url')

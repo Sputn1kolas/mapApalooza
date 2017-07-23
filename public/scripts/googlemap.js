@@ -226,13 +226,32 @@ function changeMap(title, description, map_id) {
 }
 
 ///////////////////////// On load AJAX CALLS ////////////////////////
-$.ajax({
-  url:`/maps/all`,
+
+console.log("page is reading..", $('.page').data('page'))
+switch($('.page').data('page')) {
+case 'main':
+  generateDescriptionsByRoute("/maps/all")
+  break;
+case 'favourites':
+  generateDescriptionsByRoute("/user/favourites")
+  break;
+case 'profile':
+  generateDescriptionsByRoute("/user/maps")
+  break;
+}
+
+function generateDescriptionsByRoute(route) {
+  console.log("the route is..", route)
+  $.ajax({
+  url: route,
   type:'GET',
   success: function(result) {
+    console.log(result)
     generateDescriptions(result)
-  }
-})
+    }
+  })
+}
+
 
 // should load the map points on load
 // let map_id = $('#map').data('map_id')
