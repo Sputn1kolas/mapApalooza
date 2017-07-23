@@ -227,9 +227,6 @@ function changeMap(title, description, map_id) {
 }
 
 
-
-
-
 function allArray(array, callback) {
   for(var i = 0; i < 0; i++ ) {
     callback(array[i])
@@ -398,8 +395,9 @@ $(".controls").on('click', '.fav', function() {
   event.preventDefault();
   if($('.fav').hasClass('favourited')){
     let favourited = "Yes"
+  } else {
+    let favourited = "No"
   }
-  let favourited = "No"
   let map_id = $('#map').data('map_id')
   if(!map_id) {
     console.log("Error, No map id!")
@@ -412,7 +410,7 @@ $(".controls").on('click', '.fav', function() {
       favourited: favourited,
       map_id: map_id
     },
-    success: function(mapObject) {
+    success: function() {
        $('.fav').toggleClass('favourited')
     }
   })
