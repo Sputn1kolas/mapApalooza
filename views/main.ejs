@@ -16,8 +16,10 @@
       <% let map_id = "map_1" %>
 
        <div class="controls">
-        <i class="fa fa-heart fav" aria-hidden="true"></i>
-        <p>FAVE</p>
+        <div class="fav">
+          <i class="fa fa-heart" aria-hidden="true"></i>
+          <p>FAVE</p>
+        </div>
         <h1 class="map_title" > <%= map_db[randMap].title   %> </h1>
         <div class="addPoint">
           <i class="fa fa-plus" aria-hidden="true"></i>
@@ -56,7 +58,7 @@
   <div class="list_container col-3">
     <div class="row">
       <div class="col divider my_maps"><a href="/profile">My Maps</a></div>
-      <div class="col divider"><a href="/profile">Faves</a></div>
+      <div class="col divider"><a href="/user/favourites">Faves</a></div>
       <article class="list_item new_map" id="new_map">
         NEW  <br> MAP
         <i class="fa fa-map-o fa-5x" aria-hidden="true"></i>

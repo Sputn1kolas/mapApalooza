@@ -344,7 +344,28 @@ $(".list_container").on('click', '.all_maps', function(event) {
     `<div class="col divider my_maps"><a href="/profile">My Maps</a></div>`)
 })
 
-
-
+$(".controls").on('click', '.fav', function() {
+  event.preventDefault();
+  if($('.fav').hasClass('favourited')){
+    let favourited = "Yes"
+  }
+  let favourited = "No"
+  let map_id = $('#map').data('map_id')
+  if(!map_id) {
+    console.log("Error, No map id!")
+    return
+  }
+  $.ajax({
+    url:`/fav`,
+    type:'POST',
+    data: {
+      favourited: favourited,
+      map_id: map_id
+    },
+    success: function(mapObject) {
+       $('.fav').toggleClass('favourited')
+    }
+  })
+})
 
 

@@ -75,7 +75,6 @@ app.get("/maps/:map_id", (req, res) => {
   knex.select('*').from('maps')
     .where({id: map_id})
     .then(function(result){
-        console.log(result)
         res.json(result)
       })
     .catch(function (err) {
@@ -90,7 +89,6 @@ app.get("/:map_id/points", (req, res) => {
   knex.select('*').from('points')
     .where({map_id: map_id})
     .then(function(result){
-        console.log("sending... ", result)
         res.json(result)
       })
     .catch(function (err) {
@@ -130,7 +128,28 @@ app.get("/profile", (req, res) => {
           map_db: result,
           page: "profile"
       }
-      console.log(templateVar)
+      res.render("main.ejs", templateVar)
+      })
+    .catch(function (err) {
+      throw(err)
+    })
+})
+
+
+
+app.get("/user/favourites", (req, res) => {
+  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+
+  knex.select('*').from('maps')
+      .rightJoin('user_fav', 'maps.id', 'user_fav.map_id')
+      .where({'user_fav.user_id': user_id})
+      .then(function(result) {
+        console.log(result)
+       let templateVar = {
+          gMapsApi: gMapsApi,
+          map_db: result,
+          page: "favourites"
+      }
       res.render("main.ejs", templateVar)
       })
     .catch(function (err) {
@@ -160,14 +179,12 @@ app.get("/profile", (req, res) => {
 
 //  post for new map
 app.post("/maps/new", (req, res) => {
-  console.log("posting map route works...")
   const user_id = 1
   const title = req.body["title"]
   const description = req.body["description"]
   // const img_url = req.body["img_url"]
   // const lat = ""
   // const long = ""
-  console.log("posting new map..", user_id, title, description)
   knex('maps').insert({user_id: user_id, title: title, description: description}).then(function(){
         knex.select('*').from('maps')
         .where({title: title})
@@ -193,15 +210,31 @@ app.post("/maps/:map/point/new", (req, res) => {
   let address = req.body["address"]
   let lat = req.body["lat"]
   let long = req.body["long"]
-  console.log("posting new point...", map_id, title, description, address, lat, long)
   knex('points').insert({map_id: map_id, title: title, description: description, lat: lat, long: long}).returning('id').then(function (result){
-        console.log(result)
         res.send(result)
       }).catch(function (error){
         console.error(error)
       });
 })
 
+app.post("/fav", (req, res) => {
+  const user_id = 1
+  let favourited = req.body["favourited"]
+  let map_id = req.body["map_id"]
+  if(favourited === "No") {
+    knex('user_fav').insert({user_id: user_id, map_id: map_id}).then(function(){
+            res.send(204)
+        }).catch(function (error){
+          console.error(error)
+    });
+  } else {
+    knex('user_fav').del({user_id: user_id, map_id: map_id}).then(function(){
+                res.send(204)
+        }).catch(function (error){
+          console.error(error)
+    });
+  }
+})
 
 // Logs out user by deleting cookie
 app.post("/logout", (req, res) => {

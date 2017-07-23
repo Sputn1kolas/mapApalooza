@@ -167,6 +167,13 @@ div.map_container {
   color: purple;
 }
 
+.fav {
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
 .fav:hover {
   color: purple;
 }
@@ -235,6 +242,10 @@ div #login_form button {
 .pointDescriptions {
   color: black;
   font-family: Quicksand, sans-serif;
+}
+
+.favourited {
+  color: purple;
 }
 
 /*::-webkit-input-placeholder { color: #f0eeee; }

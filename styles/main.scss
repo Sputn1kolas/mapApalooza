@@ -169,6 +169,12 @@ div.map_container {
   .addPoint:hover {
     color: purple;
   }
+  .fav {
+    color:black;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
   .fav:hover {
     color: purple;
   }
@@ -240,6 +246,10 @@ div.map_container {
 .pointDescriptions{
 color: black;
 font-family: Quicksand, sans-serif;
+}
+
+.favourited {
+  color: purple;
 }
 
 /*::-webkit-input-placeholder { color: #f0eeee; }
