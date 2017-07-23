@@ -59,7 +59,7 @@
   background-color: purple;
 }
 
-div.col-sm-1 {
+div.col-1 {
   height: 70px;
   margin-top: -15px;
   text-align: center;
@@ -67,7 +67,12 @@ div.col-sm-1 {
   color: white;
 }
 
-div #login_form {
+div.register {
+  text-align: right;
+  color: white;
+}
+
+div #login_form, div #register {
   line-height: 20px;
   display: none;
   background: lightblue;
@@ -76,19 +81,19 @@ div #login_form {
   margin-left: -40px;
 }
 
-div #login_form h3 {
+div #login_form h3, div #register h3 {
   line-height: 60px;
 }
 
-div #login_form .password {
+div #login_form .password, div #register .password {
   margin-top: 10px;
 }
 
-div #login_form button {
+div #login_form button, div #register button {
   margin-top: 10px;
 }
 
-div.col-sm-1:hover {
+div.col-1:hover {
   background: #b000b0;
 }
 

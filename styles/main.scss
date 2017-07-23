@@ -60,11 +60,16 @@ $full_search_width: 480px;
   }
 }
 
-  div.col-sm-1{
+  div.col-1{
     height: 70px;
     margin-top: -15px;
     text-align: center;
     line-height: 57px;
+    color: white;
+  }
+
+  div.register {
+    text-align: right;
     color: white;
   }
 
@@ -90,7 +95,11 @@ $full_search_width: 480px;
 
   }
 
-  div.col-sm-1:hover {
+  div #register {
+    @extend #login_form;
+  }
+
+  div.col-1:hover {
     background: #b000b0;
   }
 
