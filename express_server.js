@@ -279,6 +279,7 @@ app.post("/fav", (req, res) => {
     });
   }
 })
+ /////////////////////////// USER Authentication //////////////////////
 
 // Logs out user by deleting cookie
 app.post("/logout", (req, res) => {
