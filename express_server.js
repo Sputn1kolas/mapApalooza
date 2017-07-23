@@ -58,6 +58,7 @@ app.get("/", (req, res) => {
           gMapsApi: gMapsApi,
           map_db: result,
           page: "main",
+          maps: maps.title,
       }
       res.render("main.ejs", templateVar)
       })

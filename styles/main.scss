@@ -58,9 +58,9 @@ a:hover{
     display: none;
     width: $full_search_width;
     height: 150px;
-    background: white;
+    background: yellow;
     margin-left: -49px;
-    z-index: 10;
+    z-index: 9999;
     opacity: 1.0;
     overflow: scroll;
   }
@@ -75,7 +75,7 @@ a:hover{
   }
 }
 
-  div.col-sm-1{
+  div.col-1{
     height: 70px;
     margin-top: -15px;
     text-align: enter;
@@ -83,7 +83,13 @@ a:hover{
     color: white;
   }
 
+  div.register {
+    text-align: right;
+    color: white;
+  }
+
   div #login_form{
+    text-align: center;
     line-height: 20px;
     display: none;
     background: white;
@@ -105,8 +111,12 @@ a:hover{
 
   }
 
-  div.col-sm-1:hover {
-    background: #b000b0;
+  div #register {
+    @extend #login_form;
+  }
+
+  div.col-1:hover {
+    background: grey;
   }
 
 .gmaps {

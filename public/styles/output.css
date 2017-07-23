@@ -58,9 +58,9 @@ a:hover {
   display: none;
   width: 480px;
   height: 150px;
-  background: white;
+  background: yellow;
   margin-left: -49px;
-  z-index: 10;
+  z-index: 9999;
   opacity: 1.0;
   overflow: scroll;
 }
@@ -74,7 +74,7 @@ a:hover {
   background-color: purple;
 }
 
-div.col-sm-1 {
+div.col-1 {
   height: 70px;
   margin-top: -15px;
   text-align: enter;
@@ -82,7 +82,13 @@ div.col-sm-1 {
   color: white;
 }
 
-div #login_form {
+div.register {
+  text-align: right;
+  color: white;
+}
+
+div #login_form, div #register {
+  text-align: center;
   line-height: 20px;
   display: none;
   background: white;
@@ -91,20 +97,20 @@ div #login_form {
   margin-left: -40px;
 }
 
-div #login_form h3 {
+div #login_form h3, div #register h3 {
   line-height: 60px;
 }
 
-div #login_form .password {
+div #login_form .password, div #register .password {
   margin-top: 10px;
 }
 
-div #login_form button {
+div #login_form button, div #register button {
   margin-top: 10px;
 }
 
-div.col-sm-1:hover {
-  background: #b000b0;
+div.col-1:hover {
+  background: grey;
 }
 
 .gmaps {
@@ -198,7 +204,7 @@ div.map_container {
   margin-top: 15px;
 }
 
-div #login_form {
+div #login_form, div #register {
   line-height: 20px;
   display: none;
   background: lightblue;
@@ -207,15 +213,15 @@ div #login_form {
   margin-left: -40px;
 }
 
-div #login_form h3 {
+div #login_form h3, div #register h3 {
   line-height: 60px;
 }
 
-div #login_form .password {
+div #login_form .password, div #register .password {
   margin-top: 10px;
 }
 
-div #login_form button {
+div #login_form button, div #register button {
   margin-top: 10px;
 }
 
