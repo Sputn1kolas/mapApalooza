@@ -43,7 +43,8 @@ function toggleDescriptions() {
 function initMap(center) {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 45.5023, lng: -73.5592},
-    zoom: 15
+    zoom: 15,
+    styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#fcfcfc"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#fcfcfc"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#dddddd"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#dddddd"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#eeeeee"}]},{"featureType":"water","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#dddddd"}]}]
   });
 
   infowindow = new google.maps.InfoWindow({
@@ -141,7 +142,6 @@ $(".gmaps").on('click', ".submit_new_map", function(event) {
     type:'POST',
     data: data,
     success: function(mapObject) {
-      console.log(mapObject)
       loadMap(mapObject)
       // changemap(title, description,)
     }
@@ -219,8 +219,9 @@ function changeMap(title, description, map_id) {
   $('.controls').find('.map_title').replaceWith(
     `<h1 class="map_title" >${title}</h1>`
     )
-  $('.gmaps').find('.map_description').replaceWith(
-    `<h3 class="map_description"> ${description} </h3>`)
+ $('.gmaps').find('#map_description').replaceWith(
+    `<h3 class="map_description" id="map_description"> ${description} </h3>`
+  )
   $('#map').data('map_id', map_id)
 }
 
@@ -325,7 +326,7 @@ $(".new_map").on('click', function(event) {
     `<input type="map_title" name="map_title" class=".form-control map_title" placeholder='Title: My Sunbathing Spots'>`
     )
   $('.gmaps').find('.map_description').replaceWith(
-    `<div class=map_description">
+    `<div class="map_description" id="map_description">
     <textarea class="form-control" type="map_description" name="map_description" rows="2" placeholder='Description: My map is a all of my favourite sunbathing spots in Montreal...'></textarea>
      <button class="btn btn-info btn-block submit_new_map">SUBMIT</button>
     </div>

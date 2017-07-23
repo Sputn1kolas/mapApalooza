@@ -30,9 +30,9 @@
       <div id="map" data-map_id="<%= map_db[randMap].id  %>" height="350px" width="100%"></div>
 
       <h3 class="map_description"> <%= map_db[randMap].description %> </h3>
-    </div>
 
-    <div class="form pointDescriptions col-7 offset-2">
+
+    <div class="form pointDescriptions col-7 offset-1">
       <form action="/<% map_id %> /point" method="POST" class="pointForm">
         <h1> New Point </h1>
         Title
@@ -47,7 +47,7 @@
         <button type="submit"class="btn btn-info btn-block">SUBMIT</button>
       </form>
     </div>
-
+  </div>
     <div id="point_container">
     </div>
 
@@ -55,8 +55,8 @@
 
   <div class="list_container col-3">
     <div class="row">
-      <div class="col divider">Search</div>
-      <div class="col divider">Fav</div>
+      <div class="col divider">My Maps</div>
+      <div class="col divider">Faves</div>
       <article class="list_item new_map" id="new_map">
         NEW  <br> MAP
         <i class="fa fa-map-o fa-5x" aria-hidden="true"></i>
