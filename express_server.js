@@ -1,4 +1,4 @@
-// Known bugs:
+// Known bugs: "my maps changes right back to itself instead of into main"
 
 ///////////////////////////////////// Intiate Settings + Server ////////////////////////////////////////////
 const gMapsApi = require("private.js").gMapsApi
@@ -153,6 +153,24 @@ app.get("/user/favourites", (req, res) => {
     throw(err)
   })
 })
+
+
+app.get("/favourites/:map_id", (req, res) => {
+  let user_id = 1
+  let map_id = req.params.map_id //temp as we don't have user id's yet, will come from cookie.
+  console.log("checking if this is favourited..", map_id)
+
+  knex.select('*').from('user_fav')
+  .where({'user_fav.user_id': user_id, 'user_fav.map_id': map_id })
+  .then(function(result) {
+    console.log(result)
+    res.json(result)
+  })
+  .catch(function (err) {
+    throw(err)
+  })
+})
+
 
 app.get("/maps/:map_id", (req, res) => {
   let map_id = req.params.map_id

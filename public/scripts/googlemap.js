@@ -223,7 +223,39 @@ function changeMap(title, description, map_id) {
     `<h3 class="map_description" id="map_description"> ${description} </h3>`
   )
   $('#map').data('map_id', map_id)
+  ifFavourited(map_id, highlight)
 }
+
+
+
+
+
+function allArray(array, callback) {
+  for(var i = 0; i < 0; i++ ) {
+    callback(array[i])
+  }
+}
+
+
+function highlight(mapObject){
+  console.log(mapObject)
+ if(mapObject === []){
+    $('.fav').removeClass("favourited")
+   } else {
+    $('.fav').addClass("favourited")
+  }
+}
+
+function ifFavourited(map_id, callback){
+   $.ajax({
+    url:`/favourites/${map_id}`,
+    type:'GET',
+    success: function(mapObject) {
+      callback(mapObject)
+    }
+  })
+}
+
 
 ///////////////////////// On load AJAX CALLS ////////////////////////
 
@@ -241,7 +273,6 @@ case 'profile':
 }
 
 function generateDescriptionsByRoute(route) {
-  console.log("the route is..", route)
   $.ajax({
   url: route,
   type:'GET',
@@ -278,7 +309,7 @@ function newMapDescription(title, description, map_id, img_url) {
   <div class="item_description">${description} </div>
   </main>
   <footer>
-  <div class="numberFavs">
+  <div class="numberFavs data-map_id="${map_id}">
   <i class="fa fa-heart"></i>
   2 fav
   </div>
@@ -386,5 +417,15 @@ $(".controls").on('click', '.fav', function() {
     }
   })
 })
+
+// needs to match the map ID on the fav..
+// $.ajax({
+//   url: `/user/favourites`,
+//   type:'GET',
+//   success: function(result) {
+//     allArray(result, highlight)
+//   }
+// })
+
 
 
