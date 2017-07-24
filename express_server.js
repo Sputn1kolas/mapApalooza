@@ -70,7 +70,7 @@ app.get("/", (req, res) => {
 app.get("/profile", (req, res) => {
   let user_id = req.session.user_id //temp as we don't have user id's yet, will come from cookie.
   knex.select('*').from('maps')
-    .where({user_id: user_id})
+    .where({user_id: user_id["id"]})
     .then(function(result) {
        let templateVar = {
           gMapsApi: gMapsApi,
@@ -89,7 +89,7 @@ app.get("/favourites", (req, res) => {
 
   knex.select('*').from('maps')
       .rightJoin('user_fav', 'maps.id', 'user_fav.map_id')
-      .where({'user_fav.user_id': user_id})
+      .where({'user_fav.user_id': user_id['id']})
       .then(function(result) {
         console.log(result)
        let templateVar = {
@@ -138,9 +138,9 @@ app.get("/maps/all", (req, res) => {
 })
 
 app.get("/user/maps", (req, res) => {
-  let user_id = req.session.user_id //temp as we don't have user id's yet, will come from cookie.
+  let user_id = req.session.user_id
   knex.select('*').from('maps')
-  .where({user_id: user_id})
+  .where({user_id: user_id["id"]})
   .then(function(result) {
     res.json(result)
     })
@@ -153,7 +153,7 @@ app.get("/user/favourites", (req, res) => {
   let user_id = req.session.user_id //temp as we don't have user id's yet, will come from cookie.
   knex.select('*').from('maps')
   .rightJoin('user_fav', 'maps.id', 'user_fav.map_id')
-  .where({'user_fav.user_id': user_id})
+  .where({'user_fav.user_id': user_id['id']})
   .then(function(result) {
     res.json(result)
   })
@@ -168,7 +168,7 @@ app.get("/favourites/:map_id", (req, res) => {
   let map_id = req.params.map_id //temp as we don't have user id's yet, will come from cookie.
 
   knex.select('*').from('user_fav')
-  .where({'user_fav.user_id': user_id, 'user_fav.map_id': map_id })
+  .where({'user_fav.user_id': user_id['id'], 'user_fav.map_id': map_id })
   .then(function(result) {
     res.json(result)
   })
@@ -235,7 +235,7 @@ app.post("/maps/new", (req, res) => {
   // const img_url = req.body["img_url"]
   // const lat = ""
   // const long = ""
-  knex('maps').insert({user_id: user_id, title: title, description: description}).then(function(){
+  knex('maps').insert({user_id: user_id["id"], title: title, description: description}).then(function(){
         knex.select('*').from('maps')
         .where({title: title})
         .then(function(result){
@@ -289,13 +289,13 @@ app.post("/fav", (req, res) => {
   let favourited = req.body["favourited"]
   let map_id = req.body["map_id"]
   if(favourited === "No") {
-    knex('user_fav').insert({user_id: user_id, map_id: map_id}).then(function(){
+    knex('user_fav').insert({user_id: user_id["id"], map_id: map_id}).then(function(){
             res.send(204)
         }).catch(function (error){
           console.error(error)
     });
   } else {
-    knex('user_fav').del({user_id: user_id, map_id: map_id}).then(function(){
+    knex('user_fav').del({user_id: user_id["id"], map_id: map_id}).then(function(){
                 res.send(204)
         }).catch(function (error){
           console.error(error)
