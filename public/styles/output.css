@@ -15,6 +15,11 @@ a:hover {
   text-decoration: none;
 }
 
+.map_delete {
+  font-size: 30px;
+  margin-right: 15px;
+}
+
 .navbar {
   height: 70px;
   width: 100%;
@@ -296,6 +301,7 @@ div.list_container {
   font-family: 'Quicksand', sans-serif;
   color: white;
   border-left: black solid 1px;
+  display: none;
 }
 
 .divider:hover {

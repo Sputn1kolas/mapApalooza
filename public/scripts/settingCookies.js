@@ -17,6 +17,9 @@ $(document).ready(function (){
       },
       success: function() {
         console.log("new entry added");
+        $('#newmap').slideDown()
+        $('dividor').slideDown()
+        $('dividor').slideDown()
       }
     });
   })
@@ -36,6 +39,9 @@ $(document).ready(function (){
       },
       success: function() {
         location.reload();
+        $('#newmap').slideDown()
+        $('dividor').slideDown()
+        $('dividor').slideDown()
        // generateDescriptionsByRoute("/user/maps")
        //  $('.register_form_button').replaceWith('<div class="col-1 logout">Logout</div>')
        //  $('.login_form_button').replaceWith('<div class="col-1 welcome"><h2>Welcome Back!</h2></div>') //REST OF CODE TO BE REPLACED.)
