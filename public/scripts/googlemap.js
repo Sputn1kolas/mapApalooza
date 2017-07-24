@@ -151,22 +151,6 @@ $(".gmaps").on('click', ".submit_new_map", function(event) {
 });
 
 
-
-// for all points passed to it shows them on screen and generates a box below
-function renderPoints(points_array){
-  for(var i = 0; i < points_array.length; i++) {
-    let pointObject = points_array[i]
-    let latLng = {lat: Number(pointObject.lat), lng: Number(pointObject.long)};
-    let marker = new google.maps.Marker({   //change this to ID later
-     position: latLng,
-     map: map,
-     icon: image
-   });
-    markers.push(marker)
-    newPointDescription(pointObject.title, pointObject.address, pointObject.description, "point_id", pointObject.img_url)
-  }
-}
-
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
   for (var i = 0; i < markers.length; i++) {
@@ -183,8 +167,42 @@ function deleteMarkers() {
   markers = [];
 }
 
+
+// for all points passed to it shows them on screen and generates a box below
+function renderPoints(points_array){
+  for(var i = 0; i < points_array.length; i++) {
+    let pointObject = points_array[i]
+    let latLng = {lat: Number(pointObject.lat), lng: Number(pointObject.long)};
+    let marker = new google.maps.Marker({   //change this to ID later
+     position: latLng,
+     map: map,
+     icon: image
+   });
+    let map_id = $('#map').data('map_id')
+    markers.push(marker)
+    isUserOwnerOfMap(map_id)
+    newPointDescription(pointObject.title, pointObject.address, pointObject.description, "point_id", pointObject.img_url)
+  }
+}
+
+function isUserOwnerOfMap(map_id){
+  $.ajax({
+    url: `/user/maps`,
+    type:'GET',
+    success: function(result) {
+      for(var i = 0; i < result.length; i++) {
+        if(result[i].id === map_id) {
+          let deleteButton = `<i class="fa fa-trash-o purpleHover" aria-hidden="true"></i>`
+          $('#point_container').find('main').append(deleteButton)
+        }
+      }
+    }
+  })
+}
+
 // make a point description box down below the map
-function newPointDescription(title, address, description, point_id, img_url) {
+function newPointDescription(title, address, description, point_id, img_url, user) {
+  let map_id = $('#map').data('map_id')
   let newPoint =
   ` <article class="point_item" data-point_id="${point_id}">
   <header>
@@ -232,12 +250,10 @@ function ifFavourited(map_id) {
     url:`/favourites/${map_id}`,
     type:'GET',
     success: function(mapObject) {
-        console.log("the favourited result is..", mapObject)
-        if(mapObject === []) {
-          console.log("removing class favourited")
+        console.log("the favourited result is..", mapObject, mapObject[0])
+        if(!mapObject[0]) {
            $('.fav').removeClass("favourited")
         } else {
-          console.log("adding class favourited")
           $('.fav').addClass("favourited")
          }
     }
@@ -384,10 +400,12 @@ $(".list_container").on('click', '.all_maps', function(event) {
 
 $(".controls").on('click', '.fav', function() {
   event.preventDefault();
+  let favourited = ""
   if($('.fav').hasClass('favourited')){
-    let favourited = "Yes"
+    favourited = "Yes"
+    console.log("is favourited")
   } else {
-    let favourited = "No"
+     favourited = "No"
   }
   let map_id = $('#map').data('map_id')
   if(!map_id) {

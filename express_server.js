@@ -20,7 +20,7 @@ app.set("view engine", "ejs")
 
 app.use(cookieSession({
   name: 'session',
-  keys: [process.env.SECRET_KEY]
+  keys: ["key1"]
 
   // Cookie Options
   // maxAge: 24 * 60 * 60 * 1000 // 24 hours
@@ -300,6 +300,7 @@ app.post("/register", (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
   let username = req.body.username;
+  console.log("server regiter is receiving.. ", email, password, username)
   if(email == "" || password == ""){
     res.status(400).send("Password or email cannot be empty");
   // }else if(emailExistsInDB(email)){
@@ -309,9 +310,15 @@ app.post("/register", (req, res) => {
 
     password = bcrypt.hashSync(password, 10);
 
-    knex('users').insert({username: username, password: password, email: email})
-    req.session.user_id = userID;
-    res.redirect('/urls');
+    knex('users')
+    .insert({username: username, password: password, email: email})
+    .returning('id')
+    .then(function(result){
+      req.session.user_id = result[0];
+    })
+    .catch(function(error){
+      console.error(error)
+    });
   }
  });
 

@@ -6,6 +6,10 @@ a {
   color: white;
 }
 
+.purpleHover:hover {
+  color: purple;
+}
+
 a:hover {
   color: white;
   text-decoration: none;
@@ -357,4 +361,9 @@ div.list_container {
 
 #point_container .point_item main .point_description {
   margin-left: 10px;
+}
+
+#point_container .point_item main .fa-trash-o {
+  font-size: 40px;
+  margin: 0px 15px 15px auto;
 }

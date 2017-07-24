@@ -1,4 +1,5 @@
-
+const bcrypt = require('bcrypt')
+hashedpassword = bcrypt.hashSync(password, 10);
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
   return Promise.all([
@@ -8,9 +9,9 @@ exports.seed = function(knex, Promise) {
   .then(function () {
     // Inserts seed entries
     return knex('users').returning('id').insert([
-      {id: 1, username: 'NIK',     password: 'password',  email:'nikolas.clark@gmail.com'},
-      {id: 2, username: 'SIDNEY',  password: 'password',  email:'Sidney.Coroso@gmail.com'},
-      {id: 3, username: 'UCHEN',   password: 'password',  email:'UCHEN.lastname@gmail.com'}
+      {id: 1, username: 'NIK',     password: hashedpassword,  email:'nikolas.clark@gmail.com'},
+      {id: 2, username: 'SIDNEY',  password: hashedpassword,  email:'Sidney.Coroso@gmail.com'},
+      {id: 3, username: 'UCHEN',   password: hashedpassword,  email:'UCHEN.lastname@gmail.com'}
     ]);
   })
   .then(() => {
