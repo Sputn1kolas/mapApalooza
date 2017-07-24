@@ -34,10 +34,12 @@ $(document).ready(function (){
         username: username,
         password: password
       },
-      success: function(res) {
-        console.log(res)
+      success: function() {
+        location.reload();
+       // generateDescriptionsByRoute("/user/maps")
+       //  $('.register_form_button').replaceWith('<div class="col-1 logout">Logout</div>')
+       //  $('.login_form_button').replaceWith('<div class="col-1 welcome"><h2>Welcome Back!</h2></div>') //REST OF CODE TO BE REPLACED.)
       }
     });
   })
-
 })
