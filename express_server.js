@@ -355,7 +355,7 @@ app.post("/login", (req, res) => {
        .where('username', username)
        .then(function(result){
           req.session.user_id = result[0];
-          res.redirect("/profile");
+          res.send(result[0]);
         })
        .catch(function(error){
           console.error(error)
