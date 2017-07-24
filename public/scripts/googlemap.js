@@ -112,12 +112,15 @@ $(".pointForm").on('submit', function(event) {
     url:`/maps/${map_id}/point/new`,
     type:'POST',
     data: data,
-    success: function(res) {
-      console.log(res)
+    success: function(data) {
+      let point_id = data[0].id
+      newPointDescription(title, address, description, point_id, "img_url", "new")
+      let deleteButton = `<i class="fa fa-trash-o purpleHover delete_point" aria-hidden="true"></i>`
+      $('.new').find('main').append(deleteButton)
+      $("#point_container").find('.new').removeClass("new")
     }
   });
   toggleDescriptions();
-  renderPoints({data})
 });
 
 
@@ -143,11 +146,9 @@ $(".gmaps").on('click', ".submit_new_map", function(event) {
     data: data,
     success: function(mapObject) {
       loadMap(mapObject)
-      // changemap(title, description,)
     }
   });
   toggleDescriptions();
-  renderPoints({data})
 });
 
 
@@ -178,11 +179,11 @@ function renderPoints(points_array){
      map: map,
      icon: image
    });
-    let map_id = $('#map').data('map_id')
     markers.push(marker)
-    isUserOwnerOfMap(map_id)
     newPointDescription(pointObject.title, pointObject.address, pointObject.description, pointObject.id, pointObject.img_url)
   }
+ let map_id = $('#map').data('map_id')
+ isUserOwnerOfMap(map_id)
 }
 
 function isUserOwnerOfMap(map_id){
@@ -201,10 +202,14 @@ function isUserOwnerOfMap(map_id){
 }
 
 // make a point description box down below the map
-function newPointDescription(title, address, description, point_id, img_url, user) {
+function newPointDescription(title, address, description, point_id, img_url, new_class) {
+  if(!new_class) {
+    new_class = ""
+  }
   let map_id = $('#map').data('map_id')
+  console.log("new class is..", new_class)
   let newPoint =
-  ` <article class="point_item" data-point_id="${point_id}">
+  `<article class="point_item ${new_class}" data-point_id="${point_id}">
   <header>
   <h1> ${title}   </h1>
   </header>
@@ -217,6 +222,7 @@ function newPointDescription(title, address, description, point_id, img_url, use
   </article>
   </div>`
   $("#point_container").prepend(newPoint)
+  console.log(newPoint)
 }
 
 // generates a map description box on the right hand, when passed info
@@ -237,7 +243,7 @@ function changeMap(title, description, map_id) {
   $('.controls').find('.map_title').replaceWith(
     `<h1 class="map_title" >${title}</h1>`
     )
- $('.gmaps').find('#map_description').replaceWith(
+ $('.gmaps').find('.map_description').replaceWith(
     `<h3 class="map_description" id="map_description"> ${description} </h3>`
   )
   $('#map').data('map_id', map_id)
@@ -263,7 +269,6 @@ function ifFavourited(map_id) {
 
 ///////////////////////// On load AJAX CALLS ////////////////////////
 
-console.log("page is reading..", $('.page').data('page'))
 switch($('.page').data('page')) {
 case 'main':
   generateDescriptionsByRoute("/maps/all")
@@ -281,7 +286,6 @@ function generateDescriptionsByRoute(route) {
   url: route,
   type:'GET',
   success: function(result) {
-    console.log(result)
     generateDescriptions(result)
     }
   })
@@ -343,6 +347,8 @@ function loadMap(mapObject){
   let description = mapObject[0].description
   let map_id = mapObject[0].id
   changeMap(title, description, map_id)
+  let deleteButton = `<i class="fa fa-trash-o purpleHover delete_map" aria-hidden="true"></i>`
+  $('.gmaps').find('main').append(deleteButton)
 }
 
 // get the information on the clicked item, and loads it to the main screen

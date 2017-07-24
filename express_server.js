@@ -165,12 +165,10 @@ app.get("/user/favourites", (req, res) => {
 app.get("/favourites/:map_id", (req, res) => {
   let user_id = 1
   let map_id = req.params.map_id //temp as we don't have user id's yet, will come from cookie.
-  console.log("checking if this is favourited..", map_id)
 
   knex.select('*').from('user_fav')
   .where({'user_fav.user_id': user_id, 'user_fav.map_id': map_id })
   .then(function(result) {
-    console.log(result)
     res.json(result)
   })
   .catch(function (err) {
@@ -262,7 +260,12 @@ app.post("/maps/:map/point/new", (req, res) => {
   let lat = req.body["lat"]
   let long = req.body["long"]
   knex('points').insert({map_id: map_id, title: title, description: description, lat: lat, long: long}).returning('id').then(function (result){
-        res.send(result)
+        knex('points').where({map_id: map_id, title: title}).then(function(result){
+            console.log("express data is", result)
+            res.json(result)
+          }).catch(function (error){
+            console.error(error)
+          });
       }).catch(function (error){
         console.error(error)
       });
@@ -312,7 +315,6 @@ app.post("/register", (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
   let username = req.body.username;
-  console.log("server regiter is receiving.. ", email, password, username)
   if(email == "" || password == ""){
     res.status(400).send("Password or email cannot be empty");
   // }else if(emailExistsInDB(email)){
