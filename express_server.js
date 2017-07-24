@@ -75,7 +75,8 @@ app.get("/profile", (req, res) => {
        let templateVar = {
           gMapsApi: gMapsApi,
           map_db: result,
-          page: "profile"
+          page: "profile",
+          user_id: req.session.user_id['id']
       }
       res.render("main.ejs", templateVar)
       })
@@ -95,7 +96,8 @@ app.get("/favourites", (req, res) => {
        let templateVar = {
           gMapsApi: gMapsApi,
           map_db: result,
-          page: "favourites"
+          page: "favourites",
+          user_id: req.session.user_id['id']
       }
       res.render("main.ejs", templateVar)
       })
