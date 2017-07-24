@@ -273,7 +273,6 @@ app.post("/maps/:map/point/new", (req, res) => {
 
 //  delete new points
 app.post("/point/delete", (req, res) => {
-  // later integration has this only delete if user id matches..
   let point_id = req.body.point_id
   knex('points').where({id: point_id}).del().then(function(){
         res.status(202)
@@ -281,6 +280,21 @@ app.post("/point/delete", (req, res) => {
         console.error(error)
       });
 })
+
+app.post("/map/delete", (req, res) => {
+  let map_id = req.body.map_id
+
+  knex('points').where({map_id: map_id}).del().then(function() {
+        knex('maps').where({id: map_id}).del().then(function() {
+          res.send(202)
+      }).catch(function (error){
+        console.error(error)
+      });
+    }).catch(function (error){
+        console.error(error)
+      });
+})
+
 
 
 app.post("/fav", (req, res) => {
