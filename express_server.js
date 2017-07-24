@@ -68,7 +68,7 @@ app.get("/", (req, res) => {
 })
 
 app.get("/profile", (req, res) => {
-  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  let user_id = req.session.user_id //temp as we don't have user id's yet, will come from cookie.
   knex.select('*').from('maps')
     .where({user_id: user_id})
     .then(function(result) {
@@ -85,7 +85,7 @@ app.get("/profile", (req, res) => {
 })
 
 app.get("/favourites", (req, res) => {
-  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  let user_id = req.session.user_id //temp as we don't have user id's yet, will come from cookie.
 
   knex.select('*').from('maps')
       .rightJoin('user_fav', 'maps.id', 'user_fav.map_id')
@@ -138,7 +138,7 @@ app.get("/maps/all", (req, res) => {
 })
 
 app.get("/user/maps", (req, res) => {
-  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  let user_id = req.session.user_id //temp as we don't have user id's yet, will come from cookie.
   knex.select('*').from('maps')
   .where({user_id: user_id})
   .then(function(result) {
@@ -150,7 +150,7 @@ app.get("/user/maps", (req, res) => {
 })
 
 app.get("/user/favourites", (req, res) => {
-  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  let user_id = req.session.user_id //temp as we don't have user id's yet, will come from cookie.
   knex.select('*').from('maps')
   .rightJoin('user_fav', 'maps.id', 'user_fav.map_id')
   .where({'user_fav.user_id': user_id})
@@ -164,7 +164,7 @@ app.get("/user/favourites", (req, res) => {
 
 
 app.get("/favourites/:map_id", (req, res) => {
-  let user_id = 1
+  let user_id = req.session.user_id
   let map_id = req.params.map_id //temp as we don't have user id's yet, will come from cookie.
 
   knex.select('*').from('user_fav')
@@ -180,7 +180,7 @@ app.get("/favourites/:map_id", (req, res) => {
 
 app.get("/maps/:map_id", (req, res) => {
   let map_id = req.params.map_id
-  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  let user_id = req.session.user_id //temp as we don't have user id's yet, will come from cookie.
   knex.select('*').from('maps')
     .where({id: map_id})
     .then(function(result){
@@ -193,7 +193,7 @@ app.get("/maps/:map_id", (req, res) => {
 
 
 app.get("/:map_id/points", (req, res) => {
-  let user_id = 1 //temp as we don't have user id's yet, will come from cookie.
+  let user_id = req.session.user_id //temp as we don't have user id's yet, will come from cookie.
   let map_id = req.params.map_id
   knex.select('*').from('points')
     .where({map_id: map_id})
@@ -229,7 +229,7 @@ app.get("/:map_id/points", (req, res) => {
 
 //  post for new map
 app.post("/maps/new", (req, res) => {
-  const user_id = 1
+  const user_id = req.session.user_id;
   const title = req.body["title"]
   const description = req.body["description"]
   // const img_url = req.body["img_url"]
@@ -285,7 +285,7 @@ app.post("/point/delete", (req, res) => {
 
 
 app.post("/fav", (req, res) => {
-  const user_id = 1
+  const user_id = req.session.user_id;
   let favourited = req.body["favourited"]
   let map_id = req.body["map_id"]
   if(favourited === "No") {

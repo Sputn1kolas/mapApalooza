@@ -5,8 +5,8 @@ $(document).ready(function (){
     event.preventDefault();
     let username = $('#register_form .username').val()
     let password = $('#register_form .pass').val()
-    let email = $('#register_form .email').val()
-    console.log("CLientside", username, password,email);
+    let email = $('#register_form .em').val()
+    console.log("CLientside", username, email, password );
     $.ajax({
       url:'/register',
       type:'POST',
