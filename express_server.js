@@ -58,6 +58,7 @@ app.get("/", (req, res) => {
           gMapsApi: gMapsApi,
           map_db: result,
           page: "main",
+          user_id: req.session.user_id
       }
       res.render("main.ejs", templateVar)
       })
@@ -321,39 +322,52 @@ app.post("/register", (req, res) => {
   //   res.status(400).send("Email already exist in database");
   // }
   }else{
-
     password = bcrypt.hashSync(password, 10);
-
+    console.log("bcrypted password", password);
     knex('users')
     .insert({username: username, password: password, email: email})
     .returning('id')
     .then(function(result){
+      console.log("user_id", result[0])
       req.session.user_id = result[0];
     })
     .catch(function(error){
       console.error(error)
     });
-  }
+  // }
  });
 
 app.post("/login", (req, res) => {
-
+  let username = req.body.username;
   let password = req.body.password;
-  let passwordInDatabase = userForAnExistingEmail(req.body.email)["password"];
-  let passwordMatch = bcrypt.compareSync(password, passwordInDatabase);
-
-  if(!emailExistsInDB(req.body.email)){
-    let templateVars = { shortURL: req.params.id,
-  urls: urlsForUser(req.session.user_id),
-  user: users[req.session.user_id]};
-  res.render("urls_show", templateVars);
-    res.status(403).send("Email not in database");
-  }else if(!passwordMatch){
-    res.status(403).send("Password incorrect");
-  } else {
-    req.session.user_id = userForAnExistingEmail(req.body.email).id;
-    res.redirect("/urls");
-  }
+  knex('users')
+  .select('password')
+  .where('username', username)
+  .then(function(result){
+    if(result[0]===undefined){
+      res.json(result)
+    }else {
+      // res.send(result[0].password)
+      let passwordMatch = bcrypt.compareSync(password, result[0].password);
+      if(passwordMatch){
+       knex('users')
+       .select('id')
+       .where('username', username)
+       .then(function(result){
+          req.session.user_id = result[0];
+          res.redirect("/profile");
+        })
+       .catch(function(error){
+          console.error(error)
+        });
+      }else{
+        res.json(result)
+      }
+    }
+  })
+  .catch(function(error){
+    console.error(error)
+  });
 })
 
 

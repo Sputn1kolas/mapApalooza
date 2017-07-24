@@ -87,7 +87,7 @@ div.register {
   color: white;
 }
 
-div #login_form, div #register {
+div #login_form, div #register, div #register_form {
   text-align: center;
   line-height: 20px;
   display: none;
@@ -97,15 +97,15 @@ div #login_form, div #register {
   margin-left: -40px;
 }
 
-div #login_form h3, div #register h3 {
+div #login_form h3, div #register h3, div #register_form h3 {
   line-height: 60px;
 }
 
-div #login_form .password, div #register .password {
+div #login_form .password, div #register .password, div #register_form .password {
   margin-top: 10px;
 }
 
-div #login_form button, div #register button {
+div #login_form button, div #register button, div #register_form button {
   margin-top: 10px;
 }
 
@@ -204,7 +204,7 @@ div.map_container {
   margin-top: 15px;
 }
 
-div #login_form, div #register {
+div #login_form, div #register, div #register_form {
   line-height: 20px;
   display: none;
   background: lightblue;
@@ -213,16 +213,30 @@ div #login_form, div #register {
   margin-left: -40px;
 }
 
-div #login_form h3, div #register h3 {
+div #login_form h3, div #register h3, div #register_form h3 {
   line-height: 60px;
 }
 
-div #login_form .password, div #register .password {
+div #login_form .password, div #register .password, div #register_form .password {
   margin-top: 10px;
 }
 
-div #login_form button, div #register button {
+div #login_form button, div #register button, div #register_form button {
   margin-top: 10px;
+}
+
+div #register_form {
+  height: 300px;
+  float: right;
+}
+
+div #register_form .email {
+  display: block;
+  margin-top: 10px;
+}
+
+div #register_form .email input {
+  margin: 0 auto;
 }
 
 .map_description {

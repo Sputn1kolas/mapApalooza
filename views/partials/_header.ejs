@@ -23,23 +23,24 @@
     </button>
  -->    </form>
   </div>
+  <% if (!user_id) { %>
     <div class="col-1 login_form_button">
       <p>Login</p>
       <div id="login_form">
         <div id="login">
           <h3>Login</h3>
-          <form action="/" method="post">
+          <form action="/login" method="post">
             <div class="field-wrap">
               <label>
                 Username<span class="req">*</span>
               </label>
-              <input type="text"required autocomplete="off"/>
+              <input class="username" type="text"required autocomplete="off"/>
             </div>
             <div class="field-wrap password">
               <label>
                 Password<span class="req">*</span>
               </label>
-              <input type="password"required autocomplete="off"/>
+              <input class="pass" type="password"required autocomplete="off"/>
             </div>
             <button class="button button-block" type= "submit"/>Log In</button>
           </form>
@@ -49,31 +50,35 @@
     <div class="col-1 register_form_button">
       <p>Register</p>
       <div id="register_form">
-        <div id="register">
           <h3>Register</h3>
-          <form action="/" method="post">
+          <form action="/register" method="post">
             <div class="field-wrap">
               <label>
                 Username<span class="req">*</span>
               </label>
               <input class="username" type="text" autocomplete="off"/>
             </div>
-            <div class="field-wrap password">
-              <label>
-                Password<span class="req">*</span>
-              </label>
-              <input class="pass" type="password" autocomplete="off"/>
-            </div>
-            <div class="field-wrap">
+            <div class="field-wrap email">
               <label>
                 Email<span class="req">*</span>
               </label>
               <input type="email" class="email" autocomplete="off"/>
             </div>
-            <button class="button button-block"/>Log In</button>
+          <div class="field-wrap password">
+              <label>
+                Password<span class="req">*</span>
+              </label>
+              <input class="pass" type="password" autocomplete="off"/>
+            </div>
+
+            <button class="button button-block"/>Register</button>
           </form>
         </div>
-      </div>
     </div>
+    <% } else { %>
+    <div class="col-1 offset-1 logout">
+    Logout
+    </div>
+    <% } %>
   </div>
 </nav>
