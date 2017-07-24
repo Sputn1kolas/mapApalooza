@@ -195,8 +195,11 @@ function isUserOwnerOfMap(map_id){
         if(result[i].id === map_id) {
           let deletePoint = `<i class="fa fa-trash-o purpleHover delete_point" aria-hidden="true"></i>`
           $('#point_container').find('main').append(deletePoint)
-          let deleteMap = `<i class="fa fa-trash-o purpleHover delete_map pull-right" aria-hidden="true"></i>`
-          $('.gmaps').append(deleteMap)
+
+          let deleteMap = `<div class="delete_map"><i class="fa fa-trash-o purpleHover " aria-hidden="true"></i><div>`
+          if($('.delete_map').length){
+            $('.controls').append(deleteMap)
+          }
         }
       }
     }
@@ -209,7 +212,6 @@ function newPointDescription(title, address, description, point_id, img_url, new
     new_class = ""
   }
   let map_id = $('#map').data('map_id')
-  console.log("new class is..", new_class)
   let newPoint =
   `<article class="point_item ${new_class}" data-point_id="${point_id}">
   <header>
@@ -224,7 +226,6 @@ function newPointDescription(title, address, description, point_id, img_url, new
   </article>
   </div>`
   $("#point_container").prepend(newPoint)
-  console.log(newPoint)
 }
 
 // generates a map description box on the right hand, when passed info
@@ -258,7 +259,6 @@ function ifFavourited(map_id) {
     url:`/favourites/${map_id}`,
     type:'GET',
     success: function(mapObject) {
-        console.log("the favourited result is..", mapObject, mapObject[0])
         if(!mapObject[0]) {
            $('.fav').removeClass("favourited")
         } else {
@@ -432,6 +432,22 @@ $(".controls").on('click', '.fav', function() {
   })
 })
 
+
+ $(".controls").on('click', 'div.delete_map', function(){
+    // event.preventDefault();
+   console.log("deleting map...")
+    let map_id = $("#map").data('map_id')
+    $.ajax({
+        url:`/map/delete`,
+        type:'POST',
+        data: {
+        map_id: map_id
+        },
+        success: function() {
+          location.reload()
+      }
+    })
+  })
 // needs to match the map ID on the fav..
 // $.ajax({
 //   url: `/user/favourites`,
