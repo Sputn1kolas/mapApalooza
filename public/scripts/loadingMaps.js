@@ -1,27 +1,21 @@
-// $(document).ready(function(){
+$(document).ready(function(){
 
-//   $("document").on('click', '.list_item', function(){
-//     console.log("list item has clicked..")
-//     // event.preventDefault();
-//     // clearMarkers()
-//     // let map_id = $(this).data('map_id')
-//     // console.log(map_id)
-//     // $.ajax({
-//     //     url:`/maps/${map_id}/`,
-//     //     type:'GET',
-//     //     success: function(mapObject) {
-//     //       console.log(mapObject)
-//     //       changeMap(title, description, map_id)
-//     //     }
-//     // })
-//     // $.ajax({
-//     //     url:`/${map_id}/point`,
-//     //     type:'GET',
-//     //     success: function(returnObject) {
-//     //       console.log(returnObject)
-//     //       //renderPoints(returnObject.points_db)
-//     //     }
-//     // })
-//   })
+  $("#point_container").on('click', '.point_item', function(){
+    console.log("list item has clicked..")
+    event.preventDefault();
+    let point_id = $(this).data('point_id')
+    // $("#point_container").find(`[data-slide='${point_id}']`).slideUp()
+    $(this).slideUp()
+    $.ajax({
+        url:`/point/delete`,
+        type:'POST',
+        data: {
+        point_id: point_id
+        },
+        success: function(result) {
+          console.log("successful", result)
+        }
+    })
+  })
 
-// })
+})

@@ -181,7 +181,7 @@ function renderPoints(points_array){
     let map_id = $('#map').data('map_id')
     markers.push(marker)
     isUserOwnerOfMap(map_id)
-    newPointDescription(pointObject.title, pointObject.address, pointObject.description, "point_id", pointObject.img_url)
+    newPointDescription(pointObject.title, pointObject.address, pointObject.description, pointObject.id, pointObject.img_url)
   }
 }
 
