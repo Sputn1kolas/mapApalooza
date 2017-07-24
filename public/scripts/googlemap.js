@@ -195,7 +195,7 @@ function isUserOwnerOfMap(map_id){
         if(result[i].id === map_id) {
           let deletePoint = `<i class="fa fa-trash-o purpleHover delete_point" aria-hidden="true"></i>`
           $('#point_container').find('main').append(deletePoint)
-          let deleteMap = `<i class="fa fa-trash-o purpleHover delete_map" aria-hidden="true"></i>`
+          let deleteMap = `<i class="fa fa-trash-o purpleHover delete_map pull-right" aria-hidden="true"></i>`
           $('.gmaps').append(deleteMap)
         }
       }
