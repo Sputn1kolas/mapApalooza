@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
   $("#point_container").on('click', '.delete_point', function(){
-    console.log("deleting point...")
     event.preventDefault();
     let point_id = $(this).parent().parent().data('point_id')
     let map_id = $("#map").data('map_id')
@@ -15,7 +14,6 @@ $(document).ready(function(){
         point_id: point_id
         },
         success: function() {
-          console.log("now reloading points..")
           reloadPoints()
       }
     })
@@ -23,25 +21,7 @@ $(document).ready(function(){
 
 })
 
- $("#gmaps").on('click', '.delete_map', function(){
-    console.log("deleting point...")
-    event.preventDefault();
-    let map_id = $("#map").data('map_id')
 
-    // $("#point_container").find(`[data-slide='${point_id}']`).slideUp()
-    $(this).parent.slideUp()
-    $.ajax({
-        url:`/map/delete`,
-        type:'POST',
-        data: {
-        map_id: map_id
-        },
-        success: function() {
-          console.log("now reloading points..")
-          reloadPoints()
-      }
-    })
-  })
 
 
 
