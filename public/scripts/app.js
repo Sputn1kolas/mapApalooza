@@ -1,6 +1,8 @@
 $(document).ready(function(){
   function createListMap (obj){
-    let article = $("<article>").addClass("list_item");
+    let article = $("<article>").addClass("list_item").attr({
+      href: `/maps/${obj.id}`
+    });
     let header = $("<header>").text(obj.title);
     let main = $("<main>");
     let divImg = $("<div>").addClass("item_img");
@@ -58,16 +60,20 @@ $(document).ready(function(){
     }
   };
 
-  // function loadListPoints(){
-  //   $.ajax({
-  //     url: "/maps/:map/point",
-  //     method: "GET",
-  //     success: function (result){
-  //     renderListPoint(result);
-  //     }
-  //   })
-  // };
 
   // loadListPoints();
 
+  function createSearchListItem(obj){
+    let searchLi = $("<li>");
+    let searchLink = $("<a>").attr("href", `/maps/${obj.id}`).addClass("result_map").text(`${obj.title}`);
+    searchLi.append(searchLink);
+    return searchLi;
+  }
+
+  function createSearchList(arr){
+    for (let i = 0; i < arr.length; i++){
+      let searchLi = createSearchListItem(arr[i]);
+      $(".dropdown").append(listPoint);
+    }
+  }
 })

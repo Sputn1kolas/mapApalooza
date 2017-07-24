@@ -30,10 +30,6 @@ a:hover{
     font-size: 25px;
     margin-top: -3px;
 
-    a {
-      color: white;
-      spacing: 15px;
-    }
 
     img {
     margin-top: -10px;
@@ -58,11 +54,16 @@ a:hover{
     display: none;
     width: $full_search_width;
     height: 150px;
-    background: yellow;
+    background: white;
     margin-left: -49px;
     z-index: 9999;
     opacity: 1.0;
     overflow: scroll;
+    border: 2px solid black;
+
+    .dropdown {
+      list-style-type:none;
+    }
   }
 
   #search_navbar:focus {
@@ -74,50 +75,6 @@ a:hover{
     background-color: purple;
   }
 }
-
-  div.col-1{
-    height: 70px;
-    margin-top: -15px;
-    text-align: enter;
-    line-height: 57px;
-    color: white;
-  }
-
-  div.register {
-    text-align: right;
-    color: white;
-  }
-
-  div #login_form{
-    text-align: center;
-    line-height: 20px;
-    display: none;
-    background: white;
-    width: 230px;
-    height: 250px;
-    margin-left: -40px;
-
-    h3 {
-      line-height: 60px;
-    }
-
-    .password {
-      margin-top: 10px;
-    }
-
-    button {
-      margin-top: 10px;
-    }
-
-  }
-
-  div #register {
-    @extend #login_form;
-  }
-
-  div.col-1:hover {
-    background: grey;
-  }
 
 .gmaps {
   background-color: white;
@@ -173,7 +130,6 @@ div.map_container {
 
 
 .addPoint {
-  z-index: 1000;
   margin: 0px $spacing;
   color: black;
   }
@@ -211,13 +167,26 @@ div.map_container {
   }
 }
 
+  div.col-1{
+    height: 70px;
+    margin-top: -15px;
+    text-align: center;
+    line-height: 57px;
+    color: white;
+  }
+
+  div.col-1:hover {
+    background: grey;
+  }
+
  div #login_form{
-   line-height: 20px;
+    line-height: 20px;
+    text-align: center;
     display: none;
     background: lightblue;
     width: 230px;
     height: 250px;
-    margin-left: -40px;
+    float: right;
 
     h3 {
       line-height: 60px;

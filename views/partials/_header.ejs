@@ -13,7 +13,7 @@
         <div id="search_results">
           <ul class="dropdown">
           <% for (var i = 0; i < map_db.length; i++){ %>
-          <li><%= map_db[i].title%></li>
+          <li class="result_map" data-map_id=<%= map_db[i].id%>><%= map_db[i].title%></li>
           <% } %>
           </ul>
         </div>

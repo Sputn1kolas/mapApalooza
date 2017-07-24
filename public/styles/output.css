@@ -32,11 +32,6 @@ a:hover {
   margin-top: -3px;
 }
 
-.navbar .navbar-brand a {
-  color: white;
-  spacing: 15px;
-}
-
 .navbar .navbar-brand img {
   margin-top: -10px;
 }
@@ -58,11 +53,16 @@ a:hover {
   display: none;
   width: 480px;
   height: 150px;
-  background: yellow;
+  background: white;
   margin-left: -49px;
   z-index: 9999;
   opacity: 1.0;
   overflow: scroll;
+  border: 2px solid black;
+}
+
+.navbar #search_results .dropdown {
+  list-style-type: none;
 }
 
 .navbar #search_navbar:focus {
@@ -72,45 +72,6 @@ a:hover {
 .navbar .signIn {
   margin: auto 0px auto auto;
   background-color: purple;
-}
-
-div.col-1 {
-  height: 70px;
-  margin-top: -15px;
-  text-align: enter;
-  line-height: 57px;
-  color: white;
-}
-
-div.register {
-  text-align: right;
-  color: white;
-}
-
-div #login_form, div #register, div #register_form {
-  text-align: center;
-  line-height: 20px;
-  display: none;
-  background: white;
-  width: 230px;
-  height: 250px;
-  margin-left: -40px;
-}
-
-div #login_form h3, div #register h3, div #register_form h3 {
-  line-height: 60px;
-}
-
-div #login_form .password, div #register .password, div #register_form .password {
-  margin-top: 10px;
-}
-
-div #login_form button, div #register button, div #register_form button {
-  margin-top: 10px;
-}
-
-div.col-1:hover {
-  background: grey;
 }
 
 .gmaps {
@@ -164,7 +125,6 @@ div.map_container {
 }
 
 .addPoint {
-  z-index: 1000;
   margin: 0px 15px;
   color: black;
 }
@@ -204,24 +164,37 @@ div.map_container {
   margin-top: 15px;
 }
 
-div #login_form, div #register, div #register_form {
+div.col-1 {
+  height: 70px;
+  margin-top: -15px;
+  text-align: center;
+  line-height: 57px;
+  color: white;
+}
+
+div.col-1:hover {
+  background: grey;
+}
+
+div #login_form, div #register_form {
   line-height: 20px;
+  text-align: center;
   display: none;
   background: lightblue;
   width: 230px;
   height: 250px;
-  margin-left: -40px;
+  float: right;
 }
 
-div #login_form h3, div #register h3, div #register_form h3 {
+div #login_form h3, div #register_form h3 {
   line-height: 60px;
 }
 
-div #login_form .password, div #register .password, div #register_form .password {
+div #login_form .password, div #register_form .password {
   margin-top: 10px;
 }
 
-div #login_form button, div #register button, div #register_form button {
+div #login_form button, div #register_form button {
   margin-top: 10px;
 }
 
