@@ -76,7 +76,9 @@ app.get("/profile", (req, res) => {
           gMapsApi: gMapsApi,
           map_db: result,
           page: "profile",
+
           user_id: req.session.user_id['id']
+
       }
       res.render("main.ejs", templateVar)
       })
@@ -98,6 +100,7 @@ app.get("/favourites", (req, res) => {
           map_db: result,
           page: "favourites",
           user_id: req.session.user_id['id']
+
       }
       res.render("main.ejs", templateVar)
       })
@@ -297,8 +300,6 @@ app.post("/map/delete", (req, res) => {
         console.error(error)
       });
 })
-
-
 
 app.post("/fav", (req, res) => {
   const user_id = req.session.user_id;
