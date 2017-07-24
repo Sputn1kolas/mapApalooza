@@ -166,12 +166,10 @@ app.get("/user/favourites", (req, res) => {
 app.get("/favourites/:map_id", (req, res) => {
   let user_id = 1
   let map_id = req.params.map_id //temp as we don't have user id's yet, will come from cookie.
-  console.log("checking if this is favourited..", map_id)
 
   knex.select('*').from('user_fav')
   .where({'user_fav.user_id': user_id, 'user_fav.map_id': map_id })
   .then(function(result) {
-    console.log(result)
     res.json(result)
   })
   .catch(function (err) {
@@ -263,7 +261,12 @@ app.post("/maps/:map/point/new", (req, res) => {
   let lat = req.body["lat"]
   let long = req.body["long"]
   knex('points').insert({map_id: map_id, title: title, description: description, lat: lat, long: long}).returning('id').then(function (result){
-        res.send(result)
+        knex('points').where({map_id: map_id, title: title}).then(function(result){
+            console.log("express data is", result)
+            res.json(result)
+          }).catch(function (error){
+            console.error(error)
+          });
       }).catch(function (error){
         console.error(error)
       });
@@ -301,46 +304,58 @@ app.post("/register", (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
   let username = req.body.username;
-  console.log("server regiter is receiving.. ", email, password, username)
   if(email == "" || password == ""){
     res.status(400).send("Password or email cannot be empty");
   // }else if(emailExistsInDB(email)){
   //   res.status(400).send("Email already exist in database");
   // }
   }else{
-
     password = bcrypt.hashSync(password, 10);
-
+    console.log("bcrypted password", password);
     knex('users')
     .insert({username: username, password: password, email: email})
     .returning('id')
     .then(function(result){
+      console.log("user_id", result[0])
       req.session.user_id = result[0];
     })
     .catch(function(error){
       console.error(error)
     });
-  }
+   }
  });
 
 app.post("/login", (req, res) => {
-
+  let username = req.body.username;
   let password = req.body.password;
-  let passwordInDatabase = userForAnExistingEmail(req.body.email)["password"];
-  let passwordMatch = bcrypt.compareSync(password, passwordInDatabase);
-
-  if(!emailExistsInDB(req.body.email)){
-    let templateVars = { shortURL: req.params.id,
-  urls: urlsForUser(req.session.user_id),
-  user: users[req.session.user_id]};
-  res.render("urls_show", templateVars);
-    res.status(403).send("Email not in database");
-  }else if(!passwordMatch){
-    res.status(403).send("Password incorrect");
-  } else {
-    req.session.user_id = userForAnExistingEmail(req.body.email).id;
-    res.redirect("/urls");
-  }
+  knex('users')
+  .select('password')
+  .where('username', username)
+  .then(function(result){
+    if(result[0]===undefined){
+      res.json(result)
+    }else {
+      // res.send(result[0].password)
+      let passwordMatch = bcrypt.compareSync(password, result[0].password);
+      if(passwordMatch){
+       knex('users')
+       .select('id')
+       .where('username', username)
+       .then(function(result){
+          req.session.user_id = result[0];
+          res.send(result[0]);
+        })
+       .catch(function(error){
+          console.error(error)
+        });
+      }else{
+        res.json(result)
+      }
+    }
+  })
+  .catch(function(error){
+    console.error(error)
+  });
 })
 
 

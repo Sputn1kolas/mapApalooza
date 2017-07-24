@@ -1,10 +1,12 @@
+
 $(document).ready(function (){
 
-  $("#register").on('click', 'button', function(event) {
+  $("#register_form").on('click', 'button', function(event) {
     event.preventDefault();
-    let username = $('#register .username').val()
-    let password = $('#register .pass').val()
-    let email = $('#register .email').val()
+    let username = $('#register_form .username').val()
+    let password = $('#register_form .pass').val()
+    let email = $('#register_form .email').val()
+    console.log("CLientside", username, password,email);
     $.ajax({
       url:'/register',
       type:'POST',
@@ -13,7 +15,7 @@ $(document).ready(function (){
         password: password,
         email: email
       },
-      success: function(res) {
+      success: function() {
         console.log("new entry added");
       }
     });
@@ -22,9 +24,9 @@ $(document).ready(function (){
 
   $("#login").on('click', 'button', function(event) {
     event.preventDefault();
-    let username = $('#register .username').val()
-    let password = $('#register .pass').val()
-    console.log("Client side", username, password)
+    let username = $('#login .username').val()
+    let password = $('#login .pass').val()
+    console.log("Client side login ", username, password)
     $.ajax({
       url:'/login',
       type:'POST',
@@ -32,10 +34,12 @@ $(document).ready(function (){
         username: username,
         password: password
       },
-      success: function(res) {
-        console.log(res)
+      success: function() {
+        location.reload();
+       // generateDescriptionsByRoute("/user/maps")
+       //  $('.register_form_button').replaceWith('<div class="col-1 logout">Logout</div>')
+       //  $('.login_form_button').replaceWith('<div class="col-1 welcome"><h2>Welcome Back!</h2></div>') //REST OF CODE TO BE REPLACED.)
       }
     });
   })
-
 })
