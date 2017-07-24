@@ -301,7 +301,6 @@ div.list_container {
   font-family: 'Quicksand', sans-serif;
   color: white;
   border-left: black solid 1px;
-  display: none;
 }
 
 .divider:hover {
