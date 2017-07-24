@@ -314,32 +314,30 @@ app.post("/register", (req, res) => {
   let password = req.body.password;
   let username = req.body.username;
   console.log("server regiter is receiving.. ", email, password, username)
-  if(email == "" || password == ""){
-    res.status(400).send("Password or email cannot be empty");
-  // }else if(emailExistsInDB(email)){
-  //   res.status(400).send("Email already exist in database");
-  // }
-  }else{
-
+  // if(email == "" || password == ""){
+  //   res.status(400).send("Password or email cannot be empty");
+  // // }else if(emailExistsInDB(email)){
+  // //   res.status(400).send("Email already exist in database");
+  // // }
+  // }else{
     password = bcrypt.hashSync(password, 10);
-
+    console.log("bcrypted password", password);
     knex('users')
     .insert({username: username, password: password, email: email})
     .returning('id')
     .then(function(result){
+      console.log("user_id", result[0])
       req.session.user_id = result[0];
     })
     .catch(function(error){
       console.error(error)
     });
-  }
+  // }
  });
 
 app.post("/login", (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
-  // let passwordInDatabase = userForAnExistingEmail(req.body.email)["password"];
-  // let passwordMatch = bcrypt.compareSync(password, passwordInDatabase);
   knex('users')
   .select('password')
   .where('username', username)
@@ -347,14 +345,15 @@ app.post("/login", (req, res) => {
     if(result[0]===undefined){
       res.json(result)
     }else {
-      let passwordMatch = bcrypt.compareSync(password, result[0]);
+      // res.send(result[0].password)
+      let passwordMatch = bcrypt.compareSync(password, result[0].password);
       if(passwordMatch){
        knex('users')
        .select('id')
        .where('username', username)
        .then(function(result){
           req.session.user_id = result[0];
-          res.json(result)
+          res.redirect("/profile");
         })
        .catch(function(error){
           console.error(error)
