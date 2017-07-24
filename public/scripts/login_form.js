@@ -29,9 +29,9 @@ $(document).ready(function (){
     $.ajax({
       url: "/logout",
       type:"POST",
-      success: function (result){
-        console.log("logout successful!");
-        window.location.reload();// reloads the page when successful
+      success: function (){
+        location.reload()
+
       }
     })
   })
