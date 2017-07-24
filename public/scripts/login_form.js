@@ -10,7 +10,7 @@ $(document).ready(function (){
     $("#login_form").slideUp(300)
       $(this).one("click", handler1);
   }
-  $(".register > :not(#register_form)").on("click",handler3)
+  $(".register_form_button > :not(#register_form)").on("click",handler3)
 
   function handler3() {
     $("#register_form").slideDown(300)
@@ -21,5 +21,19 @@ $(document).ready(function (){
     $("#register_form").slideUp(300)
       $(this).one("click", handler3);
   }
+
+  //Logout function
+
+  $(".logout").on("click", function (event){
+    event.preventDefault();
+    $.ajax({
+      url: "/logout",
+      type:"POST",
+      success: function (result){
+        console.log("logout successful!");
+        window.location.reload();// reloads the page when successful
+      }
+    })
+  })
 
 })
