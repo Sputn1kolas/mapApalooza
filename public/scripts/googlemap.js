@@ -193,8 +193,10 @@ function isUserOwnerOfMap(map_id){
     success: function(result) {
       for(var i = 0; i < result.length; i++) {
         if(result[i].id === map_id) {
-          let deleteButton = `<i class="fa fa-trash-o purpleHover" aria-hidden="true"></i>`
-          $('#point_container').find('main').append(deleteButton)
+          let deletePoint = `<i class="fa fa-trash-o purpleHover delete_point" aria-hidden="true"></i>`
+          $('#point_container').find('main').append(deletePoint)
+          let deleteMap = `<i class="fa fa-trash-o purpleHover delete_map" aria-hidden="true"></i>`
+          $('.gmaps').append(deleteMap)
         }
       }
     }
@@ -347,8 +349,7 @@ function loadMap(mapObject){
   let description = mapObject[0].description
   let map_id = mapObject[0].id
   changeMap(title, description, map_id)
-  let deleteButton = `<i class="fa fa-trash-o purpleHover delete_map" aria-hidden="true"></i>`
-  $('.gmaps').find('main').append(deleteButton)
+
 }
 
 // get the information on the clicked item, and loads it to the main screen

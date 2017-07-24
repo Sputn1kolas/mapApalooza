@@ -3,11 +3,11 @@ $(document).ready(function(){
   $("#point_container").on('click', '.delete_point', function(){
     console.log("deleting point...")
     event.preventDefault();
-    let point_id = $(this).data('point_id')
+    let point_id = $(this).parent().parent().data('point_id')
     let map_id = $("#map").data('map_id')
 
     // $("#point_container").find(`[data-slide='${point_id}']`).slideUp()
-    $(this).slideUp()
+    $(this).parent().parent().slideUp()
     $.ajax({
         url:`/point/delete`,
         type:'POST',
@@ -29,7 +29,7 @@ $(document).ready(function(){
     let map_id = $("#map").data('map_id')
 
     // $("#point_container").find(`[data-slide='${point_id}']`).slideUp()
-    $(this).slideUp()
+    $(this).parent.slideUp()
     $.ajax({
         url:`/map/delete`,
         type:'POST',
@@ -43,7 +43,7 @@ $(document).ready(function(){
     })
   })
 
-})
+
 
 function reloadPoints(){
 $.ajax({
