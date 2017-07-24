@@ -22,9 +22,9 @@ $(document).ready(function (){
 
   $("#login").on('click', 'button', function(event) {
     event.preventDefault();
-    let username = $('#register .username').val()
-    let password = $('#register .pass').val()
-    console.log("Client side", username, password)
+    let username = $('#login .username').val()
+    let password = $('#login .pass').val()
+    console.log("Client side login ", username, password)
     $.ajax({
       url:'/login',
       type:'POST',

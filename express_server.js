@@ -323,23 +323,37 @@ app.post("/register", (req, res) => {
  });
 
 app.post("/login", (req, res) => {
-
+  let username = req.body.username;
   let password = req.body.password;
-  let passwordInDatabase = userForAnExistingEmail(req.body.email)["password"];
-  let passwordMatch = bcrypt.compareSync(password, passwordInDatabase);
-
-  if(!emailExistsInDB(req.body.email)){
-    let templateVars = { shortURL: req.params.id,
-  urls: urlsForUser(req.session.user_id),
-  user: users[req.session.user_id]};
-  res.render("urls_show", templateVars);
-    res.status(403).send("Email not in database");
-  }else if(!passwordMatch){
-    res.status(403).send("Password incorrect");
-  } else {
-    req.session.user_id = userForAnExistingEmail(req.body.email).id;
-    res.redirect("/urls");
-  }
+  // let passwordInDatabase = userForAnExistingEmail(req.body.email)["password"];
+  // let passwordMatch = bcrypt.compareSync(password, passwordInDatabase);
+  knex('users')
+  .select('password')
+  .where('username', username)
+  .then(function(result){
+    if(result[0]===undefined){
+      res.json(result)
+    }else {
+      let passwordMatch = bcrypt.compareSync(password, result[0]);
+      if(passwordMatch){
+       knex('users')
+       .select('id')
+       .where('username', username)
+       .then(function(result){
+          req.session.user_id = result[0];
+          res.json(result)
+        })
+       .catch(function(error){
+          console.error(error)
+        });
+      }else{
+        res.json(result)
+      }
+    }
+  })
+  .catch(function(error){
+    console.error(error)
+  });
 })
 
 
