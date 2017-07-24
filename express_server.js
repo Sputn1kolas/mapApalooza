@@ -334,7 +334,7 @@ app.post("/register", (req, res) => {
     .catch(function(error){
       console.error(error)
     });
-  // }
+   }
  });
 
 app.post("/login", (req, res) => {
