@@ -58,6 +58,7 @@ app.get("/", (req, res) => {
           gMapsApi: gMapsApi,
           map_db: result,
           page: "main",
+          user_id: req.session.user_id
       }
       res.render("main.ejs", templateVar)
       })
@@ -267,6 +268,18 @@ app.post("/maps/:map/point/new", (req, res) => {
         console.error(error)
       });
 })
+
+//  delete new points
+app.post("/point/delete", (req, res) => {
+  // later integration has this only delete if user id matches..
+  let point_id = req.body.point_id
+  knex('points').where({id: point_id}).del().then(function(){
+        res.status(202)
+      }).catch(function (error){
+        console.error(error)
+      });
+})
+
 
 app.post("/fav", (req, res) => {
   const user_id = 1

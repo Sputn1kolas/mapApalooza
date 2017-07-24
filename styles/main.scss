@@ -232,6 +232,21 @@ div.map_container {
     }
   }
 
+  div #register_form{
+    @extend #login_form;
+    height: 300px;
+    float: right;
+
+    .email {
+      display: block;
+      margin-top: 10px;
+
+      input {
+        margin: 0 auto;
+      }
+    }
+  }
+
   .map_description {
     margin: $spacing;
     font-family: Quicksand, sans-serif;
