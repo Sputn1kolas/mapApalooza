@@ -2,6 +2,10 @@ $spacing: 15px;
 $ease-in : width  0.3s ease-in-out;
 $full_search_width: 480px;
 
+.page{
+  display: none;
+}
+
 a {
  color: white;
 }

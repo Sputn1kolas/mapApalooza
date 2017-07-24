@@ -195,11 +195,8 @@ function isUserOwnerOfMap(map_id){
         if(result[i].id === map_id) {
           let deletePoint = `<i class="fa fa-trash-o purpleHover delete_point" aria-hidden="true"></i>`
           $('#point_container').find('main').append(deletePoint)
-
           let deleteMap = `<div class="delete_map"><i class="fa fa-trash-o purpleHover " aria-hidden="true"></i><div>`
-          if($('.delete_map').length){
-            $('.controls').append(deleteMap)
-          }
+          $('.controls').append(deleteMap)
         }
       }
     }

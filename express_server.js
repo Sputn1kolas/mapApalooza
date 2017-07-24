@@ -68,9 +68,9 @@ app.get("/", (req, res) => {
 })
 
 app.get("/profile", (req, res) => {
-  let user_id = req.session.user_id //temp as we don't have user id's yet, will come from cookie.
+  let user_id = req.session.user_id['id'] //temp as we don't have user id's yet, will come from cookie.
   knex.select('*').from('maps')
-    .where({user_id: user_id["id"]})
+    .where({user_id: user_id})
     .then(function(result) {
        let templateVar = {
           gMapsApi: gMapsApi,
@@ -88,11 +88,11 @@ app.get("/profile", (req, res) => {
 })
 
 app.get("/favourites", (req, res) => {
-  let user_id = req.session.user_id //temp as we don't have user id's yet, will come from cookie.
+  let user_id = req.session.user_id.id //temp as we don't have user id's yet, will come from cookie.
 
   knex.select('*').from('maps')
       .rightJoin('user_fav', 'maps.id', 'user_fav.map_id')
-      .where({'user_fav.user_id': user_id['id']})
+      .where({'user_fav.user_id': user_id})
       .then(function(result) {
         console.log(result)
        let templateVar = {
